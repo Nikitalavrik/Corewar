@@ -1,2 +1,6 @@
 .DS_Store
 resources
+.vscode
+*.o
+obj
+corewar
