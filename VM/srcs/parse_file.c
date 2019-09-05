@@ -6,14 +6,14 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/05 20:14:05 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/05 20:37:20 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 #include "corewar.h"
 
-void	print_bytes(unsigned int *line, int count)
+void	print_bytes(char *line, int count)
 {
 	int i;
 
@@ -40,16 +40,29 @@ unsigned int	reverse_num(unsigned int num)
 void	read_file(char *filename)
 {
 	int fd;
-	unsigned int	head;
-	unsigned int	magic;
+	header_t		*head;
+
 
 	fd = open(filename, O_RDONLY);
-	read(fd, &head, 4);
-	ft_printf("hex = %x\n", head);
-	magic = reverse_num(head);
-	if (magic == COREWAR_EXEC_MAGIC)
-		ft_printf("YES\n");
-	ft_printf("hex = %x\n", magic);
+	head = ft_memalloc(sizeof(header_t));
+	read(fd, &head->magic, 4);
+	head->magic = reverse_num(head->magic);
+	ft_printf("magic head = %x\n", head->magic);
+	if (head->magic != COREWAR_EXEC_MAGIC)
+		print_error("Bad magic head");
+	
+	read(fd, &head->prog_name, PROG_NAME_LENGTH);
+	ft_printf("prog_name ");
+	print_bytes(head->prog_name, PROG_NAME_LENGTH);
+	
+	read(fd, &head->prog_size, 4);
+	read(fd, &head->prog_size, 4);
+	head->prog_size = reverse_num(head->prog_size);
+	ft_printf("prog_size = %x\n", head->prog_size);
+	
+	read(fd, &head->comment, COMMENT_LENGTH);
+	ft_printf("Comment ");
+	print_bytes(head->comment, COMMENT_LENGTH);
 }
 
 void	parse_file(t_player *players)
