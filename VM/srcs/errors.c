@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.h                                          :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/02 16:17:17 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/05 17:55:59 by nlavrine         ###   ########.fr       */
+/*   Created: 2019/09/05 17:54:53 by nlavrine          #+#    #+#             */
+/*   Updated: 2019/09/05 17:59:01 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COREWAR
-# define COREWAR
+#include "corewar.h"
 
-# include "../libft/libft.h"
-# include "../libft/ft_printf/include/ft_printf.h"
-# include <fcntl.h>
-
-typedef	struct	s_player
+void	print_error(char *error)
 {
-	int			id;
-	char		*name;
-}				t_player;
-
-void			out_players(t_player *players);
-t_player		*parse_argv(int argc, char ** argv);
-void			print_error(char *error);
-
-#endif
+	ft_printf("%s\n", error);
+	exit(0);
+}

@@ -6,7 +6,7 @@
 #    By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/25 17:55:29 by nlavrine          #+#    #+#              #
-#    Updated: 2019/09/05 17:07:44 by nlavrine         ###   ########.fr        #
+#    Updated: 2019/09/05 17:58:46 by nlavrine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = corewar
 SRC =	main.c			\
 		sys_out.c		\
 		parsing.c		\
+		errors.c		\
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
