@@ -13,6 +13,18 @@
 #include "corewar.h"
 #include "op.h"
 
+void	map_init(t_cw *cw)
+{
+	int i;
+
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		cw->map[i] = 0;
+		i++;
+	}
+}
+
 int		parse_champ(char *param)
 {
 	ft_printf("%s\n", param);
@@ -21,11 +33,13 @@ int		parse_champ(char *param)
 
 int		main(int argc, char **argv)
 {
-	t_player	*players;
+	t_cw		*cw;
 
 	if (argc < 2)
 		print_error("Please put champions!");
-	players = parse_argv(argc, argv);
-	parse_file(players);
+	cw = ft_memalloc(sizeof(t_cw));
+	cw->players = parse_argv(argc, argv);
+	parse_file(cw->players);
+	map_init(cw);
 	return (0);
 }
