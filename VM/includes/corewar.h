@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbratsla <tbratsla@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/05 15:47:48 by tbratsla         ###   ########.fr       */
+/*   Updated: 2019/09/08 15:43:29 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ typedef struct		s_cursor
 	int				player_nbr;			//номер игрока породившего каретку
 }					t_cursor;
 
+typedef	struct	s_player
+{
+	int			id;
+	char		*name;
+}				t_player;
+
 typedef struct		s_corewar
 {
 	unsigned char	map[MEM_SIZE];
@@ -40,11 +46,6 @@ typedef struct		s_corewar
 	t_player		*players;
 }					t_cw;
 
-typedef	struct	s_player
-{
-	int			id;
-	char		*name;
-}				t_player;
 
 void			out_players(t_player *players);
 

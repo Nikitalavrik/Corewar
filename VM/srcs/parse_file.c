@@ -6,14 +6,13 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/05 20:37:20 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/08 15:45:46 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
 #include "corewar.h"
 
-void	print_bytes(char *line, int count)
+void	print_bytes(unsigned char *line, int count)
 {
 	int i;
 
@@ -37,12 +36,14 @@ unsigned int	reverse_num(unsigned int num)
 	return (reversed);
 }
 
-void	read_file(char *filename)
+void	read_file(char *filename, unsigned char *area, int i)
 {
 	int fd;
+	unsigned int null_byte;
 	header_t		*head;
 
 
+	null_byte = 0;
 	fd = open(filename, O_RDONLY);
 	head = ft_memalloc(sizeof(header_t));
 	read(fd, &head->magic, 4);
@@ -53,21 +54,35 @@ void	read_file(char *filename)
 	
 	read(fd, &head->prog_name, PROG_NAME_LENGTH);
 	ft_printf("prog_name ");
-	print_bytes(head->prog_name, PROG_NAME_LENGTH);
+	print_bytes((unsigned char *)head->prog_name, PROG_NAME_LENGTH);
 	
-	read(fd, &head->prog_size, 4);
+	read(fd, &null_byte, 4);
+	if (null_byte)
+		print_error("Bad file");
+
 	read(fd, &head->prog_size, 4);
 	head->prog_size = reverse_num(head->prog_size);
 	ft_printf("prog_size = %x\n", head->prog_size);
 	
 	read(fd, &head->comment, COMMENT_LENGTH);
 	ft_printf("Comment ");
-	print_bytes(head->comment, COMMENT_LENGTH);
+	print_bytes((unsigned char *)head->comment, COMMENT_LENGTH);
+
+	read(fd, &null_byte, 4);
+	if (null_byte)
+		print_error("Bad file");
+	read(fd, &area[i], head->prog_size);
+	ft_printf("Execute code:\n");
+	print_bytes(area, head->prog_size);
 }
 
 void	parse_file(t_player *players)
 {
-	read_file(players[0].name);
+	t_cw	*corewar;
+
+	corewar = ft_memalloc(sizeof(t_cw));
+	ft_bzero(corewar->map, MEM_SIZE);
+	read_file(players[0].name, corewar->map, 0);
 	// int i;
 
 	// i = 0;

@@ -6,12 +6,11 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:05:43 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/05 18:05:45 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/08 15:43:59 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "op.h"
 
 int			check_uniq_id(t_player *players, int id)
 {
