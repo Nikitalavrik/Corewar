@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/08 16:19:40 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/08 20:10:25 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct		s_corewar
 {
 	unsigned char	map[MEM_SIZE];
 	int				player_nbr;
+	int				check_cycle;
+	int				cycle_to_die;
 	t_cursor		*cursor;
 	t_player		*players;
 }					t_cw;
@@ -54,8 +56,12 @@ void			out_cursor(t_cursor *cursor);
 t_player		*parse_argv(int argc, char ** argv);
 t_cw			*parse_file(t_player *players);
 
+void			engine(t_cw *corewar);
+
 void			print_error(char *error);
 
 void			cursor(t_cw *cw);
+void			del_cursor(t_cursor **cursor, t_cursor **prev,\
+													t_cursor **main_cursor);
 
 #endif

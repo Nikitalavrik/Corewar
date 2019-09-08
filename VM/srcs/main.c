@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 16:17:00 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/08 16:33:05 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/08 17:19:10 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int		main(int argc, char **argv)
 	players = parse_argv(argc, argv);
 	cw = parse_file(players);
 	cursor(cw);
+	engine(cw);
 	return (0);
 }
