@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/08 15:43:29 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/08 16:19:40 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef	struct	s_player
 {
 	int			id;
 	char		*name;
+	header_t	*head;
 }				t_player;
 
 typedef struct		s_corewar
@@ -50,7 +51,7 @@ typedef struct		s_corewar
 void			out_players(t_player *players);
 
 t_player		*parse_argv(int argc, char ** argv);
-void			parse_file(t_player *players);
+t_cw			*parse_file(t_player *players);
 
 void			print_error(char *error);
 

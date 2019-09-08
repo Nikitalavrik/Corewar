@@ -6,12 +6,11 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:48:57 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/05 15:54:49 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/08 16:32:08 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "op.h"
 
 void	out_players(t_player *players)
 {

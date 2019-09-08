@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/08 15:45:46 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/08 16:19:31 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ unsigned int	reverse_num(unsigned int num)
 	return (reversed);
 }
 
-void	read_file(char *filename, unsigned char *area, int i)
+header_t	*read_file(char *filename, unsigned char *area, int i)
 {
 	int fd;
 	unsigned int null_byte;
@@ -48,47 +48,53 @@ void	read_file(char *filename, unsigned char *area, int i)
 	head = ft_memalloc(sizeof(header_t));
 	read(fd, &head->magic, 4);
 	head->magic = reverse_num(head->magic);
-	ft_printf("magic head = %x\n", head->magic);
 	if (head->magic != COREWAR_EXEC_MAGIC)
 		print_error("Bad magic head");
-	
 	read(fd, &head->prog_name, PROG_NAME_LENGTH);
-	ft_printf("prog_name ");
 	print_bytes((unsigned char *)head->prog_name, PROG_NAME_LENGTH);
-	
 	read(fd, &null_byte, 4);
 	if (null_byte)
 		print_error("Bad file");
-
 	read(fd, &head->prog_size, 4);
 	head->prog_size = reverse_num(head->prog_size);
-	ft_printf("prog_size = %x\n", head->prog_size);
-	
 	read(fd, &head->comment, COMMENT_LENGTH);
-	ft_printf("Comment ");
-	print_bytes((unsigned char *)head->comment, COMMENT_LENGTH);
-
 	read(fd, &null_byte, 4);
 	if (null_byte)
 		print_error("Bad file");
 	read(fd, &area[i], head->prog_size);
-	ft_printf("Execute code:\n");
-	print_bytes(area, head->prog_size);
+	return (head);
 }
 
-void	parse_file(t_player *players)
+int		count_players(t_player *players)
+{
+	int i;
+
+	i = 0;
+	while (i < MAX_PLAYERS && players[i].id)
+		i++;
+	return (i);
+}
+
+t_cw	*parse_file(t_player *players)
 {
 	t_cw	*corewar;
+	int		i;
+	int		place;
+	int		diff;
 
+	i = 0;
+	place = 0;
 	corewar = ft_memalloc(sizeof(t_cw));
+	corewar->player_nbr = count_players(players);
+	corewar->players = players;
+	diff = MEM_SIZE / corewar->player_nbr;
 	ft_bzero(corewar->map, MEM_SIZE);
-	read_file(players[0].name, corewar->map, 0);
-	// int i;
-
-	// i = 0;
-	// while (i < MAX_PLAYERS && players[i].id)
-	// {
-	// 	read_file(players[i].name);
-	// 	i++;
-	// }
+	while (i < corewar->player_nbr)
+	{
+		players[i].head = read_file(players[i].name, corewar->map, place);
+		place += (diff + 1);
+		i++;
+	}
+	print_bytes(corewar->map, MEM_SIZE);
+	return (corewar);
 }
