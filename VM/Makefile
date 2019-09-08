@@ -16,7 +16,8 @@ SRC =	main.c				\
 		sys_out.c			\
 		parse_argv.c		\
 		errors.c			\
-		parse_file.c
+		parse_file.c 		\
+		cursor.c
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror

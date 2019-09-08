@@ -49,10 +49,13 @@ typedef struct		s_corewar
 
 
 void			out_players(t_player *players);
+void			out_cursor(t_cursor *cursor);
 
 t_player		*parse_argv(int argc, char ** argv);
 t_cw			*parse_file(t_player *players);
 
 void			print_error(char *error);
+
+void			cursor(t_cw *cw);
 
 #endif

@@ -21,5 +21,6 @@ int		main(int argc, char **argv)
 		print_error("Please put champions!");
 	players = parse_argv(argc, argv);
 	cw = parse_file(players);
+	cursor(cw);
 	return (0);
 }

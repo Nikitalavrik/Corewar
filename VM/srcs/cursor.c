@@ -23,13 +23,8 @@ void	init_cursor(t_cw *cw, int i)
 	cw->cursor->next = tmp;
 	cw->cursor->id = i;
 	cw->cursor->carry = 0;
-	cw->cursor->reg[0] = -id;
-	while (j < REG_NUMBER)
-	{
-		cw->cursor->reg[j] = 0;
-		j++;
-	}
-	cw->cursor->position = MEM_SIZE / cw->position * (i - 1);
+	cw->cursor->reg[0] = -i;
+	cw->cursor->position = MEM_SIZE / cw->player_nbr * (i - 1);
 }
 
 void	cursor(t_cw *cw)
@@ -38,9 +33,11 @@ void	cursor(t_cw *cw)
 
 	cw->cursor = NULL;
 	i = 1;
+	ft_printf("num = %i\n", cw->player_nbr);
 	while (i <= cw->player_nbr)
 	{
 		init_cursor(cw, i);
 		i++;
 	}
+	out_cursor(cw->cursor);
 }

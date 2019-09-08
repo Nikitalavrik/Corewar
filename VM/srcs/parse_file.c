@@ -95,6 +95,6 @@ t_cw	*parse_file(t_player *players)
 		place += (diff + 1);
 		i++;
 	}
-	print_bytes(corewar->map, MEM_SIZE);
+	// print_bytes(corewar->map, MEM_SIZE);
 	return (corewar);
 }

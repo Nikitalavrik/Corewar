@@ -22,3 +22,15 @@ void	out_players(t_player *players)
 		i++;
 	}
 }
+
+void	out_cursor(t_cursor *cursor)
+{
+	t_cursor *start;
+
+	start = cursor;
+	while (start != NULL)
+	{
+		ft_printf("id = %i carry = %i position = %i\n", start->id, start->carry, start->position);
+		start = start->next;
+	}	
+}
