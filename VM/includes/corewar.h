@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/09 13:35:18 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/09 16:12:57 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,17 @@ typedef	struct		s_op
 	char			t_dirsize;			// если 1 то Тдир = 2, если 0, то 4
 }					t_op;
 
+void			print_error(char *error);
 void			out_players(t_player *players);
 void			out_cursor(t_cursor *cursor);
+void			out_print_bytes(unsigned char *line, int count);
 
 t_player		*parse_argv(int argc, char ** argv);
 t_cw			*parse_file(t_player *players);
 
 void			engine(t_cw *corewar);
 int				check_operation(t_cw *corewar, t_cursor *cursor, int op);
-
-void			print_error(char *error);
+unsigned	int	grep_args(unsigned char *map, int position, int size);
 
 void			cursor(t_cw *cw);
 void			del_cursor(t_cursor **cursor, t_cursor **prev,\

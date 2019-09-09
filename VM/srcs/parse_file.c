@@ -6,24 +6,11 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/09 13:43:22 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/09 15:03:16 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-void	print_bytes(unsigned char *line, int count)
-{
-	int i;
-
-	i = 0;
-	while (i < count)
-	{
-		ft_printf("%x ", line[i]);
-		i++;
-	}
-	ft_printf("\n");
-}
 
 unsigned int	reverse_num(unsigned int num)
 {
@@ -92,9 +79,13 @@ t_cw	*parse_file(t_player *players)
 	corewar->players = players;
 	diff = MEM_SIZE / corewar->player_nbr;
 	ft_bzero(corewar->map, MEM_SIZE);
+	ft_printf("Introducing contetants...\n");
 	while (i < corewar->player_nbr)
 	{
 		players[i].head = read_file(players[i].name, corewar->map, place);
+		ft_printf("* Player %i, weight %2i bytes, %10s, %s\n", i + 1,\
+		players[i].head->prog_size, players[i].head->prog_name,\
+		players[i].head->comment);
 		place += (diff + 1);
 		i++;
 	}
