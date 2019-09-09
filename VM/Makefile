@@ -6,7 +6,7 @@
 #    By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/25 17:55:29 by nlavrine          #+#    #+#              #
-#    Updated: 2019/09/08 17:18:56 by nlavrine         ###   ########.fr        #
+#    Updated: 2019/09/09 12:12:27 by nlavrine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ SRC =	main.c				\
 		parse_file.c 		\
 		cursor.c			\
 		engine.c			\
+		op.c				\
+		check_op.c
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror

@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/08 20:10:25 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/09 12:13:17 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,17 @@ typedef struct		s_corewar
 	t_player		*players;
 }					t_cw;
 
+typedef	struct		s_op
+{
+	char			*func_name;
+	int				num_of_args;
+	int				type_of_args[3];
+	char			id;
+	int				cycle_before_exec;
+	char			*description;
+	char			codage;
+	char			t_dirsize;
+}					t_op;
 
 void			out_players(t_player *players);
 void			out_cursor(t_cursor *cursor);
@@ -57,11 +68,13 @@ t_player		*parse_argv(int argc, char ** argv);
 t_cw			*parse_file(t_player *players);
 
 void			engine(t_cw *corewar);
+int				check_operation(unsigned char *map, t_cursor *cursor);
 
 void			print_error(char *error);
 
 void			cursor(t_cw *cw);
 void			del_cursor(t_cursor **cursor, t_cursor **prev,\
 													t_cursor **main_cursor);
+extern			t_op	g_op_tab[17];
 
 #endif

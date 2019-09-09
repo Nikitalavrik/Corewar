@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 11:44:03 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/08 20:13:57 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/09 12:16:00 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	cursor(t_cw *cw)
 
 	cw->cursor = NULL;
 	i = 1;
-	// ft_printf("num = %i\n", cw->player_nbr);
 	while (i <= cw->player_nbr)
 	{
 		init_cursor(cw, i);
