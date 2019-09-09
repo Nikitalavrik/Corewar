@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/09 17:52:59 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/09 17:58:39 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	engine(t_cw *corewar)
 	i = 0;
 	tmp_die = 0;
 	corewar->cycle_to_die = CYCLE_TO_DIE;
-	// out_print_bytes
+	// out_print_bytes(corewar->map, MEM_SIZE);
 	while (1)
 	{
 		iterate_all_cursors(corewar, corewar->cursor);
