@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/09 13:25:43 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/09 13:35:18 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ typedef struct		s_corewar
 
 typedef	struct		s_op
 {
-	char			*func_name;
-	int				num_of_args;
-	int				type_of_args[3];
-	char			id;
-	int				cycle_before_exec;
-	char			*description;
-	char			codage;
-	char			t_dirsize;
+	char			*func_name; 		// имя функции
+	int				num_of_args;		// количество аргументов
+	int				type_of_args[3]; 	// типы аргументов
+	char			id;					// номер функции < 16
+	int				cycle_before_exec;	// количество циклов перед исполнением
+	char			*description;		// описание функции
+	char			codage;				// код типов аргументов
+	char			t_dirsize;			// если 1 то Тдир = 2, если 0, то 4
 }					t_op;
 
 void			out_players(t_player *players);

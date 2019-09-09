@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/08 17:18:01 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/09 13:43:22 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,15 @@ header_t	*read_file(char *filename, unsigned char *area, int i)
 	if (head->magic != COREWAR_EXEC_MAGIC)
 		print_error("Bad magic head");
 	read(fd, &head->prog_name, PROG_NAME_LENGTH);
-	// print_bytes((unsigned char *)head->prog_name, PROG_NAME_LENGTH);
+	// if (!head->prog_name)
+	// 	print_error("Noname champion");
 	read(fd, &null_byte, 4);
 	if (null_byte)
 		print_error("Bad file");
 	read(fd, &head->prog_size, 4);
 	head->prog_size = reverse_num(head->prog_size);
+	if (head->prog_size > CHAMP_MAX_SIZE)
+		print_error("Big size");
 	read(fd, &head->comment, COMMENT_LENGTH);
 	read(fd, &null_byte, 4);
 	if (null_byte)
