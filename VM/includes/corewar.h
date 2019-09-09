@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/09 12:13:17 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/09 13:25:43 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_player		*parse_argv(int argc, char ** argv);
 t_cw			*parse_file(t_player *players);
 
 void			engine(t_cw *corewar);
-int				check_operation(unsigned char *map, t_cursor *cursor);
+int				check_operation(t_cw *corewar, t_cursor *cursor, int op);
 
 void			print_error(char *error);
 

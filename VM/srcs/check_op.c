@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/02 16:17:00 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/09 12:37:27 by nlavrine         ###   ########.fr       */
+/*   Created: 2019/09/09 12:07:47 by nlavrine          #+#    #+#             */
+/*   Updated: 2019/09/09 13:26:26 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "func.h"
 
-int		main(int argc, char **argv)
+int		check_operation(t_cw *corewar, t_cursor *cursor, int op)
 {
-	t_cw		*cw;
-	t_player	*players;
-
-	if (argc < 2)
-		print_error("Please put champions!");
-	players = parse_argv(argc, argv);
-	cw = parse_file(players);
-	cursor(cw);
-	engine(cw);
-	return (0);
+	g_func[op - 1](corewar, cursor);
+	return (op);
 }

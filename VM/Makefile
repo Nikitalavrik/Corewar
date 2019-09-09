@@ -6,7 +6,7 @@
 #    By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/25 17:55:29 by nlavrine          #+#    #+#              #
-#    Updated: 2019/09/09 12:12:27 by nlavrine         ###   ########.fr        #
+#    Updated: 2019/09/09 12:56:12 by nlavrine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,12 @@ SRC =	main.c				\
 		cursor.c			\
 		engine.c			\
 		op.c				\
-		check_op.c
+		check_op.c			\
+		op1_4.c				\
+		op5_8.c				\
+		op9_12.c			\
+		op13_16.c			\
+		func.c				\
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror

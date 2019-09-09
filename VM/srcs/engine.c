@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/09 12:21:51 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/09 13:25:30 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 	if (op > 16 || !op)
 		return (1);
 	cursor->cycles_num++;
+	check_operation(corewar, cursor, op);
 	ft_printf("cursor id %i do %s op %i\n", cursor->id, g_op_tab[op - 1].func_name, op);
 	return (0);
 }
