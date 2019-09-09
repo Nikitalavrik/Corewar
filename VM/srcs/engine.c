@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/09 15:06:03 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/09 17:52:59 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,19 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 	unsigned char op;
 
 	op = corewar->map[cursor->position];
-	if (op > 16 || !op)
+	if (op >= 16 || !op)
 		return (1);
-	cursor->cycles_num++;
-	check_operation(corewar, cursor, op);
+	if (!cursor->is_wait)
+	{
+		cursor->op = op;
+		cursor->remaining_cycles = g_op_tab[op - 1].cycle_before_exec;
+		cursor->is_wait = 1;
+	}
+	if (cursor->remaining_cycles <= 0)
+	{
+		check_operation(corewar, cursor, op);
+		cursor->is_wait = 0;
+	}
 	// ft_printf("cursor id %i do %s op %i\n", cursor->id, g_op_tab[op - 1].func_name, op);
 	return (0);
 }
@@ -71,6 +80,8 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 	{
 		start->position += do_op(corewar, start);
 		start->position %= MEM_SIZE;
+		cursor->cycles_num++;
+		cursor->remaining_cycles--;
 		start = start->next;
 	}
 }
@@ -83,6 +94,7 @@ void	engine(t_cw *corewar)
 	i = 0;
 	tmp_die = 0;
 	corewar->cycle_to_die = CYCLE_TO_DIE;
+	// out_print_bytes
 	while (1)
 	{
 		iterate_all_cursors(corewar, corewar->cursor);

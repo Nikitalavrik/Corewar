@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 11:44:03 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/09 15:01:03 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/09 17:14:29 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_cursor(t_cw *cw, int i)
 	cw->cursor = ft_memalloc(sizeof(t_cursor));
 	cw->cursor->next = tmp;
 	cw->cursor->id = i;
+	cw->cursor->player_nbr = i;
 	cw->cursor->carry = 0;
 	cw->cursor->reg[0] = -i;
 	cw->cursor->position = MEM_SIZE / cw->player_nbr * (i - 1);
