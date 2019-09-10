@@ -90,10 +90,16 @@ void	ft_lfork(t_cw *corewar, t_cursor *cursor, t_op op)
 
 void	ft_aff(t_cw *corewar, t_cursor *cursor, t_op op)
 {
-	int arg1;
+	unsigned char	arg1;
+	unsigned char	type_arg1;
+	unsigned char	type;
 
 	out_func_info(corewar, cursor, op);
-	arg1 = grep_args(corewar->map, cursor->position + 1, T_REG);
-	
-	cursor->position += (1 + T_REG);
+	type = corewar->map[cursor->position + 1];
+	type_arg1 = type >> 6;
+	arg1 = check_grep_args(corewar->map, cursor->position + 2, type_arg1, op.t_dirsize);
+	if (type_arg1 == REG_CODE && arg1 && arg1 <= 16)
+		arg1 = cursor->reg[arg1 - 1] % 256;
+	ft_printf("Aff: %c\n", arg1);
+	cursor->position += (2 + T_REG);
 }
