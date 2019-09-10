@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:07:47 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/09 18:16:13 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/10 15:59:10 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ int		check_operation(t_cw *corewar, t_cursor *cursor, int op)
 {
 	g_func[op - 1](corewar, cursor, g_op_tab[op - 1]);
 	// exit(0);
+	// sleep(1);
 	return (op);
 }

@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:37:40 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/09 16:29:42 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/10 16:55:30 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,55 @@ func	*g_func[17] =
 	&ft_aff
 };
 
-unsigned	int	grep_args(unsigned char *map, int position, int size)
+int	grep_args(unsigned char *map, int position, int size)
 {
 	int				i;
-	unsigned int	val;
+	int				val;
+	char			sign;
 
 	i = 0;
 	val = 0;
-	while (i < size)
-	{
-		val = (val << 16) + map[position + i];
-		i++;
-	}
-	if (size == 1)
-		val = (unsigned char)val;
-	else if (size == 2)
-		val = (unsigned short int)val;
-	else if (size == 4)
-		val = (unsigned int)val;
+	sign = map[position] & 0x80;
+	if (!sign)
+		while (i < size)
+		{
+			val = (val << 8) + map[position + i];
+			i++;
+		}
+	else
+		while (i < size)
+		{
+			val = (val << 8) + (map[position + i] ^ 0xff);
+			i++;
+		}
+	if (sign)
+		val = ~val;
 	return (val);
+}
+
+int	check_grep_args(unsigned char *map, int position,\
+											int type, char t_dirsize)
+{
+	int	arg;
+
+	arg = 0;
+	if (type == REG_CODE)
+		arg = (unsigned char)grep_args(map, position, T_REG);
+	else if (type == DIR_CODE)
+		arg = grep_args(map, position, DIR_SIZE - t_dirsize * 2);
+	else if (type == IND_CODE)
+		arg = (short int)grep_args(map, position, IND_SIZE);
+	return (arg);
+}
+
+unsigned	int get_val_size(int type, char t_dirsize)
+{
+	if (type == REG_CODE)
+		return (T_REG);
+	else if (type == DIR_CODE)
+		return (DIR_SIZE - t_dirsize * 2);
+	else if (type == IND_CODE)
+		return (IND_SIZE);
+	else
+		return (0);
 }

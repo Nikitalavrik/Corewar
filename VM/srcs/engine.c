@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/09 17:58:39 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/10 13:42:25 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 	unsigned char op;
 
 	op = corewar->map[cursor->position];
-	if (op >= 16 || !op)
+	if (op > 16 || !op)
 		return (1);
 	if (!cursor->is_wait)
 	{
@@ -62,7 +62,7 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 		cursor->remaining_cycles = g_op_tab[op - 1].cycle_before_exec;
 		cursor->is_wait = 1;
 	}
-	if (cursor->remaining_cycles <= 0)
+	if (cursor->remaining_cycles <= 0 && cursor->is_wait)
 	{
 		check_operation(corewar, cursor, op);
 		cursor->is_wait = 0;
@@ -80,8 +80,8 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 	{
 		start->position += do_op(corewar, start);
 		start->position %= MEM_SIZE;
-		cursor->cycles_num++;
-		cursor->remaining_cycles--;
+		start->cycles_num++;
+		start->remaining_cycles--;
 		start = start->next;
 	}
 }
