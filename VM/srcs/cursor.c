@@ -6,13 +6,13 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 11:44:03 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/09 17:14:29 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/10 18:07:46 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	init_cursor(t_cw *cw, int i)
+void	add_cursor(t_cw *cw, int i)
 {
 	int			j;
 	t_cursor	*tmp;
@@ -36,7 +36,7 @@ void	cursor(t_cw *cw)
 	i = 1;
 	while (i <= cw->player_nbr)
 	{
-		init_cursor(cw, i);
+		add_cursor(cw, i);
 		i++;
 	}
 	// out_cursor(cw->cursor);
@@ -50,4 +50,19 @@ void	del_cursor(t_cursor **cursor, t_cursor **prev, t_cursor **main_cursor)
 		*main_cursor = *prev;
 	if (*cursor)
 		ft_memdel((void **)cursor);
+}
+
+void	copy_cursor(t_cursor *src, t_cursor *dist)
+{
+	int	i;
+
+	i = 0;
+	dist->carry = src->carry;
+	dist->cycles_num = src->cycles_num;
+	dist->player_nbr = src->player_nbr;
+	while (i < 16)
+	{
+		dist->reg[i] = src->reg[i];
+		i++;
+	}
 }

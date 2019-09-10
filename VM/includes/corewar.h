@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/10 15:06:12 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/10 18:07:57 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int				check_grep_args(unsigned char *map, int position,\
 													int type, char t_dirsize);
 unsigned	int get_val_size(int type, char t_dirsize);
 
+void			copy_cursor(t_cursor *src, t_cursor *dist);
+void			add_cursor(t_cw *cw, int i);
 void			cursor(t_cw *cw);
 void			del_cursor(t_cursor **cursor, t_cursor **prev,\
 													t_cursor **main_cursor);
