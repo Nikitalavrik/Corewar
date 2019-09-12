@@ -48,7 +48,7 @@ void	ft_ld(t_cw *corewar, t_cursor *cursor, t_op op)
 	}
 	cursor->position += (2 + get_val_size(type_arg1, op.t_dirsize) +\
 									get_val_size(type, op.t_dirsize));
-	dump(cursor);
+	// dump(cursor);
 }
 
 void	ft_st(t_cw *corewar, t_cursor *cursor, t_op op)

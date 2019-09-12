@@ -97,7 +97,6 @@ void	engine(t_cw *corewar)
 	char	c;
 	int		tmp_die;
 
-	start_color();
 	i = 0;
 	tmp_die = 0;
 	corewar->cycle_to_die = CYCLE_TO_DIE;
