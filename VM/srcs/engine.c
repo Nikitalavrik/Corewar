@@ -12,6 +12,9 @@
 
 #include "corewar.h"
 
+# define HEIGHT					(MEM_SIZE / 64 + 4)
+# define WIDTH					(64 * 3 + 5)
+
 int		check_cycle_to_die(t_cw *corewar)
 {
 	t_cursor	*start;
@@ -89,12 +92,17 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 void	engine(t_cw *corewar)
 {
 	int		i;
+	int		k;
+	int		j;
+	char	c;
 	int		tmp_die;
 
+	start_color();
 	i = 0;
 	tmp_die = 0;
 	corewar->cycle_to_die = CYCLE_TO_DIE;
 	// out_print_bytes(corewar->map, MEM_SIZE);
+	vis_init(corewar);
 	while (1)
 	{
 		iterate_all_cursors(corewar, corewar->cursor);
@@ -108,5 +116,38 @@ void	engine(t_cw *corewar)
 		else
 			tmp_die++;
 		i++;
+		wattron(corewar->vis->win, COLOR_PAIR(COLOR_RED));
+       	k = 0;
+       	while (k < 64)
+       	{
+       		wmove(corewar->vis->win, k + 2, 5);
+       		j = 0;
+       		while (j < 64)
+       		{
+       			wprintw(corewar->vis->win, "%.2x ", corewar->map[k * 64 + j]);
+       			j++;
+       		}
+       		wprintw(corewar->vis->win, "\n");
+       		// wrefresh(corewar->vis->win);
+       		k++;
+       	}
+       	wattron(corewar->vis->win, COLOR_PAIR(COLOR_WHITE));
+		box(corewar->vis->win, 0, 0);
+		wattroff(corewar->vis->win, COLOR_PAIR(COLOR_WHITE));
+		// if (!check_cycle_to_die(corewar))
+		// 	clear();
+       	wrefresh(corewar->vis->win);
+	}
+	wprintw(corewar->vis->win, "Press q to exit ");
+	wrefresh(corewar->vis->win);
+	c = '\0';
+	while (c != 'q')
+	{
+		c = getch();
+		if (c == 'q')
+		{
+			delwin(corewar->vis->win);
+   	 		endwin();
+		}
 	}
 }
