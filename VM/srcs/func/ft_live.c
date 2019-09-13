@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_op.c                                         :+:      :+:    :+:   */
+/*   ft_live.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/09 12:07:47 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/10 15:59:10 by nlavrine         ###   ########.fr       */
+/*   Created: 2019/09/13 15:31:58 by nlavrine          #+#    #+#             */
+/*   Updated: 2019/09/13 15:32:00 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "func.h"
+#include "corewar.h"
 
-// unsigned	char check_type(unsigned type)
-
-int		check_operation(t_cw *corewar, t_cursor *cursor, int op)
+void	ft_live(t_cw *corewar, t_cursor *cursor, t_op op)
 {
-	g_func[op - 1](corewar, cursor, g_op_tab[op - 1]);
-	// exit(0);
-	// sleep(1);
-	return (op);
+	int arg1;
+
+	out_func_info(corewar, cursor, op);
+	arg1 = grep_args(corewar->map, cursor->position + 1, T_DIR);
+	if (arg1 == cursor->reg[0])
+		cursor->cycles_num = 0;
+	cursor->position += (1 + T_DIR);
 }

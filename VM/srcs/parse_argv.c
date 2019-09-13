@@ -6,42 +6,11 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:05:43 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/13 14:02:19 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 15:38:21 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-int			check_uniq_id(t_player *players, int id)
-{
-	int i;
-
-	i = 0;
-	while (i < MAX_PLAYERS)
-	{
-		if (players[i].id == id)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-void		check_uniq_name(t_player *players)
-{
-	int	i;
-
-	i = MAX_PLAYERS - 1;
-	while (i > 0 && !players[i].id)
-		i--;
-	while (i >= 0)
-	{
-		if (!players[i].name)
-			print_error("Bad player number");
-		if (ft_strcmp(players[i].name + ft_get_index(players[i].name, '.'), "cor"))
-			print_error("Bad filename");
-		i--;
-	}
-}
 
 int 		choose_flag(char *param)
 {

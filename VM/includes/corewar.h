@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/13 14:22:10 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 15:42:05 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ typedef struct		s_type_arg
 	unsigned int	arg;
 }					t_type_arg;
 
+/**
+ ** print function
+ */
 void			print_error(char *error);
 void			out_players(t_player *players);
 void			out_cursor(t_cursor *cursor);
@@ -84,22 +87,42 @@ void			out_print_bytes(unsigned char *line, int count);
 void			out_func_info(t_cw *corewar, t_cursor *cursor, t_op op);
 void			dump(t_cursor *cursor);
 
+/**
+ ** parse function
+ */
 t_player		*parse_argv(int argc, char ** argv, int *flags);
 t_cw			*parse_file(t_player *players);
+int				check_uniq_id(t_player *players, int id);
+void			check_uniq_name(t_player *players);
 
+/**
+ ** main cycle function
+ */
 void			engine(t_cw *corewar);
 int				check_operation(t_cw *corewar, t_cursor *cursor, int op);
+
+/**
+ ** grep value from map
+ */
+unsigned int	get_val_size(int type, char t_dirsize);
 int				grep_args(unsigned char *map, int position, int size);
 int				check_grep_args(unsigned char *map, int position,\
 													int type, char t_dirsize);
-unsigned	int get_val_size(int type, char t_dirsize);
 
+
+/**
+ ** cursor function
+ */
 void			copy_cursor(t_cursor *src, t_cursor *dist);
 void			add_cursor(t_cw *cw, int i);
 void			cursor(t_cw *cw);
 int				del_cursor(t_cursor **cursor, t_cursor **prev,\
 													t_cursor **main_cursor);
+/**
+ ** visual function
+ */
 void			vis_init(t_cw *corewar);
+
 extern			t_op	g_op_tab[17];
 
 #endif
