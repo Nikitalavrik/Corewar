@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:05:43 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/13 15:38:21 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 18:05:35 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int 		choose_flag(char *param)
 			flag |= 2;
 		else if (param[i] == 'n')
 			flag |= 4;
+		else if (param[i] == 'o')
+			flag |= 8;
 		else
 			print_error("Unexpected flag");
 		i++;

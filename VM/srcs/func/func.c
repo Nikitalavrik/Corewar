@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:37:40 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/10 16:55:30 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 17:54:47 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,9 @@ unsigned	int get_val_size(int type, char t_dirsize)
 		return (IND_SIZE);
 	else
 		return (0);
+}
+
+unsigned int place_cur(int cur)
+{
+	return (cur % MEM_SIZE);
 }

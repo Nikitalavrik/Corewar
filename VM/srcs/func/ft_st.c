@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:31:08 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/13 16:21:00 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 18:06:54 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_st(t_cw *corewar, t_cursor *cursor, t_op op)
 	int	type_arg1;
 
 
-	// out_func_info(corewar, cursor, op);
+	corewar->flags & 8 ? out_func_info(corewar, cursor, op) : 0;
 	arg2 = 0;
 	type = corewar->map[cursor->position + 1];
 	type_arg1 = type >> 6;
@@ -33,12 +33,12 @@ void	ft_st(t_cw *corewar, t_cursor *cursor, t_op op)
 			cursor->reg[arg2 - 1] = cursor->reg[arg1 - 1];
 		else if (type == IND_CODE && arg1 && arg1 <= 16)
 		{
-			corewar->map[cursor->position + arg2 % IDX_MOD] = cursor->reg[arg1 - 1];
+			corewar->map[place_cur(cursor->position + arg2 % IDX_MOD)] = cursor->reg[arg1 - 1];
 			// ft_printf("where %i and what = %i\n", cursor->position + arg2 % IDX_MOD, cursor->reg[arg1 - 1]);
 		}
 			
 	}
-	cursor->position += (2 + get_val_size(type_arg1, op.t_dirsize) +\
+	cursor->position = place_cur(cursor->position + 2 + get_val_size(type_arg1, op.t_dirsize) +\
 						get_val_size(type, op.t_dirsize));
 	// dump(cursor);
 }

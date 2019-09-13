@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/13 16:22:00 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 18:22:11 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 	}
 	if (cursor->remaining_cycles <= 0 && cursor->is_wait)
 	{
+		// ft_printf("g_i = %i\n", g_i);
 		check_operation(corewar, cursor, op);
 		cursor->is_wait = 0;
 		// out_print_bytes(corewar->map, MEM_SIZE);
@@ -108,15 +109,20 @@ void	engine(t_cw *corewar)
 		vis_init(corewar);
 	while (1)
 	{
+		g_i = i;
 		iterate_all_cursors(corewar, corewar->cursor);
-		if (tmp_die == corewar->cycle_to_die)
+		if (tmp_die >= corewar->cycle_to_die)
 		{
-			// out_print_bytes(corewar->map, MEM_SIZE);
+			out_print_bytes(corewar->map, MEM_SIZE);
+			// ft_printf("CHECK %i\n", corewar->cycle_to_die);
+
 			if ((tmp_die = check_cycle_to_die(corewar)))
 				break ;
+			tmp_die = 0;
 		}
 		else
 			tmp_die++;
+		
 		i++;
 		if (corewar->flags & 2)
 		{
