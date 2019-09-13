@@ -23,7 +23,7 @@ unsigned int	reverse_num(unsigned int num)
 	return (reversed);
 }
 
-header_t	*read_file(char *filename, unsigned char *area, int i)
+header_t	*read_file(char *filename, unsigned char *area, int i, t_cw *corewar)
 {
 	int fd;
 	unsigned int null_byte;
@@ -52,6 +52,7 @@ header_t	*read_file(char *filename, unsigned char *area, int i)
 	if (null_byte)
 		print_error("Bad file");
 	read(fd, &area[i], head->prog_size);
+	draw_player(area, i, head, corewar);
 	return (head);
 }
 
@@ -79,13 +80,16 @@ t_cw	*parse_file(t_player *players)
 	corewar->players = players;
 	diff = MEM_SIZE / corewar->player_nbr;
 	ft_bzero(corewar->map, MEM_SIZE);
-	ft_printf("Introducing contetants...\n");
+	// ft_printf("Introducing contetants...\n");
+	vis_init(corewar);
+	draw_map(corewar);
 	while (i < corewar->player_nbr)
 	{
-		players[i].head = read_file(players[i].name, corewar->map, place);
-		ft_printf("* Player %i, weight %2i bytes, %10s, %s\n", i + 1,\
-		players[i].head->prog_size, players[i].head->prog_name,\
-		players[i].head->comment);
+		set_player_collor(i, corewar);
+		players[i].head = read_file(players[i].name, corewar->map, place, corewar);
+		// ft_printf("* Player %i, weight %2i bytes, %10s, %s\n", i + 1,\
+		// players[i].head->prog_size, players[i].head->prog_name,\
+		// players[i].head->comment);
 		place += (diff + 1);
 		i++;
 	}

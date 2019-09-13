@@ -17,8 +17,19 @@ code:	live %42			# 5
 		st  r2, 55
 		st  r2, 56
 		st  r2, 57
-
-
-
-
+		st  r2, 58
+		st  r2, 59
+		st  r2, 60
+		st  r2, 61
+		st  r2, 62
+		st  r2, 63
+		st  r2, 64
+		st  r2, 65
+		st  r2, 66
+		st  r2, 67
+		st  r2, 68
+		st  r2, 69
+		st  r2, 70
+		st  r2, 71
+		st  r2, 72
 

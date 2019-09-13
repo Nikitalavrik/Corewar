@@ -122,6 +122,10 @@ int				del_cursor(t_cursor **cursor, t_cursor **prev,\
  ** visual function
  */
 void			vis_init(t_cw *corewar);
+void			draw_map(t_cw *corewar);
+void  			set_player_collor(int i, t_cw *corewar);
+void  			draw_player(unsigned char *area, int i, header_t *head,\
+													t_cw *corewar);
 
 extern			t_op	g_op_tab[17];
 
