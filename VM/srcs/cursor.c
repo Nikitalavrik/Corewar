@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 11:44:03 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/10 18:07:46 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 14:22:03 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,18 @@ void	cursor(t_cw *cw)
 	// out_cursor(cw->cursor);
 }
 
-void	del_cursor(t_cursor **cursor, t_cursor **prev, t_cursor **main_cursor)
+int	del_cursor(t_cursor **cursor, t_cursor **prev, t_cursor **main_cursor)
 {
+	int id;
+
+	id = (*cursor) ? (*cursor)->player_nbr : 0;
 	if (*prev)
 		(*prev)->next = (*cursor)->next;
 	if (*cursor == *main_cursor)
 		*main_cursor = *prev;
 	if (*cursor)
 		ft_memdel((void **)cursor);
+	return (id);
 }
 
 void	copy_cursor(t_cursor *src, t_cursor *dist)

@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:32:55 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/10 18:23:28 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 13:31:20 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_sti(t_cw *corewar, t_cursor *cursor, t_op op)
 	if (type_arg1 == REG_CODE && type_arg1 && type_arg2 && type != IND_CODE)
 	{
 		if (arg1 && arg1 <= 16)
-			cursor->reg[arg1 - 1] = cursor->position + (arg2 + arg3) % IDX_MOD;
+			corewar->map[cursor->position + (arg2 + arg3) % IDX_MOD] = cursor->reg[arg1 - 1];
 	}
 	cursor->position += (2 + get_val_size(type_arg1, op.t_dirsize) +\
 	get_val_size(type_arg2, op.t_dirsize) + get_val_size(type, op.t_dirsize));

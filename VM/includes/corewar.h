@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/10 18:07:57 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 14:22:10 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct		s_corewar
 	int				player_nbr;
 	int				check_cycle;
 	int				cycle_to_die;
+	int				flags;
 	t_cursor		*cursor;
 	t_player		*players;
 	t_vis			*vis;
@@ -83,7 +84,7 @@ void			out_print_bytes(unsigned char *line, int count);
 void			out_func_info(t_cw *corewar, t_cursor *cursor, t_op op);
 void			dump(t_cursor *cursor);
 
-t_player		*parse_argv(int argc, char ** argv);
+t_player		*parse_argv(int argc, char ** argv, int *flags);
 t_cw			*parse_file(t_player *players);
 
 void			engine(t_cw *corewar);
@@ -96,7 +97,7 @@ unsigned	int get_val_size(int type, char t_dirsize);
 void			copy_cursor(t_cursor *src, t_cursor *dist);
 void			add_cursor(t_cw *cw, int i);
 void			cursor(t_cw *cw);
-void			del_cursor(t_cursor **cursor, t_cursor **prev,\
+int				del_cursor(t_cursor **cursor, t_cursor **prev,\
 													t_cursor **main_cursor);
 void			vis_init(t_cw *corewar);
 extern			t_op	g_op_tab[17];
