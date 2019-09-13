@@ -26,6 +26,7 @@ SRC =	main.c				\
 		op9_12.c			\
 		op13_16.c			\
 		func.c				\
+		vis_main.c
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
@@ -42,7 +43,7 @@ OBJS = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 all: $(NAME) 
 
 $(NAME): $(LIB) $(PRINTF) $(OBJS)
-		@$(CC) $(FLAGS) $(OBJS) $(PRINTF) $(LIB) -o $(NAME) -g
+		@$(CC) $(FLAGS) $(OBJS) $(PRINTF) $(LIB) -o $(NAME) -g -lncurses
 	
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 		@mkdir -p $(OBJ_DIR)

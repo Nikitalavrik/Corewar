@@ -17,7 +17,13 @@
 # include "../libft/ft_printf/include/ft_printf.h"
 # include <fcntl.h>
 # include "op.h"
-# include <sys/stat.h> 
+# include <sys/stat.h>
+# include <ncurses.h>
+
+typedef struct		s_vis
+{
+	WINDOW			*win;
+}					t_vis;
 
 typedef struct		s_cursor
 {
@@ -49,6 +55,7 @@ typedef struct		s_corewar
 	int				cycle_to_die;
 	t_cursor		*cursor;
 	t_player		*players;
+	t_vis			*vis;
 }					t_cw;
 
 typedef	struct		s_op
@@ -91,6 +98,7 @@ void			add_cursor(t_cw *cw, int i);
 void			cursor(t_cw *cw);
 void			del_cursor(t_cursor **cursor, t_cursor **prev,\
 													t_cursor **main_cursor);
+void			vis_init(t_cw *corewar);
 extern			t_op	g_op_tab[17];
 
 #endif

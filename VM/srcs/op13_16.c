@@ -14,24 +14,92 @@
 
 void	ft_lld(t_cw *corewar, t_cursor *cursor, t_op op)
 {
+	int	arg1;
+	int	arg2;
+	unsigned char	type;
+	int	type_arg1;
+
 	out_func_info(corewar, cursor, op);
-	return ;
+	arg1 = 0;
+	type = corewar->map[cursor->position + 1];
+	type_arg1 = type >> 6;
+	type = (char)(type << 2) >> 6;
+	if ((type_arg1 == DIR_CODE || type_arg1 == IND_CODE) && type == REG_CODE)
+	{
+		arg1 = check_grep_args(corewar->map, cursor->position + 2,\
+										type_arg1, op.t_dirsize);
+		cursor->carry = !arg1 ? 1 : cursor->carry;
+		arg2 = check_grep_args(corewar->map, cursor->position + 2 +\
+				get_val_size(type_arg1, op.t_dirsize), type, op.t_dirsize);
+		if (arg2 && arg2 <= 16)
+			cursor->reg[arg2 - 1] = type_arg1 == IND_CODE ? cursor->position + 2 +\
+					get_val_size(type_arg1, op.t_dirsize) + arg1 : arg1;
+	}
+	cursor->position += (2 + get_val_size(type_arg1, op.t_dirsize) +\
+									get_val_size(type, op.t_dirsize));
+	dump(cursor);
 }
 
 void	ft_lldi(t_cw *corewar, t_cursor *cursor, t_op op)
 {
+	int	arg1;
+	int	arg2;
+	unsigned char	arg3;
+	unsigned char	type_arg1;
+	unsigned char	type_arg2;
+	unsigned char	type;
+
 	out_func_info(corewar, cursor, op);
-	return ;
+	type = corewar->map[cursor->position + 1];
+	type_arg1 = type >> 6;
+	type_arg2 = (char)(type << 2) >> 6;
+	type = (char)(type << 4) >> 6;
+	arg1 = check_grep_args(corewar->map, cursor->position + 2, type_arg1, op.t_dirsize);
+	arg2 = check_grep_args(corewar->map, cursor->position +\
+					get_val_size(type_arg1, op.t_dirsize), type_arg2, op.t_dirsize);
+	if (type_arg1 == REG_CODE && arg1 && arg1 <= 16)
+		arg1 = cursor->reg[arg1 - 1];
+	else if (type_arg1 == IND_CODE)
+		arg1 = check_grep_args(corewar->map, cursor->position + 2\
+											+ arg1 % IDX_MOD, IND_CODE, op.t_dirsize);
+	if (type_arg2 == REG_CODE && arg2 && arg2 <= 16)
+		arg2 = cursor->reg[arg2 - 1];
+
+	if (type == REG_CODE && type_arg1 && type_arg2 && type_arg2 != IND_CODE)
+	{
+		arg3 = grep_args(corewar->map, cursor->position + 2 +\
+		get_val_size(type_arg1, op.t_dirsize) +\
+		get_val_size(type_arg2, op.t_dirsize), T_REG);
+		cursor->reg[arg3 - 1] = (arg1 + arg2);
+	}
+	cursor->position += (2 + get_val_size(type_arg1, op.t_dirsize) +\
+	get_val_size(type_arg2, op.t_dirsize) + get_val_size(type, op.t_dirsize));
 }
 
 void	ft_lfork(t_cw *corewar, t_cursor *cursor, t_op op)
 {
+	int			arg1;
+
 	out_func_info(corewar, cursor, op);
-	return ;
+	arg1 = (int)grep_args(corewar->map, cursor->position + 1, T_DIR);
+	add_cursor(corewar, cursor->player_nbr);
+	copy_cursor(cursor, corewar->cursor);
+	corewar->cursor->position = arg1;
+	cursor->position += (1 + T_DIR);
 }
 
 void	ft_aff(t_cw *corewar, t_cursor *cursor, t_op op)
 {
+	unsigned char	arg1;
+	unsigned char	type_arg1;
+	unsigned char	type;
+
 	out_func_info(corewar, cursor, op);
-	return ;
+	type = corewar->map[cursor->position + 1];
+	type_arg1 = type >> 6;
+	arg1 = check_grep_args(corewar->map, cursor->position + 2, type_arg1, op.t_dirsize);
+	if (type_arg1 == REG_CODE && arg1 && arg1 <= 16)
+		arg1 = cursor->reg[arg1 - 1] % 256;
+	ft_printf("Aff: %c\n", arg1);
+	cursor->position += (2 + T_REG);
 }
