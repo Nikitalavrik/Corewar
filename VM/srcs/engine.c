@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/13 14:23:51 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 16:22:00 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 	{
 		check_operation(corewar, cursor, op);
 		cursor->is_wait = 0;
+		// out_print_bytes(corewar->map, MEM_SIZE);
 	}
 	// ft_printf("cursor id %i do %s op %i\n", cursor->id, g_op_tab[op - 1].func_name, op);
 	return (0);
@@ -127,7 +128,8 @@ void	engine(t_cw *corewar)
 				j = 0;
 				while (j < 64)
 				{
-					wprintw(corewar->vis->win, "%.2x ", corewar->map[k * 64 + j]);
+					// ft_printf("%.2x ", corewar->map[k * 64 + j]);
+					// wprintw(corewar->vis->win, "%.2x ", corewar->map[k * 64 + j]);
 					j++;
 				}
 				wprintw(corewar->vis->win, "\n");

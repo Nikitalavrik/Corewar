@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:36:49 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/13 15:36:56 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 16:15:44 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	ft_aff(t_cw *corewar, t_cursor *cursor, t_op op)
 	unsigned char	type_arg1;
 	unsigned char	type;
 
-	out_func_info(corewar, cursor, op);
+	// out_func_info(corewar, cursor, op);
+	(void)op;
 	type = corewar->map[cursor->position + 1];
 	type_arg1 = type >> 6;
 	arg1 = check_grep_args(corewar->map, cursor->position + 2, type_arg1, op.t_dirsize);

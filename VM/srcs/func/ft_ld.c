@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:31:39 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/13 15:31:46 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 16:16:06 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	ft_ld(t_cw *corewar, t_cursor *cursor, t_op op)
 	unsigned char	type;
 	int	type_arg1;
 
-	out_func_info(corewar, cursor, op);
+	// out_func_info(corewar, cursor, op);
 	arg1 = 0;
 	type = corewar->map[cursor->position + 1];
 	type_arg1 = type >> 6;
-	type = (char)(type << 2) >> 6;
+	type = (unsigned char)(type << 2) >> 6;
 	if ((type_arg1 == DIR_CODE || type_arg1 == IND_CODE) && type == REG_CODE)
 	{
 		arg1 = check_grep_args(corewar->map, cursor->position + 2,\
