@@ -117,13 +117,14 @@ void	engine(t_cw *corewar)
 	// wprintw(corewar->vis->win, "Press q to exit ");
 	// wrefresh(corewar->vis->win);
 	c = '\0';
-	while (c != 'q')
-	{
-		c = getch();
-		if (c == 'q')
+	if (corewar->flags == 2)
+		while (c != 'q')
 		{
-			delwin(corewar->vis->win);
-   	 		endwin();
+			c = getch();
+			if (c == 'q')
+			{
+				delwin(corewar->vis->win);
+	   	 		endwin();
+			}
 		}
-	}
 }

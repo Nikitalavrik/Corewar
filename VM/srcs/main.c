@@ -22,8 +22,7 @@ int		main(int argc, char **argv)
 		print_error("Please put champions!");
 	flags = 0;
 	players = parse_argv(argc, argv, &flags);
-	cw = parse_file(players);
-	cw->flags = flags;
+	cw = parse_file(players, flags);
 	cursor(cw);
 	engine(cw);
 	return (0);

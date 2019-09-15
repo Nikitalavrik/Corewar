@@ -52,7 +52,8 @@ header_t	*read_file(char *filename, unsigned char *area, int i, t_cw *corewar)
 	if (null_byte)
 		print_error("Bad file");
 	read(fd, &area[i], head->prog_size);
-	draw_player(area, i, head, corewar);
+	if (corewar->flags == 2)
+		draw_player(area, i, head->prog_size, corewar);
 	return (head);
 }
 
@@ -66,7 +67,7 @@ int		count_players(t_player *players)
 	return (i);
 }
 
-t_cw	*parse_file(t_player *players)
+t_cw	*parse_file(t_player *players, int flags)
 {
 	t_cw	*corewar;
 	int		i;
@@ -76,20 +77,28 @@ t_cw	*parse_file(t_player *players)
 	i = 0;
 	place = 0;
 	corewar = ft_memalloc(sizeof(t_cw));
+	corewar->flags = flags;
 	corewar->player_nbr = count_players(players);
 	corewar->players = players;
 	diff = MEM_SIZE / corewar->player_nbr;
 	ft_bzero(corewar->map, MEM_SIZE);
 	// ft_printf("Introducing contetants...\n");
-	vis_init(corewar);
-	draw_map(corewar);
+	if (corewar->flags == 2)
+	{
+		vis_init(corewar);
+		draw_map(corewar);
+	}
 	while (i < corewar->player_nbr)
 	{
-		set_player_collor(i, corewar);
+		if (corewar->flags == 2)
+			set_player_collor(i, corewar);
 		players[i].head = read_file(players[i].name, corewar->map, place, corewar);
-		// ft_printf("* Player %i, weight %2i bytes, %10s, %s\n", i + 1,\
-		// players[i].head->prog_size, players[i].head->prog_name,\
-		// players[i].head->comment);
+		if (corewar->flags == 2)
+			reset_player_collor(i, corewar);
+		else
+			ft_printf("* Player %i, weight %2i bytes, %10s, %s\n", i + 1,\
+		players[i].head->prog_size, players[i].head->prog_name,\
+		players[i].head->comment);
 		place += (diff + 1);
 		i++;
 	}

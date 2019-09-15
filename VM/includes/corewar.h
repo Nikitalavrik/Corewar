@@ -91,7 +91,7 @@ void			dump(t_cursor *cursor);
  ** parse function
  */
 t_player		*parse_argv(int argc, char ** argv, int *flags);
-t_cw			*parse_file(t_player *players);
+t_cw			*parse_file(t_player *players, int flags);
 int				check_uniq_id(t_player *players, int id);
 void			check_uniq_name(t_player *players);
 
@@ -124,8 +124,10 @@ int				del_cursor(t_cursor **cursor, t_cursor **prev,\
 void			vis_init(t_cw *corewar);
 void			draw_map(t_cw *corewar);
 void  			set_player_collor(int i, t_cw *corewar);
-void  			draw_player(unsigned char *area, int i, header_t *head,\
-													t_cw *corewar);
+void  			reset_player_collor(int i, t_cw *corewar);
+void 			draw_player(unsigned char *area, int i,\
+				unsigned int prog_size,	t_cw *corewar);
+
 
 extern			t_op	g_op_tab[17];
 

@@ -51,24 +51,46 @@ void  set_player_collor(int i, t_cw *corewar)
       wattron(corewar->vis->win, COLOR_PAIR(COLOR_YELLOW));
 }
 
-void  draw_player(unsigned char *area, int i, header_t *head, t_cw *corewar)
+void  reset_player_collor(int i, t_cw *corewar)
+{
+    if (i == 0)
+      wattroff(corewar->vis->win, COLOR_PAIR(COLOR_GREEN));
+    else if (i == 1)
+      wattroff(corewar->vis->win, COLOR_PAIR(COLOR_BLUE));
+    else if (i == 2)
+      wattroff(corewar->vis->win, COLOR_PAIR(COLOR_RED));
+    else if (i == 3)
+      wattroff(corewar->vis->win, COLOR_PAIR(COLOR_YELLOW));
+}
+
+void  draw_player(unsigned char *area, int i, unsigned int prog_size, t_cw *corewar)
 {
     int j;
+    unsigned int k;
 
+    k = 0;
     j = i % 64;
     i = i / 64;
-    while (i < 64 && i * 64 + j < (int)head->prog_size)
+    wmove(corewar->vis->win, i + 2, 5 + j * 3);
+    while (i < 64)
     {
-      wmove(corewar->vis->win, i + 2, 5);
       j = 0;
-      while (j < 64 && i * 64 + j < (int)head->prog_size)
+      while (j < 64 && k < prog_size)
       {
         wprintw(corewar->vis->win, "%.2x ", area[i * 64 + j]);
         j++;
+        k++;
       }
-      wprintw(corewar->vis->win, "\n");
+      if (k < prog_size)
+          wprintw(corewar->vis->win, "\n");
+      else
+        break ;
       i++;
+      wmove(corewar->vis->win, i + 2, 5);
     }
+    wattron(corewar->vis->win, COLOR_PAIR(COLOR_WHITE));
+    box(corewar->vis->win, 0, 0);
+    wattroff(corewar->vis->win, COLOR_PAIR(COLOR_WHITE));
     wrefresh(corewar->vis->win);
 }
 
