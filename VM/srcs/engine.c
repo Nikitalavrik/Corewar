@@ -7,6 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
 /*   Updated: 2019/09/10 13:42:25 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 18:22:11 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +68,7 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 	}
 	if (cursor->remaining_cycles <= 0 && cursor->is_wait)
 	{
+		// ft_printf("g_i = %i\n", g_i);
 		check_operation(corewar, cursor, op);
 		cursor->is_wait = 0;
 	}
@@ -76,15 +78,20 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 
 void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 {
-	t_cursor *start;
+	t_cursor	*start;
+	int			pos;
 
+	pos = 0;
 	start = cursor;
 	while (start)
 	{
+		pos = start->position;
 		start->position += do_op(corewar, start);
 		start->position %= MEM_SIZE;
 		start->cycles_num++;
 		start->remaining_cycles--;
+		if (corewar->flags == 2)
+			draw_cursor(pos, start, corewar, cursor);
 		start = start->next;
 	}
 }
@@ -99,24 +106,40 @@ void	engine(t_cw *corewar)
 	tmp_die = 0;
 	corewar->cycle_to_die = CYCLE_TO_DIE;
 	// out_print_bytes(corewar->map, MEM_SIZE);
+	c = '\0';
+	if (corewar->flags == 2)
+		while (c != 's')
+		{
+		    c = getch();
+		    if (c == 's')
+		    {
+		        delwin(corewar->vis->win);
+		        endwin();
+		    }
+		}
 	while (1)
 	{
+		g_i = i;
 		iterate_all_cursors(corewar, corewar->cursor);
-		if (tmp_die == corewar->cycle_to_die)
+		if (tmp_die >= corewar->cycle_to_die)
 		{
 			// out_print_bytes(corewar->map, MEM_SIZE);
-			if (check_cycle_to_die(corewar))
+			// if (check_cycle_to_die(corewar))
+			// out_print_bytes(corewar->map, MEM_SIZE);
+			// ft_printf("CHECK %i\n", corewar->cycle_to_die);
+
+			if ((tmp_die = check_cycle_to_die(corewar)))
 				break ;
 			tmp_die = 0;
 		}
 		else
 			tmp_die++;
+		
 		i++;
 		// draw_map(corewar);
 	}
 	// wprintw(corewar->vis->win, "Press q to exit ");
 	// wrefresh(corewar->vis->win);
-	c = '\0';
 	if (corewar->flags == 2)
 		while (c != 'q')
 		{

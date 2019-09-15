@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 11:44:03 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/13 14:22:03 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 18:20:49 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	del_cursor(t_cursor **cursor, t_cursor **prev, t_cursor **main_cursor)
 {
 	int id;
 
+	// ft_printf("del = %i\n", (*cursor)->id);
 	id = (*cursor) ? (*cursor)->player_nbr : 0;
 	if (*prev)
 		(*prev)->next = (*cursor)->next;

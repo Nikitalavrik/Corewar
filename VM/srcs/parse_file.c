@@ -57,6 +57,7 @@ header_t	*read_file(char *filename, unsigned char *area, int i, t_cw *corewar)
 	return (head);
 }
 
+
 int		count_players(t_player *players)
 {
 	int i;

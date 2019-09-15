@@ -40,7 +40,8 @@ SRC =	main.c				\
 		func/ft_lldi.c		\
 		func/ft_lfork.c		\
 		func/ft_aff.c		\
-		func/func.c		\
+		func/func.c			\
+		set_color.c 		\
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror

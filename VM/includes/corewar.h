@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/13 15:42:05 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 17:48:21 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 typedef struct		s_vis
 {
 	WINDOW			*win;
+	int				map[MEM_SIZE];
+	int				player;
 }					t_vis;
 
 typedef struct		s_cursor
@@ -40,12 +42,12 @@ typedef struct		s_cursor
 	int				player_nbr;			//номер игрока породившего каретку
 }					t_cursor;
 
-typedef	struct	s_player
+typedef	struct		s_player
 {
-	int			id;
-	char		*name;
-	header_t	*head;
-}				t_player;
+	int				id;
+	char			*name;
+	header_t		*head;
+}					t_player;
 
 typedef struct		s_corewar
 {
@@ -100,7 +102,7 @@ void			check_uniq_name(t_player *players);
  */
 void			engine(t_cw *corewar);
 int				check_operation(t_cw *corewar, t_cursor *cursor, int op);
-
+unsigned int 	place_cur(int cur);
 /**
  ** grep value from map
  */
@@ -127,8 +129,14 @@ void  			set_player_collor(int i, t_cw *corewar);
 void  			reset_player_collor(int i, t_cw *corewar);
 void 			draw_player(unsigned char *area, int i,\
 				unsigned int prog_size,	t_cw *corewar);
+void  			draw_cursor(int pos, t_cursor *start, t_cw *corewar,\
+													t_cursor *cursor);
+void    		set_color_by_cursor(t_cw *corewar, t_cursor *cursor);
+void    		cursor_color_to_player(int pos, t_cw *corewar);
+void   			set_cursor_color_by_pos(t_cw *corewar, t_cursor *start);
 
 
 extern			t_op	g_op_tab[17];
-
+int		g_id;
+int		g_i;
 #endif

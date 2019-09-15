@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:34:52 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/13 16:16:52 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 18:20:34 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ void	ft_sti(t_cw *corewar, t_cursor *cursor, t_op op)
 	unsigned char	type_arg1;
 	unsigned char	type_arg2;
 	unsigned char	type;
+	int	i[2];
 
-	// out_func_info(corewar, cursor, op);
+	corewar->flags & 8 ? out_func_info(corewar, cursor, op) : 0;
 	type = corewar->map[cursor->position + 1];
 	type_arg1 = type >> 6;
 	type_arg2 = (unsigned char)(type << 2) >> 6;
@@ -43,9 +44,23 @@ void	ft_sti(t_cw *corewar, t_cursor *cursor, t_op op)
 	if (type_arg1 == REG_CODE && type_arg1 && type_arg2 && type != IND_CODE)
 	{
 		if (arg1 && arg1 <= 16)
-			corewar->map[cursor->position + (arg2 + arg3) % IDX_MOD] = cursor->reg[arg1 - 1];
+		{
+			// ft_printf("where %i and what %i\n", cursor->position + (arg2 + arg3) % IDX_MOD, cursor->reg[arg1 - 1]);
+			corewar->map[place_cur(cursor->position + (arg2 + arg3) % IDX_MOD)] = cursor->reg[arg1 - 1];
+			// ft_putnbr(cursor->reg[0]);
+			if (corewar->flags == 2)
+			{
+				i[0] = place_cur(cursor->position + (arg2 + arg3) % IDX_MOD) / 64;
+				i[1] = place_cur(cursor->position + (arg2 + arg3) % IDX_MOD) % 64;
+				set_color_by_cursor(corewar, cursor);
+				mvwprintw(corewar->vis->win, i[0] + 2, 3 * i[1] + 5, "%.2x", corewar->map[i[0] * 64 + i[1]]);
+				corewar->vis->map[i[0] * 64 + i[1]] = -cursor->reg[0];
+			}
+			// exit(0);
+		}
+			
 	}
-	cursor->position += (2 + get_val_size(type_arg1, op.t_dirsize) +\
+	cursor->position = place_cur(cursor->position + 2 + get_val_size(type_arg1, op.t_dirsize) +\
 	get_val_size(type_arg2, op.t_dirsize) + get_val_size(type, op.t_dirsize));
 	// dump(cursor);
 }
