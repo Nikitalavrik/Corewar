@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 16:17:00 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/13 14:02:56 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 17:30:09 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		main(int argc, char **argv)
 	t_player	*players;
 	int			flags;
 
+	g_id = 1;
 	if (argc < 2)
 		print_error("Please put champions!");
 	flags = 0;

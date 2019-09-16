@@ -21,11 +21,17 @@ void	vis_init(t_cw *corewar)
     refresh();
     corewar->vis = ft_memalloc(sizeof(t_vis));
     corewar->vis->win = newwin(HEIGHT, WIDTH + 4, 1, 2);
+    corewar->vis->info = newwin(HEIGHT, 64, 1, WIDTH + 4);
     ft_bzero(corewar->vis->map, MEM_SIZE);
     corewar->vis->player = 0;
-  	start_color();
-  	has_colors();
-  	init_pair(1,  COLOR_RED,     COLOR_BLACK);
+    ft_init_colors();
+}
+
+void    ft_init_colors(void)
+{
+    start_color();
+    has_colors();
+    init_pair(1,  COLOR_RED,     COLOR_BLACK);
     init_pair(2,  COLOR_GREEN,   COLOR_BLACK);
     init_pair(3,  COLOR_YELLOW,  COLOR_BLACK);
     init_pair(4,  COLOR_BLUE,    COLOR_BLACK);
@@ -40,6 +46,7 @@ void	vis_init(t_cw *corewar)
     init_pair(13, COLOR_BLACK,   COLOR_CYAN);
     init_pair(14, COLOR_WHITE,   COLOR_WHITE);
 }
+
 
 void  draw_player(unsigned char *area, int i, unsigned int prog_size, t_cw *corewar)
 {
@@ -101,10 +108,15 @@ void	draw_map(t_cw *corewar)
  		wprintw(corewar->vis->win, "\n");
  		k++;
    	}
+    mvwprintw(corewar->vis->info, 2, 5, "Cycles: ");
+    mvwprintw(corewar->vis->info, 4, 5, "Cycles to die: ");
     wattron(corewar->vis->win, COLOR_PAIR(14));
     box(corewar->vis->win, 0, 0);
     wattroff(corewar->vis->win, COLOR_PAIR(14));
-   	wrefresh(corewar->vis->win);
+    wattron(corewar->vis->info, COLOR_PAIR(14));
+    box(corewar->vis->info, 0, 0);
+    wattroff(corewar->vis->info, COLOR_PAIR(14));
+    wrefresh(corewar->vis->info);
 }
 
 

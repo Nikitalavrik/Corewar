@@ -42,7 +42,7 @@ void	ft_st(t_cw *corewar, t_cursor *cursor, t_op op)
 				i[1] = place_cur(cursor->position + arg2 % IDX_MOD) % 64;
 				set_color_by_cursor(corewar, cursor);
 				mvwprintw(corewar->vis->win, i[0] + 2, 3 * i[1] + 5, "%.2x", corewar->map[i[0] * 64 + i[1]]);
-				corewar->vis->map[i[0] * 64 + i[1]] = -cursor->reg[0];
+				corewar->vis->map[i[0] * 64 + i[1]] = -cursor->reg[0];	
 			}
 			// ft_printf("where %i and what = %i\n", cursor->position + arg2 % IDX_MOD, cursor->reg[arg1 - 1]);
 		}

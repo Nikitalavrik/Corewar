@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:36:11 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/13 16:16:10 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/13 18:06:35 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_ldi(t_cw *corewar, t_cursor *cursor, t_op op)
 	unsigned char	type_arg2;
 	unsigned char	type;
 
-	// out_func_info(corewar, cursor, op);
+	corewar->flags & 8 ? out_func_info(corewar, cursor, op) : 0;
 	type = corewar->map[cursor->position + 1];
 	type_arg1 = type >> 6;
 	type_arg2 = (unsigned char)(type << 2) >> 6;
@@ -45,7 +45,7 @@ void	ft_ldi(t_cw *corewar, t_cursor *cursor, t_op op)
 		if (arg3 && arg3 <= 16)
 			cursor->reg[arg3 - 1] = cursor->position + (arg1 + arg2) % IDX_MOD;
 	}
-	cursor->position += (2 + get_val_size(type_arg1, op.t_dirsize) +\
+	cursor->position = place_cur(cursor->position + 2 + get_val_size(type_arg1, op.t_dirsize) +\
 	get_val_size(type_arg2, op.t_dirsize) + get_val_size(type, op.t_dirsize));
 	// dump(cursor);
 }
