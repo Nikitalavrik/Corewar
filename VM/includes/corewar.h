@@ -24,6 +24,7 @@ typedef struct		s_vis
 {
 	WINDOW			*win;
 	WINDOW			*info;
+	WINDOW			*help;
 	int				map[MEM_SIZE];
 	int				player;
 }					t_vis;
@@ -136,7 +137,8 @@ void    		set_color_by_cursor(t_cw *corewar, t_cursor *cursor);
 void    		cursor_color_to_player(int pos, t_cw *corewar);
 void   			set_cursor_color_by_pos(t_cw *corewar, t_cursor *start);
 void    		ft_init_colors(void);
-
+void    		draw_box_and_words(t_cw *corewar);
+void    		draw_player_name(char *prog_name, t_cw *corewar);
 
 extern			t_op	g_op_tab[17];
 int		g_id;

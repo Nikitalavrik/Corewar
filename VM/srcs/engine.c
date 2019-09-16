@@ -108,10 +108,10 @@ void	engine(t_cw *corewar)
 	// out_print_bytes(corewar->map, MEM_SIZE);
 	c = '\0';
 	if (corewar->flags == 2)
-		while (c != 's')
+		while (c != 32)
 		{
 		    c = getch();
-		    if (c == 's')
+		    if (c == 32)
 		    {
 		        delwin(corewar->vis->win);
 		        endwin();
@@ -135,21 +135,27 @@ void	engine(t_cw *corewar)
 		else
 			tmp_die++;
 		i++;
-		mvwprintw(corewar->vis->info, 2, 21, "%i", i);
-		mvwprintw(corewar->vis->info, 4, 21, "%i", corewar->cycle_to_die - tmp_die);
+		mvwprintw(corewar->vis->info, 4, 21, "%i", i);
+		mvwprintw(corewar->vis->info, 6, 21, "%i", corewar->cycle_to_die - tmp_die);
 		wrefresh(corewar->vis->info);
 		// draw_map(corewar);
 	}
 	// wprintw(corewar->vis->win, "Press q to exit ");
 	// wrefresh(corewar->vis->win);
+	c = '\0';
 	if (corewar->flags == 2)
-		while (c != 'q')
+	{
+		while (c != 27)
 		{
 			c = getch();
-			if (c == 'q')
+			if (c == 27)
 			{
 				delwin(corewar->vis->win);
+				delwin(corewar->vis->help);
+				delwin(corewar->vis->info);
 	   	 		endwin();
 			}
 		}
+		free(corewar->vis);
+	}
 }

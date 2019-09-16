@@ -53,7 +53,10 @@ header_t	*read_file(char *filename, unsigned char *area, int i, t_cw *corewar)
 		print_error("Bad file");
 	read(fd, &area[i], head->prog_size);
 	if (corewar->flags == 2)
+	{
 		draw_player(area, i, head->prog_size, corewar);
+		draw_player_name(head->prog_name, corewar);
+	}
 	return (head);
 }
 

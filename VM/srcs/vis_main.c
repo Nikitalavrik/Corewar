@@ -19,9 +19,11 @@ void	vis_init(t_cw *corewar)
     initscr();
     curs_set(0);
     refresh();
+    noecho();
     corewar->vis = ft_memalloc(sizeof(t_vis));
     corewar->vis->win = newwin(HEIGHT, WIDTH + 4, 1, 2);
-    corewar->vis->info = newwin(HEIGHT, 64, 1, WIDTH + 4);
+    corewar->vis->info = newwin(HEIGHT / 2, 64, 1, WIDTH + 5);
+    corewar->vis->help = newwin(HEIGHT / 2 + 1, 64, HEIGHT / 2, WIDTH + 5);
     ft_bzero(corewar->vis->map, MEM_SIZE);
     corewar->vis->player = 0;
     ft_init_colors();
@@ -108,17 +110,58 @@ void	draw_map(t_cw *corewar)
  		wprintw(corewar->vis->win, "\n");
  		k++;
    	}
-    mvwprintw(corewar->vis->info, 2, 5, "Cycles: ");
-    mvwprintw(corewar->vis->info, 4, 5, "Cycles to die: ");
+    draw_box_and_words(corewar);
+}
+
+void    draw_player_name(char *prog_name, t_cw *corewar)
+{
+    int i;
+    int n;
+
+    i = 0;
+    n = 0;
+    mvwprintw(corewar->vis->info, 12 + corewar->vis->player * 3, 5, "Player %i:", corewar->vis->player);
+    while (prog_name[i])
+    {
+        mvwprintw(corewar->vis->info, 12 + corewar->vis->player * 3 + n, 15 + i % 47, "%c", prog_name[i]);
+        if (i % 47 == 0 && i != 0)
+            n++;
+        i++;
+    }
+    wrefresh(corewar->vis->info);
+}
+
+void    draw_box_and_words(t_cw *corewar)
+{
+    wattron(corewar->vis->info, COLOR_PAIR(1));
+    mvwprintw(corewar->vis->info, 2, 28, "STATUS");
+    wattroff(corewar->vis->info, COLOR_PAIR(1));
+    mvwprintw(corewar->vis->info, 4, 5, "Cycles: ");
+    mvwprintw(corewar->vis->info, 6, 5, "Cycles to die: ");
+    mvwprintw(corewar->vis->info, 8, 5, "Cycle delta: ");
+    mvwprintw(corewar->vis->info, 8, 21, "%i", CYCLE_DELTA);
+    mvwprintw(corewar->vis->info, 10, 5, "Nbr LIVE: ");
+    mvwprintw(corewar->vis->info, 10, 21, "%i", NBR_LIVE);
+    mvwprintw(corewar->vis->info, 12, 5, "Max cheks: ");
+    mvwprintw(corewar->vis->info, 12, 21, "%i", MAX_CHECKS);
     wattron(corewar->vis->win, COLOR_PAIR(14));
     box(corewar->vis->win, 0, 0);
     wattroff(corewar->vis->win, COLOR_PAIR(14));
+    wrefresh(corewar->vis->win);
     wattron(corewar->vis->info, COLOR_PAIR(14));
     box(corewar->vis->info, 0, 0);
     wattroff(corewar->vis->info, COLOR_PAIR(14));
     wrefresh(corewar->vis->info);
+    wattron(corewar->vis->help, COLOR_PAIR(14));
+    box(corewar->vis->help, 0, 0);
+    wattroff(corewar->vis->help, COLOR_PAIR(14));
+    wattron(corewar->vis->help, COLOR_PAIR(1));
+    mvwprintw(corewar->vis->help, 2, 25, "INFORMATION");
+    wattroff(corewar->vis->help, COLOR_PAIR(1));
+    mvwprintw(corewar->vis->help, 4, 5, "Press spase to start.");
+    mvwprintw(corewar->vis->help, 6, 5, "Press esc to exit.");
+    wrefresh(corewar->vis->help);
 }
-
 
 void    draw_cursor(int pos, t_cursor *start, t_cw *corewar, t_cursor *cursor)
 {
