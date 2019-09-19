@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/19 13:46:50 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/19 16:35:19 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int		check_cycle_to_die(t_cw *corewar)
 	{
 		corewar->check_cycle++;
 	}
-	// ft_printf("g-i = %i\n", g_i);
 	if (corewar->cursor == NULL)
 		return (1);
 	return (0);
@@ -69,14 +68,10 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 	}
 	if (cursor->remaining_cycles <= 0 && cursor->is_wait)
 	{
-		// ft_printf("g_i = %i\n", g_i);
 		check_operation(corewar, cursor, cursor->op);
 		cursor->is_wait = 0;
 		do_op(corewar, cursor);
-		// return (0);
 	}
-	
-	// ft_printf("cursor id %i do %s op %i\n", cursor->id, g_op_tab[op - 1].func_name, op);
 	return (0);
 }
 
@@ -109,7 +104,6 @@ void	engine(t_cw *corewar)
 	i = 0;
 	tmp_die = 0;
 	corewar->cycle_to_die = CYCLE_TO_DIE;
-	// out_print_bytes(corewar->map, MEM_SIZE);
 	c = '\0';
 	if (corewar->flags == 2)
 		while (c != 32)
@@ -127,16 +121,9 @@ void	engine(t_cw *corewar)
 		iterate_all_cursors(corewar, corewar->cursor);
 		if (tmp_die >= corewar->cycle_to_die)
 		{
-			// out_print_bytes(corewar->map, MEM_SIZE);
-			// if (check_cycle_to_die(corewar))
-			// out_print_bytes(corewar->map, MEM_SIZE);
-			// ft_printf("CHECK %i\n", corewar->cycle_to_die);
-			// out_cursor(corewar->cursor);
-			// ft_printf("cycle = %i\n", i)
 			if ((tmp_die = check_cycle_to_die(corewar)))
 				break ;
 			tmp_die = 0;
-			// out_cursor(corewar->cursor);
 		}
 		else
 			tmp_die++;
@@ -147,10 +134,7 @@ void	engine(t_cw *corewar)
 			wrefresh(corewar->vis->info);
 		}
 		i++;
-		// draw_map(corewar);
 	}
-	// wprintw(corewar->vis->win, "Press q to exit ");
-	// wrefresh(corewar->vis->win);
 	c = '\0';
 	if (corewar->flags == 2)
 	{
