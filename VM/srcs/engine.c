@@ -6,10 +6,10 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/10 13:42:25 by nlavrine         ###   ########.fr       */
-/*   Updated: 2019/09/13 18:22:11 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/19 13:46:50 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "corewar.h"
 
@@ -34,7 +34,7 @@ int		check_cycle_to_die(t_cw *corewar)
 			del_cursor(&start, &prev, &corewar->cursor);
 		else
 			live_process++;
-		prev = start;
+		prev = start ? start : prev;
 		start = next;
 	}
 	// check if we need to reduce cycle_to_die
@@ -48,6 +48,7 @@ int		check_cycle_to_die(t_cw *corewar)
 	{
 		corewar->check_cycle++;
 	}
+	// ft_printf("g-i = %i\n", g_i);
 	if (corewar->cursor == NULL)
 		return (1);
 	return (0);
@@ -69,9 +70,12 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 	if (cursor->remaining_cycles <= 0 && cursor->is_wait)
 	{
 		// ft_printf("g_i = %i\n", g_i);
-		check_operation(corewar, cursor, op);
+		check_operation(corewar, cursor, cursor->op);
 		cursor->is_wait = 0;
+		do_op(corewar, cursor);
+		// return (0);
 	}
+	
 	// ft_printf("cursor id %i do %s op %i\n", cursor->id, g_op_tab[op - 1].func_name, op);
 	return (0);
 }
@@ -127,17 +131,22 @@ void	engine(t_cw *corewar)
 			// if (check_cycle_to_die(corewar))
 			// out_print_bytes(corewar->map, MEM_SIZE);
 			// ft_printf("CHECK %i\n", corewar->cycle_to_die);
-
+			// out_cursor(corewar->cursor);
+			// ft_printf("cycle = %i\n", i)
 			if ((tmp_die = check_cycle_to_die(corewar)))
 				break ;
 			tmp_die = 0;
+			// out_cursor(corewar->cursor);
 		}
 		else
 			tmp_die++;
+		if (corewar->flags & 2)
+		{
+			mvwprintw(corewar->vis->info, 4, 21, "%i", i);
+			mvwprintw(corewar->vis->info, 6, 21, "%i", corewar->cycle_to_die);
+			wrefresh(corewar->vis->info);
+		}
 		i++;
-		mvwprintw(corewar->vis->info, 4, 21, "%i", i);
-		mvwprintw(corewar->vis->info, 6, 21, "%i", corewar->cycle_to_die - tmp_die);
-		wrefresh(corewar->vis->info);
 		// draw_map(corewar);
 	}
 	// wprintw(corewar->vis->win, "Press q to exit ");

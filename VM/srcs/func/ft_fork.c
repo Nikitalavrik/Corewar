@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:35:15 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/13 18:06:28 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/19 13:06:05 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ void	ft_fork(t_cw *corewar, t_cursor *cursor, t_op op)
 	corewar->cursor->id = ++g_id;
 	corewar->cursor->position = cursor->position + (arg1 % IDX_MOD);
 	cursor->position = place_cur(cursor->position + 1 + T_DIR);
+	// ft_printf("cur id = %i\n", corewar->cursor->id);
+	// out_cursor(corewar->cursor);
 	// ft_printf("next op = %x\n", corewar->map[cursor->position]);
 }

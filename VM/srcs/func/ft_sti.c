@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:34:52 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/13 18:20:34 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/19 13:13:17 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,16 @@ void	ft_sti(t_cw *corewar, t_cursor *cursor, t_op op)
 		if (arg1 && arg1 <= 16)
 		{
 			// ft_printf("where %i and what %i\n", cursor->position + (arg2 + arg3) % IDX_MOD, cursor->reg[arg1 - 1]);
-			corewar->map[place_cur(cursor->position + (arg2 + arg3) % IDX_MOD)] = cursor->reg[arg1 - 1];
+			// ft_printf("reg = %i\n", cursor->reg[arg1 - 1]);
+			corewar->map[place_cur(cursor->position + ((arg2 + arg3) % IDX_MOD))] = cursor->reg[arg1 - 1] >> 24;
+			corewar->map[place_cur(cursor->position + ((arg2 + arg3) % IDX_MOD) + 1)] = cursor->reg[arg1 - 1] << 8 >> 24;
+			corewar->map[place_cur(cursor->position + ((arg2 + arg3) % IDX_MOD) + 2)] = cursor->reg[arg1 - 1] << 16 >> 24;
+			corewar->map[place_cur(cursor->position + ((arg2 + arg3) % IDX_MOD) + 3)] = cursor->reg[arg1 - 1] << 24 >> 24;
+			// ft_printf("map[%i] = %x\n", place_cur(cursor->position + ((arg2 + arg3) % IDX_MOD)), corewar->map[place_cur(cursor->position + ((arg2 + arg3) % IDX_MOD))]);
+			// ft_printf("map[%i] = %x\n", place_cur(cursor->position + ((arg2 + arg3) % IDX_MOD) + 1), corewar->map[place_cur(cursor->position + ((arg2 + arg3) % IDX_MOD) + 1)]);
+			// ft_printf("map[%i] = %x\n", place_cur(cursor->position + ((arg2 + arg3) % IDX_MOD) + 2), corewar->map[place_cur(cursor->position + ((arg2 + arg3) % IDX_MOD) + 2)]);
+			// ft_printf("map[%i] = %x\n", place_cur(cursor->position + ((arg2 + arg3) % IDX_MOD) + 3), corewar->map[place_cur(cursor->position + ((arg2 + arg3) % IDX_MOD) + 3)]);
+
 			// ft_putnbr(cursor->reg[0]);
 			if (corewar->flags == 2)
 			{

@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:35:40 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/13 18:06:44 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/19 12:52:20 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,15 @@ void	ft_lld(t_cw *corewar, t_cursor *cursor, t_op op)
 	{
 		arg1 = check_grep_args(corewar->map, cursor->position + 2,\
 										type_arg1, op.t_dirsize);
-		cursor->carry = !arg1 ? 1 : cursor->carry;
 		arg2 = check_grep_args(corewar->map, cursor->position + 2 +\
 				get_val_size(type_arg1, op.t_dirsize), type, op.t_dirsize);
 		if (arg2 && arg2 <= 16)
+		{
 			cursor->reg[arg2 - 1] = type_arg1 == IND_CODE ? cursor->position + 2 +\
 					get_val_size(type_arg1, op.t_dirsize) + arg1 : arg1;
+			cursor->carry = !cursor->reg[arg2 - 1] ? 1 : 0;
+		}
+
 	}
 	cursor->position = place_cur(cursor->position + 2 + get_val_size(type_arg1, op.t_dirsize) +\
 									get_val_size(type, op.t_dirsize));

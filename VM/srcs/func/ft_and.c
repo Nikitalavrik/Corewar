@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:32:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/13 18:06:24 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/19 12:49:19 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_and(t_cw *corewar, t_cursor *cursor, t_op op)
 		get_val_size(type_arg1, op.t_dirsize) +\
 		get_val_size(type_arg2, op.t_dirsize), T_REG);
 		cursor->reg[arg3 - 1] = arg1 & arg2;
+		cursor->carry = !cursor->reg[arg3 - 1] ? 1 : 0;
 	}
 	cursor->position = place_cur(cursor->position + 2 + get_val_size(type_arg1, op.t_dirsize) +\
 	get_val_size(type_arg2, op.t_dirsize) + get_val_size(type, op.t_dirsize));

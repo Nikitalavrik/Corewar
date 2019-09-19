@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vis_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbratsla <tbratsla@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 10:55:15 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/11 10:55:16 by tbratsla         ###   ########.fr       */
+/*   Updated: 2019/09/19 14:15:36 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,6 @@ void    draw_cursor(int pos, t_cursor *start, t_cw *corewar, t_cursor *cursor)
         mvwprintw(corewar->vis->win, i + 2, 3 * j + 5, "%.2x", corewar->map[i * 64 + j]);
     }
     wrefresh(corewar->vis->win);
-    usleep(1000);
+    usleep(11100);
 }
 

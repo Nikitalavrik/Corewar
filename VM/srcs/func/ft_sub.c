@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:32:28 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/13 18:07:01 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/19 12:48:28 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_sub(t_cw *corewar, t_cursor *cursor, t_op op)
 		if (arg1 && arg1 <= 16 && arg2 && arg2 <= 16 && arg3 && arg3 <= 16)
 		{
 			cursor->reg[arg3 - 1] = cursor->reg[arg1 - 1] - cursor->reg[arg2 - 1];
-			cursor->carry = !cursor->reg[arg3 - 1] ? 1 : cursor->carry;
+			cursor->carry = !cursor->reg[arg3 - 1] ? 1 : 0;
 		}	
 	}
 	cursor->position = place_cur(cursor->position + 2 + get_val_size(type_arg1, op.t_dirsize) +\
