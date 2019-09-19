@@ -27,6 +27,8 @@ typedef struct		s_vis
 	WINDOW			*help;
 	int				map[MEM_SIZE];
 	int				player;
+	int				x;
+	int				y;
 }					t_vis;
 
 typedef struct		s_cursor

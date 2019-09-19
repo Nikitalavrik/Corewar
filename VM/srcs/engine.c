@@ -116,10 +116,7 @@ void	engine(t_cw *corewar)
 		{
 		    c = getch();
 		    if (c == 32)
-		    {
-		        delwin(corewar->vis->win);
-		        endwin();
-		    }
+			    break ;
 		}
 	while (1)
 	{
@@ -147,6 +144,9 @@ void	engine(t_cw *corewar)
 			wrefresh(corewar->vis->info);
 		}
 		i++;
+		mvwprintw(corewar->vis->info, 4, 21, "%i", i);
+		mvwprintw(corewar->vis->info, 6, 21, "%i", corewar->cycle_to_die - tmp_die);
+		wrefresh(corewar->vis->info);
 		// draw_map(corewar);
 	}
 	// wprintw(corewar->vis->win, "Press q to exit ");

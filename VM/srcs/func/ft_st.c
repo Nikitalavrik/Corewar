@@ -54,7 +54,22 @@ void	ft_st(t_cw *corewar, t_cursor *cursor, t_op op)
 					IDX_MOD)/ 64 + 2, 3 * (place_cur(cursor->position + arg2 %\
 					IDX_MOD) % 64) + 5, "%.2x",\
 					corewar->map[place_cur(cursor->position + arg2 % IDX_MOD)]);
-				corewar->vis->map[place_cur(cursor->position + arg2 % IDX_MOD)] = -cursor->reg[0];	
+				mvwprintw(corewar->vis->win, place_cur(cursor->position + arg2 %\
+					IDX_MOD + 1)/ 64 + 2, 3 * (place_cur(cursor->position + arg2 %\
+					IDX_MOD + 1) % 64) + 5, "%.2x",\
+					corewar->map[place_cur(cursor->position + arg2 % IDX_MOD)]);
+				mvwprintw(corewar->vis->win, place_cur(cursor->position + arg2 %\
+					IDX_MOD + 2)/ 64 + 2, 3 * (place_cur(cursor->position + arg2 %\
+					IDX_MOD + 2) % 64) + 5, "%.2x",\
+					corewar->map[place_cur(cursor->position + arg2 % IDX_MOD)]);
+				mvwprintw(corewar->vis->win, place_cur(cursor->position + arg2 %\
+					IDX_MOD + 3)/ 64 + 2, 3 * (place_cur(cursor->position + arg2 %\
+					IDX_MOD + 3) % 64) + 5, "%.2x",\
+					corewar->map[place_cur(cursor->position + arg2 % IDX_MOD)]);
+				corewar->vis->map[place_cur(cursor->position + arg2 % IDX_MOD)] = -cursor->reg[0];
+				corewar->vis->map[place_cur(cursor->position + arg2 % IDX_MOD) + 1] = -cursor->reg[0];
+				corewar->vis->map[place_cur(cursor->position + arg2 % IDX_MOD) + 2] = -cursor->reg[0];
+				corewar->vis->map[place_cur(cursor->position + arg2 % IDX_MOD) + 3] = -cursor->reg[0];	
 			}
 			// ft_printf("where %i and what = %i\n", cursor->position + arg2 % IDX_MOD, cursor->reg[arg1 - 1]);
 		}

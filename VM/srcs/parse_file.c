@@ -56,6 +56,9 @@ header_t	*read_file(char *filename, unsigned char *area, int i, t_cw *corewar)
 	{
 		draw_player(area, i, head->prog_size, corewar);
 		draw_player_name(head->prog_name, corewar);
+		wrefresh(corewar->vis->win);
+		wrefresh(corewar->vis->info);
+		wrefresh(corewar->vis->help);
 	}
 	return (head);
 }

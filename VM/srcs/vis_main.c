@@ -16,14 +16,16 @@
 
 void	vis_init(t_cw *corewar)
 {
+    system("printf '\033[8;100;1000t' && printf '\e[3;0;0t' && sleep 1");
+    // system("source fullscreen/exec.sh && sleep 5");
     initscr();
     curs_set(0);
     refresh();
     noecho();
     corewar->vis = ft_memalloc(sizeof(t_vis));
     corewar->vis->win = newwin(HEIGHT, WIDTH + 4, 1, 2);
-    corewar->vis->info = newwin(HEIGHT / 2, 64, 1, WIDTH + 5);
-    corewar->vis->help = newwin(HEIGHT / 2 + 1, 64, HEIGHT / 2, WIDTH + 5);
+    corewar->vis->info = newwin(HEIGHT / 2, 64, 1, WIDTH + 4);
+    corewar->vis->help = newwin(HEIGHT / 2 + 1, 64, HEIGHT / 2, WIDTH + 4);
     ft_bzero(corewar->vis->map, MEM_SIZE);
     corewar->vis->player = 0;
     ft_init_colors();
@@ -54,16 +56,7 @@ void  draw_player(unsigned char *area, int i, unsigned int prog_size, t_cw *core
 {
     int           j;
     unsigned int  k;
-    int           f;
 
-    if (corewar->vis->player == 1)
-        f = 1;
-    if (corewar->vis->player == 2)
-        f = 2;
-    if (corewar->vis->player == 3)
-        f = 3;
-    if (corewar->vis->player == 4)
-        f = 4;
     k = 0;
     j = i % 64;
     i = i / 64;
@@ -73,7 +66,7 @@ void  draw_player(unsigned char *area, int i, unsigned int prog_size, t_cw *core
         while (j < 64 && k < prog_size)
         {
             wprintw(corewar->vis->win, "%.2x ", area[i * 64 + j]);
-            corewar->vis->map[i * 64 + j] = f;
+            corewar->vis->map[i * 64 + j] = corewar->vis->player;
             j++;
             k++;
         }
