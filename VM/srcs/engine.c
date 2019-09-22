@@ -89,8 +89,17 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 		start->position %= MEM_SIZE;
 		start->cycles_num++;
 		start->remaining_cycles--;
+		// printf("reg[0] = %i\n", start->reg[0]);
 		if (corewar->flags == 2)
+		{
+			if (COLS != 362 || LINES != 76)
+			{
+				system("sleep 1 && printf '\033[8;100;1000t' && printf '\e[3;0;0t' && sleep 2");
+				draw_map(corewar);
+				draw_box_and_words(corewar);
+			}
 			draw_cursor(pos, start, corewar, cursor);
+		}
 		start = start->next;
 	}
 }
@@ -107,14 +116,9 @@ void	engine(t_cw *corewar)
 	c = '\0';
 	if (corewar->flags == 2)
 		while (c != 32)
-		{
 		    c = getch();
-		    if (c == 32)
-		    {
-		        delwin(corewar->vis->win);
-		        endwin();
-		    }
-		}
+	c = '\0';
+	nodelay(stdscr, TRUE);
 	while (1)
 	{
 		g_i = i;
@@ -128,18 +132,33 @@ void	engine(t_cw *corewar)
 		else
 			tmp_die++;
 		if (corewar->flags & 2)
-		{
+		{	
+			c = getch();
+			if (c == 32)
+			{
+				c = '\0';
+				while (c != 32)
+		    		c = getch();
+		    	c = '\0';
+			}
+			else if (c == '+' && corewar->vis->speed > 100)
+				corewar->vis->speed -= 100;
+			else if (c == '-' && corewar->vis->speed < 10000)
+				corewar->vis->speed += 100;
 			mvwprintw(corewar->vis->info, 4, 21, "%i", i);
 			mvwprintw(corewar->vis->info, 6, 21, "%i", corewar->cycle_to_die);
 			wrefresh(corewar->vis->info);
 		}
 		i++;
 	}
+	nodelay(stdscr, FALSE);
 	c = '\0';
 	if (corewar->flags == 2)
 	{
 		while (c != 27)
 		{
+			mvwprintw(corewar->vis->help, 6, 5, "Press esc to exit.");
+			wrefresh(corewar->vis->help);
 			c = getch();
 			if (c == 27)
 			{

@@ -18,7 +18,6 @@ void	ft_st(t_cw *corewar, t_cursor *cursor, t_op op)
 	int	arg2;
 	unsigned char	type;
 	int	type_arg1;
-	int i[2];
 
 
 	corewar->flags & 8 ? out_func_info(corewar, cursor, op) : 0;
@@ -47,14 +46,28 @@ void	ft_st(t_cw *corewar, t_cursor *cursor, t_op op)
 			// ft_putnbr(cursor->reg[0]);
 			if (corewar->flags == 2)
 			{
-				i[0] = place_cur(cursor->position + arg2 % IDX_MOD) / 64;
-				i[1] = place_cur(cursor->position + arg2 % IDX_MOD) % 64;
 				set_color_by_cursor(corewar, cursor);
 				mvwprintw(corewar->vis->win, place_cur(cursor->position + arg2 %\
 					IDX_MOD)/ 64 + 2, 3 * (place_cur(cursor->position + arg2 %\
 					IDX_MOD) % 64) + 5, "%.2x",\
 					corewar->map[place_cur(cursor->position + arg2 % IDX_MOD)]);
-				corewar->vis->map[place_cur(cursor->position + arg2 % IDX_MOD)] = -cursor->reg[0];	
+				mvwprintw(corewar->vis->win, place_cur(cursor->position + arg2 %\
+					IDX_MOD + 1)/ 64 + 2, 3 * (place_cur(cursor->position + arg2 %\
+					IDX_MOD + 1) % 64) + 5, "%.2x",\
+					corewar->map[place_cur(cursor->position + arg2 % IDX_MOD) + 1]);
+				mvwprintw(corewar->vis->win, place_cur(cursor->position + arg2 %\
+					IDX_MOD + 2)/ 64 + 2, 3 * (place_cur(cursor->position + arg2 %\
+					IDX_MOD + 2) % 64) + 5, "%.2x",\
+					corewar->map[place_cur(cursor->position + arg2 % IDX_MOD) + 2]);
+				mvwprintw(corewar->vis->win, place_cur(cursor->position + arg2 %\
+					IDX_MOD + 3)/ 64 + 2, 3 * (place_cur(cursor->position + arg2 %\
+					IDX_MOD + 3) % 64) + 5, "%.2x",\
+					corewar->map[place_cur(cursor->position + arg2 % IDX_MOD) + 3]);
+				corewar->vis->map[place_cur(cursor->position + arg2 % IDX_MOD)] = -cursor->reg[0];
+				corewar->vis->map[place_cur(cursor->position + arg2 % IDX_MOD) + 1] = -cursor->reg[0];
+				corewar->vis->map[place_cur(cursor->position + arg2 % IDX_MOD) + 2] = -cursor->reg[0];
+				corewar->vis->map[place_cur(cursor->position + arg2 % IDX_MOD) + 3] = -cursor->reg[0];	
+				wrefresh(corewar->vis->win);
 			}
 			// ft_printf("where %i and what = %i\n", cursor->position + arg2 % IDX_MOD, cursor->reg[arg1 - 1]);
 		}

@@ -25,6 +25,7 @@ typedef struct		s_vis
 	WINDOW			*win;
 	WINDOW			*info;
 	WINDOW			*help;
+	int				speed;
 	int				map[MEM_SIZE];
 	int				player;
 }					t_vis;

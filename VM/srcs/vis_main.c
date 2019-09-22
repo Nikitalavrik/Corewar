@@ -16,11 +16,13 @@
 
 void	vis_init(t_cw *corewar)
 {
+    system("printf '\033[8;100;1000t' && printf '\e[3;0;0t' && sleep 1");
     initscr();
     curs_set(0);
     refresh();
     noecho();
     corewar->vis = ft_memalloc(sizeof(t_vis));
+    corewar->vis->speed = 1000;
     corewar->vis->win = newwin(HEIGHT, WIDTH + 4, 1, 2);
     corewar->vis->info = newwin(HEIGHT / 2, 64, 1, WIDTH + 5);
     corewar->vis->help = newwin(HEIGHT / 2 + 1, 64, HEIGHT / 2, WIDTH + 5);
@@ -54,16 +56,7 @@ void  draw_player(unsigned char *area, int i, unsigned int prog_size, t_cw *core
 {
     int           j;
     unsigned int  k;
-    int           f;
 
-    if (corewar->vis->player == 1)
-        f = 1;
-    if (corewar->vis->player == 2)
-        f = 2;
-    if (corewar->vis->player == 3)
-        f = 3;
-    if (corewar->vis->player == 4)
-        f = 4;
     k = 0;
     j = i % 64;
     i = i / 64;
@@ -73,7 +66,7 @@ void  draw_player(unsigned char *area, int i, unsigned int prog_size, t_cw *core
         while (j < 64 && k < prog_size)
         {
             wprintw(corewar->vis->win, "%.2x ", area[i * 64 + j]);
-            corewar->vis->map[i * 64 + j] = f;
+            corewar->vis->map[i * 64 + j] = corewar->vis->player;
             j++;
             k++;
         }
@@ -104,6 +97,7 @@ void	draw_map(t_cw *corewar)
  		j = 0;
  		while (j < 64)
  		{
+            cursor_color_to_player(k * 64 + j, corewar);
    			wprintw(corewar->vis->win, "%.2x ", corewar->map[k * 64 + j]);
    			j++;
  		}
@@ -158,8 +152,10 @@ void    draw_box_and_words(t_cw *corewar)
     wattron(corewar->vis->help, COLOR_PAIR(1));
     mvwprintw(corewar->vis->help, 2, 25, "INFORMATION");
     wattroff(corewar->vis->help, COLOR_PAIR(1));
-    mvwprintw(corewar->vis->help, 4, 5, "Press spase to start.");
-    mvwprintw(corewar->vis->help, 6, 5, "Press esc to exit.");
+    mvwprintw(corewar->vis->help, 4, 5, "Press spase to start or to pause.");
+    
+    mvwprintw(corewar->vis->help, 8, 5, "Press '+' to increase speed");
+    mvwprintw(corewar->vis->help, 10, 5, "Press '-' to decrease speed");
     wrefresh(corewar->vis->help);
 }
 
@@ -188,6 +184,6 @@ void    draw_cursor(int pos, t_cursor *start, t_cw *corewar, t_cursor *cursor)
         mvwprintw(corewar->vis->win, i + 2, 3 * j + 5, "%.2x", corewar->map[i * 64 + j]);
     }
     wrefresh(corewar->vis->win);
-    usleep(11100);
+    usleep(corewar->vis->speed);
 }
 
