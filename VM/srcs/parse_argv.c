@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:05:43 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/23 12:07:51 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 13:59:12 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_player	*fill_n_flag(int argc, char **argv, t_player *players)
 			players[player_id - 1].id = player_id;
 			players[player_id - 1].last_live = -1;
 			players[player_id - 1].name = argv[++i];
-
 		}
 		i++;
 	}
@@ -99,6 +98,5 @@ t_player	*parse_argv(int argc, char ** argv, int *flags)
 	players = fill_n_flag(argc, argv, players);
 	players = fill_other_players(argc, argv, players, flags);
 	check_uniq_name(players);
-	// out_players(players);
 	return (players);
 }

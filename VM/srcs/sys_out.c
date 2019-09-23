@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:48:57 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/19 13:18:58 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 13:53:52 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	out_print_bytes(unsigned char *line, int count)
 void	out_func_info(t_cw *corewar, t_cursor *cursor, t_op op)
 {
 	ft_printf("i = %i process %s nbr_players %i cursor id %i\n",\
-	g_i, op.func_name, corewar->player_nbr, cursor->id);
+	g_i - op.cycle_before_exec, op.func_name, corewar->player_nbr, cursor->id);
 }
 
 void	dump(t_cursor *cursor)

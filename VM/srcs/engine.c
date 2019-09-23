@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/23 12:43:46 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 13:58:33 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int		check_cycle_to_die(t_cw *corewar)
 	start = corewar->cursor;
 	prev = NULL;
 	live_process = 0;
-	// check if cursor is live(if not we del it)
 	while (start)
 	{
 		next = start->next;
@@ -37,7 +36,6 @@ int		check_cycle_to_die(t_cw *corewar)
 		prev = start ? start : prev;
 		start = next;
 	}
-	// check if we need to reduce cycle_to_die
 	if (live_process >= NBR_LIVE || corewar->check_cycle > MAX_CHECKS)
 	{
 		corewar->cycle_to_die -= CYCLE_DELTA;
@@ -45,12 +43,8 @@ int		check_cycle_to_die(t_cw *corewar)
 		corewar->check_cycle;
 	}
 	else
-	{
 		corewar->check_cycle++;
-	}
-	if (corewar->cursor == NULL)
-		return (1);
-	return (0);
+	return (corewar->cursor == NULL ? 1 : 0);
 }
 
 int		do_op(t_cw *corewar, t_cursor *cursor)
@@ -84,12 +78,11 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 	start = cursor;
 	while (start)
 	{
+		start->remaining_cycles -= start->is_wait ? 1 : 0; 
 		pos = start->position;
 		start->position += do_op(corewar, start);
 		start->position %= MEM_SIZE;
 		start->cycles_num++;
-		start->remaining_cycles--;
-		// printf("reg[0] = %i\n", start->reg[0]);
 		if (corewar->flags == 2)
 		{
 			if (COLS != 362 || LINES != 76)
@@ -102,26 +95,6 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 		}
 		start = start->next;
 	}
-}
-
-t_player check_winner(t_player *players, int n)
-{
-	int i;
-	int	player_id;
-	long min_live;
-
-	min_live = -1;
-	i = n;
-	while (i)
-	{
-		if (players[i - 1].last_live > min_live)
-		{
-			min_live = players[i - 1].last_live;
-			player_id = i - 1;
-		}
-		i--;
-	}
-	return (players[player_id]);
 }
 
 void	engine(t_cw *corewar)
@@ -173,7 +146,8 @@ void	engine(t_cw *corewar)
 		i++;
 	}
 	player = check_winner(corewar->players, corewar->player_nbr);
-	ft_printf("Winner %s\n", player.head->prog_name);
+	if (!(corewar->flags & 2))
+		ft_printf("Winner %s\n", player.head->prog_name);
 	nodelay(stdscr, FALSE);
 	c = '\0';
 	if (corewar->flags == 2)

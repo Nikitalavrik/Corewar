@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/23 12:45:21 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 13:59:56 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ header_t	*read_file(char *filename, unsigned char *area, int i, t_cw *corewar)
 	if (head->magic != COREWAR_EXEC_MAGIC)
 		print_error("Bad magic head");
 	read(fd, &head->prog_name, PROG_NAME_LENGTH);
-	// if (!head->prog_name)
-	// 	print_error("Noname champion");
+	if (!head->prog_name)
+		print_error("Noname champion");
 	read(fd, &null_byte, 4);
 	if (null_byte)
 		print_error("Bad file");
@@ -86,7 +86,6 @@ t_cw	*parse_file(t_player *players, int flags)
 	corewar->players = players;
 	diff = MEM_SIZE / corewar->player_nbr;
 	ft_bzero(corewar->map, MEM_SIZE);
-	// ft_printf("Introducing contetants...\n");
 	if (corewar->flags == 2)
 	{
 		vis_init(corewar);

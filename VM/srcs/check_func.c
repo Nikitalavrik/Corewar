@@ -6,19 +6,15 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:07:47 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/13 15:38:38 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 13:57:26 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "func.h"
 
-// unsigned	char check_type(unsigned type)
-
 int		check_operation(t_cw *corewar, t_cursor *cursor, int op)
 {
 	g_func[op - 1](corewar, cursor, g_op_tab[op - 1]);
-	// exit(0);
-	// sleep(1);
 	return (op);
 }
 
@@ -51,4 +47,24 @@ void	check_uniq_name(t_player *players)
 			print_error("Bad filename");
 		i--;
 	}
+}
+
+t_player check_winner(t_player *players, int n)
+{
+	int i;
+	int	player_id;
+	long min_live;
+
+	min_live = -1;
+	i = n;
+	while (i)
+	{
+		if (players[i - 1].last_live > min_live)
+		{
+			min_live = players[i - 1].last_live;
+			player_id = i - 1;
+		}
+		i--;
+	}
+	return (players[player_id]);
 }

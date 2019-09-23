@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/23 12:07:21 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 13:57:50 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void			check_uniq_name(t_player *players);
 void			engine(t_cw *corewar);
 int				check_operation(t_cw *corewar, t_cursor *cursor, int op);
 unsigned int 	place_cur(int cur);
+t_player 		check_winner(t_player *players, int n);
+
 /**
  ** grep value from map
  */

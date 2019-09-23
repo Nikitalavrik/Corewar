@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:31:39 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/19 13:05:06 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 13:55:51 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,4 @@ void	ft_ld(t_cw *corewar, t_cursor *cursor, t_op op)
 	}
 	cursor->position = place_cur(cursor->position + 2 + get_val_size(type_arg1, op.t_dirsize) +\
 									get_val_size(type, op.t_dirsize));
-	// dump(cursor);
 }
