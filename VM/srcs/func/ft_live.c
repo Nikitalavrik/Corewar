@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:31:58 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/23 15:30:46 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 16:25:52 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	ft_live(t_cw *corewar, t_cursor *cursor, t_op op)
 	int arg1;
 
 	corewar->flags & 8 ? out_func_info(corewar, cursor, op) : 0;
-	arg1 = check_grep_args(corewar->map, cursor->position + 1, T_DIR, op.t_dirsize);
+	arg1 = check_grep_args(corewar->map, cursor->position + 1,\
+														T_DIR, op.t_dirsize);
 	if (arg1 == cursor->reg[0])
 		corewar->players[-arg1 - 1].last_live = g_i;
 	cursor->cycles_num = 0;

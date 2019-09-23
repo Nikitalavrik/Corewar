@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:31:39 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/23 15:40:00 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 16:25:09 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,9 @@ void	ft_ld(t_cw *corewar, t_cursor *cursor, t_op op)
 		if (arg2 > 0 && arg2 <= 16)
 		{
 			cursor->reg[arg2 - 1] = type.t_tp.t1 == IND_CODE ? cursor->position\
-			+ 2 + get_val_size(type.t_tp.t1, op.t_dirsize) + arg1 % IDX_MOD : arg1;
+		+ 2 + get_val_size(type.t_tp.t1, op.t_dirsize) + arg1 % IDX_MOD : arg1;
 			cursor->carry = !cursor->reg[arg2 - 1] ? 1 : 0;
 		}
 	}
-	cursor->position = place_cur(cursor->position + 2 +\
-	get_val_size(type.t_tp.t1, op.t_dirsize) +\
-	get_val_size(type.t_tp.t2, op.t_dirsize));
+	cursor->position = place_cur(cursor->position + 2 + calc_pos(type, 2, op));
 }

@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/23 15:33:56 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 16:21:58 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,10 +154,11 @@ void    		draw_player_name(char *prog_name, t_cw *corewar);
  ** implement func
  */
 
-void	ft_and_xor_or(t_cw *corewar, t_cursor *cursor,\
+void			ft_and_xor_or(t_cw *corewar, t_cursor *cursor,\
 										t_op op, int f(int, int));
-void	ft_add_sub(t_cw *corewar, t_cursor *cursor,\
+void			ft_add_sub(t_cw *corewar, t_cursor *cursor,\
 										t_op op, int f(int, int));
+int				calc_pos(t_type	type, int n, t_op op);
 
 extern			t_op	g_op_tab[17];
 int		g_id;
