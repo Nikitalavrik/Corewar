@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/19 16:35:19 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 12:43:46 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,32 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 	}
 }
 
+t_player check_winner(t_player *players, int n)
+{
+	int i;
+	int	player_id;
+	long min_live;
+
+	min_live = -1;
+	i = n;
+	while (i)
+	{
+		if (players[i - 1].last_live > min_live)
+		{
+			min_live = players[i - 1].last_live;
+			player_id = i - 1;
+		}
+		i--;
+	}
+	return (players[player_id]);
+}
+
 void	engine(t_cw *corewar)
 {
-	int		i;
-	char	c;
-	int		tmp_die;
+	int			i;
+	char		c;
+	int			tmp_die;
+	t_player	player;
 
 	i = 0;
 	tmp_die = 0;
@@ -151,6 +172,8 @@ void	engine(t_cw *corewar)
 		}
 		i++;
 	}
+	player = check_winner(corewar->players, corewar->player_nbr);
+	ft_printf("Winner %s\n", player.head->prog_name);
 	nodelay(stdscr, FALSE);
 	c = '\0';
 	if (corewar->flags == 2)

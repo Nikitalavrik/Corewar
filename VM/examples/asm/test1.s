@@ -1,5 +1,5 @@
-.name		"Celebration Funebre v0.99pl42"
-.comment	"Jour J"
+.name		"BigBob"
+.comment	"chick chick"
 
 		ld   %0,r3
 label:		zjmp %:avantdebut
@@ -7,7 +7,7 @@ label:		zjmp %:avantdebut
 
 avantdebut:	zjmp %:code  # 		#7
 
-code:	live %42			# 5
+code:	live %-1			# 5
 		ld	%10, r2
 		st  r2, 50
 		st  r2, 51
@@ -32,4 +32,5 @@ code:	live %42			# 5
 		st  r2, 70
 		st  r2, 71
 		st  r2, 72
+		live %-1
 

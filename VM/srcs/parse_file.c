@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/09 15:03:16 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 12:45:21 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,5 @@ t_cw	*parse_file(t_player *players, int flags)
 		place += (diff + 1);
 		i++;
 	}
-	// print_bytes(corewar->map, MEM_SIZE);
 	return (corewar);
 }

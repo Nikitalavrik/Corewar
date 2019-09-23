@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/13 17:48:21 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 12:07:21 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef	struct		s_player
 {
 	int				id;
 	char			*name;
+	long			last_live;
 	header_t		*head;
 }					t_player;
 
