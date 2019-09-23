@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/23 13:57:50 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 15:33:56 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,17 @@ typedef	struct		s_op
 	char			t_dirsize;			// если 1 то Тдир = 2, если 0, то 4
 }					t_op;
 
-typedef struct		s_type_arg
+typedef union		u_type
 {
-	unsigned char	type;
-	unsigned int	arg;
-}					t_type_arg;
+	unsigned char 	types;
+	struct			s_tp
+	{
+		unsigned char	t4 : 2;
+		unsigned char	t3 : 2;
+		unsigned char	t2 : 2;
+		unsigned char	t1 : 2;
+	}				t_tp;
+}					t_type;
 
 /**
  ** print function
@@ -143,6 +149,15 @@ void   			set_cursor_color_by_pos(t_cw *corewar, t_cursor *start);
 void    		ft_init_colors(void);
 void    		draw_box_and_words(t_cw *corewar);
 void    		draw_player_name(char *prog_name, t_cw *corewar);
+
+/**
+ ** implement func
+ */
+
+void	ft_and_xor_or(t_cw *corewar, t_cursor *cursor,\
+										t_op op, int f(int, int));
+void	ft_add_sub(t_cw *corewar, t_cursor *cursor,\
+										t_op op, int f(int, int));
 
 extern			t_op	g_op_tab[17];
 int		g_id;

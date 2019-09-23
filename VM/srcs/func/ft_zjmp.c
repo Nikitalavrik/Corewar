@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:34:18 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/23 13:56:52 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 15:31:52 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_zjmp(t_cw *corewar, t_cursor *cursor, t_op op)
 	int	arg1;
 
 	corewar->flags & 8 ? out_func_info(corewar, cursor, op) : 0;
-	(void)op;
 	arg1 = (int)grep_args(corewar->map, cursor->position + 1, T_DIR);
 	if (cursor->carry)
 		cursor->position = place_cur(cursor->position + arg1 % IDX_MOD);
