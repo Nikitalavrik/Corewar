@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:36:11 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/23 16:25:37 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 16:37:52 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_ldi(t_cw *corewar, t_cursor *cursor, t_op op)
 {
-	int	arg1;
-	int	arg2;
+	int				arg1;
+	int				arg2;
 	unsigned char	arg3;
 	t_type			type;
 

@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 14:04:43 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/23 16:28:15 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 16:41:49 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_and_xor_or(t_cw *corewar, t_cursor *cursor, t_op op, int f(int, int))
 {
-	int	arg1;
-	int	arg2;
+	int				arg1;
+	int				arg2;
 	unsigned char	arg3;
 	t_type			type;
 
@@ -26,12 +26,12 @@ void	ft_and_xor_or(t_cw *corewar, t_cursor *cursor, t_op op, int f(int, int))
 	arg2 = check_grep_args(corewar->map, cursor->position + 2 +\
 	get_val_size(type.t_tp.t1, op.t_dirsize),\
 										type.t_tp.t2, op.t_dirsize);
-	if (type.t_tp.t1 == REG_CODE && arg1 && arg1 <= 16)
+	if (type.t_tp.t1 == REG_CODE && arg1 > 0 && arg1 <= 16)
 		arg1 = cursor->reg[arg1 - 1];
 	else if (type.t_tp.t1 == IND_CODE)
 		arg1 = (int)check_grep_args(corewar->map, cursor->position\
 								+ arg1 % IDX_MOD, IND_CODE, op.t_dirsize);
-	if (type.t_tp.t2 == REG_CODE && arg2 && arg2 <= 16)
+	if (type.t_tp.t2 == REG_CODE && arg2 > 0 && arg2 <= 16)
 		arg2 = cursor->reg[arg2 - 1];
 	else if (type.t_tp.t2 == IND_CODE)
 		arg2 = (int)check_grep_args(corewar->map, cursor->position\

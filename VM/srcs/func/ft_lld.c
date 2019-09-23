@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:35:40 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/23 16:26:10 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 16:39:17 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_lld(t_cw *corewar, t_cursor *cursor, t_op op)
 {
-	int		arg1;
-	int		arg2;
-	t_type	type;
+	int				arg1;
+	unsigned char	arg2;
+	t_type			type;
 
 	corewar->flags & 8 ? out_func_info(corewar, cursor, op) : 0;
 	type.types = corewar->map[cursor->position + 1];
