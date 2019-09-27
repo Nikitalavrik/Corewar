@@ -12,27 +12,27 @@
 
 #include "corewar.h"
 
-void  set_player_collor(int i, t_cw *corewar)
+void  set_player_collor(int i, t_cw *corewar, WINDOW *win)
 {
     if (i == 0)
     {
         corewar->vis->player = 1;
-        wattron(corewar->vis->win, COLOR_PAIR(2));
+        wattron(win, COLOR_PAIR(2));
     }
     else if (i == 1)
     {
         corewar->vis->player = 2;
-        wattron(corewar->vis->win, COLOR_PAIR(4));
+        wattron(win, COLOR_PAIR(4));
     }
     else if (i == 2)
     {
         corewar->vis->player = 3;
-        wattron(corewar->vis->win, COLOR_PAIR(1));
+        wattron(win, COLOR_PAIR(1));
     }
     else if (i == 3)
     {
         corewar->vis->player = 4;
-        wattron(corewar->vis->win, COLOR_PAIR(3));
+        wattron(win, COLOR_PAIR(3));
     }
 }
 

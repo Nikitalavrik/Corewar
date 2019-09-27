@@ -94,7 +94,7 @@ t_cw	*parse_file(t_player *players, int flags)
 	while (i < corewar->player_nbr)
 	{
 		if (corewar->flags == 2)
-			set_player_collor(i, corewar);
+			set_player_collor(i, corewar, corewar->vis->win);
 		players[i].head = read_file(players[i].name, corewar->map, place, corewar);
 		if (corewar->flags == 2)
 			reset_player_collor(i, corewar);

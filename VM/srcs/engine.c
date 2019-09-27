@@ -74,9 +74,11 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 	t_cursor	*start;
 	int			pos;
 	int			count;
+	int			i;
 
 	pos = 0;
 	count = 0;
+	i = 0;
 	start = cursor;
 	while (start)
 	{
@@ -101,6 +103,11 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 	if (corewar->flags == 2)
 	{
 		 mvwprintw(corewar->vis->info, 14, 21, "%i", count);
+		 while (i < corewar->player_nbr)
+		 {
+		 	mvwprintw(corewar->vis->info, 15 + corewar->vis->player * 3 + (i + 1) * 3, 16, "%i", corewar->players[i].last_live);
+		 	i++;
+		 }
 		 wrefresh(corewar->vis->info);
 	}
 }
@@ -117,10 +124,12 @@ void	engine(t_cw *corewar)
 	corewar->cycle_to_die = CYCLE_TO_DIE;
 	c = '\0';
 	if (corewar->flags == 2)
+	{
 		while (c != 32)
 		    c = getch();
-	c = '\0';
-	nodelay(stdscr, TRUE);
+		c = '\0';
+		nodelay(stdscr, TRUE);
+	}
 	while (1)
 	{
 		g_i = i;
@@ -156,10 +165,13 @@ void	engine(t_cw *corewar)
 	player = check_winner(corewar->players, corewar->player_nbr);
 	if (!(corewar->flags & 2))
 		ft_printf("Winner %s\n", player.head->prog_name);
-	nodelay(stdscr, FALSE);
-	c = '\0';
 	if (corewar->flags == 2)
 	{
+		set_player_collor(player.id - 1, corewar, corewar->vis->info);
+		mvwprintw(corewar->vis->info, 29, 5, "Winner player %i: %s", player.id, player.head->prog_name);
+		wrefresh(corewar->vis->info);
+		nodelay(stdscr, FALSE);
+		c = '\0';
 		while (c != 27)
 		{
 			mvwprintw(corewar->vis->help, 6, 5, "Press esc to exit.");

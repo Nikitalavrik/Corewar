@@ -117,11 +117,15 @@ void    draw_player_name(char *prog_name, t_cw *corewar)
     i = 0;
     n = 0;
     mvwprintw(corewar->vis->info, 14 + corewar->vis->player * 3, 5, "Player %i:", corewar->vis->player);
+    mvwprintw(corewar->vis->info, 15 + corewar->vis->player * 3, 5, "Last live:");
     while (prog_name[i])
     {
-        mvwprintw(corewar->vis->info, 14 + corewar->vis->player * 3 + n, 15 + i % 47, "%c", prog_name[i]);
-        if (i % 47 == 0 && i != 0)
-            n++;
+        mvwprintw(corewar->vis->info, 14 + corewar->vis->player * 3 + n, 16 + i % 47, "%c", prog_name[i]);
+        if (i > 30)
+        {
+             mvwprintw(corewar->vis->info, 14 + corewar->vis->player * 3 + n, 16 + i % 47, "...");
+             break ;
+        }
         i++;
     }
     wrefresh(corewar->vis->info);

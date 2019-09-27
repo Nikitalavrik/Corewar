@@ -140,7 +140,7 @@ int				del_cursor(t_cursor **cursor, t_cursor **prev,\
  */
 void			vis_init(t_cw *corewar);
 void			draw_map(t_cw *corewar);
-void  			set_player_collor(int i, t_cw *corewar);
+void  			set_player_collor(int i, t_cw *corewar, WINDOW *win);
 void  			reset_player_collor(int i, t_cw *corewar);
 void 			draw_player(unsigned char *area, int i,\
 				unsigned int prog_size,	t_cw *corewar);
