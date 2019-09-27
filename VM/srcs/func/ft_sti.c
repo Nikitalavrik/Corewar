@@ -40,25 +40,26 @@ void	ft_sti(t_cw *corewar, t_cursor *cursor, t_op op)
 			corewar->map[place_cur(cursor->position + ((args[1] + args[2]) % IDX_MOD) + 3)] = cursor->reg[args[0] - 1] << 24 >> 24;
 			if (corewar->flags == 2)
 			{
-				i[0] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD) / 64;
-				i[1] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD) % 64;
+				i[0] = place_cur(cursor->position + (arg2 + arg3) % IDX_MOD) / 64;
+				i[1] = place_cur(cursor->position + (arg2 + arg3) % IDX_MOD) % 64;
 				set_color_by_cursor(corewar, cursor);
 				mvwprintw(corewar->vis->win, i[0] + 2, 3 * i[1] + 5, "%.2x", corewar->map[i[0] * 64 + i[1]]);
 				corewar->vis->map[i[0] * 64 + i[1]] = -cursor->reg[0];
-				i[0] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD + 1) / 64;
-				i[1] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD + 1) % 64;
+				i[0] = place_cur(cursor->position + (arg2 + arg3) % IDX_MOD + 1) / 64;
+				i[1] = place_cur(cursor->position + (arg2 + arg3) % IDX_MOD + 1) % 64;
 				mvwprintw(corewar->vis->win, i[0] + 2, 3 * i[1] + 5, "%.2x", corewar->map[i[0] * 64 + i[1]]);
 				corewar->vis->map[i[0] * 64 + i[1]] = -cursor->reg[0];
-				i[0] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD + 2) / 64;
-				i[1] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD + 2) % 64;
+				i[0] = place_cur(cursor->position + (arg2 + arg3) % IDX_MOD + 2) / 64;
+				i[1] = place_cur(cursor->position + (arg2 + arg3) % IDX_MOD + 2) % 64;
 				mvwprintw(corewar->vis->win, i[0] + 2, 3 * i[1] + 5, "%.2x", corewar->map[i[0] * 64 + i[1]]);
 				corewar->vis->map[i[0] * 64 + i[1]] = -cursor->reg[0];
-				i[0] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD + 3) / 64;
-				i[1] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD + 3) % 64;
+				i[0] = place_cur(cursor->position + (arg2 + arg3) % IDX_MOD + 3) / 64;
+				i[1] = place_cur(cursor->position + (arg2 + arg3) % IDX_MOD + 3) % 64;
 				mvwprintw(corewar->vis->win, i[0] + 2, 3 * i[1] + 5, "%.2x", corewar->map[i[0] * 64 + i[1]]);
 				corewar->vis->map[i[0] * 64 + i[1]] = -cursor->reg[0];
 			}
-		}		
+		}
+			
 	}
 	ft_memdel((void **)&args);
 	cursor->position = place_cur(cursor->position + 2 + calc_pos(type, 3, op));
