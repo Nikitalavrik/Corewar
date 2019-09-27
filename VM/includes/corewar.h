@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/13 17:48:21 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/27 13:41:26 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct		s_vis
 	WINDOW			*info;
 	WINDOW			*help;
 	int				speed;
+	int				cols;
+	int				lines;
 	int				map[MEM_SIZE];
 	int				player;
 }					t_vis;
@@ -49,6 +51,7 @@ typedef	struct		s_player
 {
 	int				id;
 	char			*name;
+	long			last_live;
 	header_t		*head;
 }					t_player;
 
@@ -76,11 +79,17 @@ typedef	struct		s_op
 	char			t_dirsize;			// если 1 то Тдир = 2, если 0, то 4
 }					t_op;
 
-typedef struct		s_type_arg
+typedef union		u_type
 {
-	unsigned char	type;
-	unsigned int	arg;
-}					t_type_arg;
+	unsigned char 	types;
+	struct			s_tp
+	{
+		unsigned char	t4 : 2;
+		unsigned char	t3 : 2;
+		unsigned char	t2 : 2;
+		unsigned char	t1 : 2;
+	}				t_tp;
+}					t_type;
 
 /**
  ** print function
@@ -106,6 +115,8 @@ void			check_uniq_name(t_player *players);
 void			engine(t_cw *corewar);
 int				check_operation(t_cw *corewar, t_cursor *cursor, int op);
 unsigned int 	place_cur(int cur);
+t_player 		check_winner(t_player *players, int n);
+
 /**
  ** grep value from map
  */
@@ -113,7 +124,8 @@ unsigned int	get_val_size(int type, char t_dirsize);
 int				grep_args(unsigned char *map, int position, int size);
 int				check_grep_args(unsigned char *map, int position,\
 													int type, char t_dirsize);
-
+int				*init_args(t_cw *corewar, t_cursor *cursor,\
+														t_op op, t_type type);
 
 /**
  ** cursor function
@@ -140,6 +152,16 @@ void   			set_cursor_color_by_pos(t_cw *corewar, t_cursor *start);
 void    		ft_init_colors(void);
 void    		draw_box_and_words(t_cw *corewar);
 void    		draw_player_name(char *prog_name, t_cw *corewar);
+
+/**
+ ** implement func
+ */
+
+void			ft_and_xor_or(t_cw *corewar, t_cursor *cursor,\
+										t_op op, int f(int, int));
+void			ft_add_sub(t_cw *corewar, t_cursor *cursor,\
+										t_op op, int f(int, int));
+int				calc_pos(t_type	type, int n, t_op op);
 
 extern			t_op	g_op_tab[17];
 int		g_id;
