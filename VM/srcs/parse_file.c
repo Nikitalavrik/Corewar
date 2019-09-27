@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/23 14:03:18 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:46:10 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_cw	*parse_file(t_player *players, int flags)
 			ft_printf("* Player %i, weight %2i bytes, %10s, %s\n", i + 1,\
 		players[i].head->prog_size, players[i].head->prog_name,\
 		players[i].head->comment);
-		place += (diff + 1);
+		place += diff;
 		i++;
 	}
 	return (corewar);

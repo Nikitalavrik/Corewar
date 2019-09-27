@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:34:52 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/27 16:08:50 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:38:42 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,34 +43,22 @@ void	ft_sti(t_cw *corewar, t_cursor *cursor, t_op op)
 				i[0] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD) / 64;
 				i[1] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD) % 64;
 				set_color_by_cursor(corewar, cursor);
-				mvwprintw(corewar->vis->win, corewar->map\
-				[place_cur(cursor->position + ((args[1] + args[2]) % IDX_MOD))]\
-				/ 64 + 2, 3 * corewar->map[place_cur(cursor->position + ((args[1] + args[2])\
-					% IDX_MOD))] % 64 + 5, "%.2x",\
-				corewar->map[place_cur(cursor->position + ((args[1] + args[2]) % IDX_MOD))]);
-				mvwprintw(corewar->vis->win, corewar->map\
-				[place_cur(cursor->position + ((args[1] + args[2]) % IDX_MOD) + 1)]\
-				/ 64 + 2, 3 * corewar->map[place_cur(cursor->position + ((args[1] + args[2])\
-					% IDX_MOD) + 1)] % 64 + 5, "%.2x",\
-				corewar->map[place_cur(cursor->position + ((args[1] + args[2]) % IDX_MOD) + 1)]);
-				mvwprintw(corewar->vis->win, corewar->map\
-				[place_cur(cursor->position + ((args[1] + args[2]) % IDX_MOD) + 2)]\
-				/ 64 + 2, 3 * corewar->map[place_cur(cursor->position + ((args[1] + args[2])\
-					% IDX_MOD) + 2)] % 64 + 5, "%.2x",\
-				corewar->map[place_cur(cursor->position + ((args[1] + args[2]) % IDX_MOD) + 2)]);
-				mvwprintw(corewar->vis->win, corewar->map\
-				[place_cur(cursor->position + ((args[1] + args[2]) % IDX_MOD) + 3)]\
-				/ 64 + 2, 3 * corewar->map[place_cur(cursor->position + ((args[1] + args[2])\
-					% IDX_MOD) + 3)] % 64 + 5, "%.2x",\
-				corewar->map[place_cur(cursor->position + ((args[1] + args[2]) % IDX_MOD) + 3)]);
-				corewar->vis->map[place_cur(cursor->position + ((args[1] + args[2]) % IDX_MOD))] = -cursor->reg[0];
-				corewar->vis->map[place_cur(cursor->position + ((args[1] + args[2]) % IDX_MOD) + 1)] = -cursor->reg[0];
-				corewar->vis->map[place_cur(cursor->position + ((args[1] + args[2]) % IDX_MOD) + 2)] = -cursor->reg[0];
-				corewar->vis->map[place_cur(cursor->position + ((args[1] + args[2]) % IDX_MOD) + 3)] = -cursor->reg[0];
-				wrefresh(corewar->vis->win);
+				mvwprintw(corewar->vis->win, i[0] + 2, 3 * i[1] + 5, "%.2x", corewar->map[i[0] * 64 + i[1]]);
+				corewar->vis->map[i[0] * 64 + i[1]] = -cursor->reg[0];
+				i[0] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD + 1) / 64;
+				i[1] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD + 1) % 64;
+				mvwprintw(corewar->vis->win, i[0] + 2, 3 * i[1] + 5, "%.2x", corewar->map[i[0] * 64 + i[1]]);
+				corewar->vis->map[i[0] * 64 + i[1]] = -cursor->reg[0];
+				i[0] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD + 2) / 64;
+				i[1] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD + 2) % 64;
+				mvwprintw(corewar->vis->win, i[0] + 2, 3 * i[1] + 5, "%.2x", corewar->map[i[0] * 64 + i[1]]);
+				corewar->vis->map[i[0] * 64 + i[1]] = -cursor->reg[0];
+				i[0] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD + 3) / 64;
+				i[1] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD + 3) % 64;
+				mvwprintw(corewar->vis->win, i[0] + 2, 3 * i[1] + 5, "%.2x", corewar->map[i[0] * 64 + i[1]]);
+				corewar->vis->map[i[0] * 64 + i[1]] = -cursor->reg[0];
 			}
-		}
-			
+		}		
 	}
 	ft_memdel((void **)&args);
 	cursor->position = place_cur(cursor->position + 2 + calc_pos(type, 3, op));

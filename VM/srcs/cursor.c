@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 11:44:03 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/23 14:00:53 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:45:04 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	add_cursor(t_cw *cw, int i)
 	cw->cursor->player_nbr = i;
 	cw->cursor->carry = 0;
 	cw->cursor->reg[0] = -i;
-	cw->cursor->position = MEM_SIZE / cw->player_nbr * (i - 1);
+	cw->cursor->position = (MEM_SIZE / cw->player_nbr * (i - 1)) - (i - 1);
 }
 
 void	cursor(t_cw *cw)
