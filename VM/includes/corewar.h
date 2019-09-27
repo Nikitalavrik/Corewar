@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/23 16:21:58 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/27 13:41:26 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,8 @@ unsigned int	get_val_size(int type, char t_dirsize);
 int				grep_args(unsigned char *map, int position, int size);
 int				check_grep_args(unsigned char *map, int position,\
 													int type, char t_dirsize);
-
+int				*init_args(t_cw *corewar, t_cursor *cursor,\
+														t_op op, t_type type);
 
 /**
  ** cursor function
