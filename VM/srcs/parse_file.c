@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/09 15:03:16 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/23 14:03:18 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ t_cw	*parse_file(t_player *players, int flags)
 	corewar->players = players;
 	diff = MEM_SIZE / corewar->player_nbr;
 	ft_bzero(corewar->map, MEM_SIZE);
-	// ft_printf("Introducing contetants...\n");
 	if (corewar->flags == 2)
 	{
 		vis_init(corewar);
@@ -106,6 +105,5 @@ t_cw	*parse_file(t_player *players, int flags)
 		place += (diff + 1);
 		i++;
 	}
-	// print_bytes(corewar->map, MEM_SIZE);
 	return (corewar);
 }

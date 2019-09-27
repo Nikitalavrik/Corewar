@@ -6,7 +6,7 @@
 #    By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/25 17:55:29 by nlavrine          #+#    #+#              #
-#    Updated: 2019/09/13 15:48:38 by nlavrine         ###   ########.fr        #
+#    Updated: 2019/09/23 15:25:36 by nlavrine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,8 @@ SRC =	main.c				\
 		func/ft_lldi.c		\
 		func/ft_lfork.c		\
 		func/ft_aff.c		\
-		func/func.c			\
+		func/grep_info.c	\
+		func/implement.c	\
 		set_color.c 		\
 
 CC = gcc
