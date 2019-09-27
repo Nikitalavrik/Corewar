@@ -116,10 +116,10 @@ void    draw_player_name(char *prog_name, t_cw *corewar)
 
     i = 0;
     n = 0;
-    mvwprintw(corewar->vis->info, 12 + corewar->vis->player * 3, 5, "Player %i:", corewar->vis->player);
+    mvwprintw(corewar->vis->info, 14 + corewar->vis->player * 3, 5, "Player %i:", corewar->vis->player);
     while (prog_name[i])
     {
-        mvwprintw(corewar->vis->info, 12 + corewar->vis->player * 3 + n, 15 + i % 47, "%c", prog_name[i]);
+        mvwprintw(corewar->vis->info, 14 + corewar->vis->player * 3 + n, 15 + i % 47, "%c", prog_name[i]);
         if (i % 47 == 0 && i != 0)
             n++;
         i++;
@@ -155,9 +155,10 @@ void    draw_box_and_words(t_cw *corewar)
     mvwprintw(corewar->vis->help, 2, 25, "INFORMATION");
     wattroff(corewar->vis->help, COLOR_PAIR(1));
     mvwprintw(corewar->vis->help, 4, 5, "Press spase to start or to pause.");
-    
+    mvwprintw(corewar->vis->info, 14, 5, "Processes: ");
     mvwprintw(corewar->vis->help, 8, 5, "Press '+' to increase speed");
     mvwprintw(corewar->vis->help, 10, 5, "Press '-' to decrease speed");
+    wrefresh(corewar->vis->info);
     wrefresh(corewar->vis->help);
 }
 

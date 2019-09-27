@@ -30,7 +30,7 @@ int		check_cycle_to_die(t_cw *corewar)
 	{
 		next = start->next;
 		if (start->cycles_num > corewar->cycle_to_die)
-			del_cursor(&start, &prev, &corewar->cursor);
+			del_cursor(&start, &prev, &corewar->cursor, corewar);
 		else
 			live_process++;
 		prev = start ? start : prev;
@@ -73,8 +73,10 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 {
 	t_cursor	*start;
 	int			pos;
+	int			count;
 
 	pos = 0;
+	count = 0;
 	start = cursor;
 	while (start)
 	{
@@ -92,8 +94,14 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 				draw_box_and_words(corewar);
 			}
 			draw_cursor(pos, start, corewar, cursor);
+			count++;
 		}
 		start = start->next;
+	}
+	if (corewar->flags == 2)
+	{
+		 mvwprintw(corewar->vis->info, 14, 21, "%i", count);
+		 wrefresh(corewar->vis->info);
 	}
 }
 

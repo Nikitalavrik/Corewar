@@ -134,7 +134,7 @@ void			copy_cursor(t_cursor *src, t_cursor *dist);
 void			add_cursor(t_cw *cw, int i);
 void			cursor(t_cw *cw);
 int				del_cursor(t_cursor **cursor, t_cursor **prev,\
-													t_cursor **main_cursor);
+											t_cursor **main_cursor, t_cw *corewar);
 /**
  ** visual function
  */

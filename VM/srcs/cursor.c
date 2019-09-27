@@ -42,11 +42,31 @@ void	cursor(t_cw *cw)
 	g_id = cw->player_nbr;
 }
 
-int	del_cursor(t_cursor **cursor, t_cursor **prev, t_cursor **main_cursor)
+int		del_cursor(t_cursor **cursor, t_cursor **prev, t_cursor **main_cursor, t_cw *corewar)
 {
-	int id;
-
+	int			id;
+	int			count;
+	int			i[2];
+	t_cursor    *begin;
 	
+	if (corewar->flags == 2)
+	{
+		count = 0;
+		begin = *main_cursor;
+		while (begin)
+		{
+			if (begin->position == (*cursor)->position)
+				count++;
+			begin = begin->next;
+		}
+		if (count == 1)
+		{
+		    cursor_color_to_player((*cursor)->position, corewar);
+		    i[0] = (*cursor)->position / 64;
+		    i[1] = (*cursor)->position % 64;
+		    mvwprintw(corewar->vis->win, i[0] + 2, 3 * i[1] + 5, "%.2x", corewar->map[i[0] * 64 + i[1]]);
+		}
+	}
 	id = (*cursor) ? (*cursor)->player_nbr : 0;
 	if (*prev)
 		(*prev)->next = (*cursor)->next;
