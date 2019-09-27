@@ -92,9 +92,10 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 		// printf("reg[0] = %i\n", start->reg[0]);
 		if (corewar->flags == 2)
 		{
-			if (COLS != 362 || LINES != 76)
+			if (COLS != corewar->vis->cols || LINES != corewar->vis->lines)
 			{
 				system("sleep 1 && printf '\033[8;100;1000t' && printf '\e[3;0;0t' && sleep 2");
+				wrefresh(corewar->vis->help);
 				draw_map(corewar);
 				draw_box_and_words(corewar);
 			}

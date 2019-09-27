@@ -22,10 +22,12 @@ void	vis_init(t_cw *corewar)
     refresh();
     noecho();
     corewar->vis = ft_memalloc(sizeof(t_vis));
+    corewar->vis->cols = COLS;
+    corewar->vis->lines = LINES;
     corewar->vis->speed = 1000;
     corewar->vis->win = newwin(HEIGHT, WIDTH + 4, 1, 2);
     corewar->vis->info = newwin(HEIGHT / 2, 64, 1, WIDTH + 5);
-    corewar->vis->help = newwin(HEIGHT / 2 + 1, 64, HEIGHT / 2, WIDTH + 5);
+    corewar->vis->help = newwin(HEIGHT / 2 + 1, 64, HEIGHT / 2, WIDTH + 5);   
     ft_bzero(corewar->vis->map, MEM_SIZE);
     corewar->vis->player = 0;
     ft_init_colors();
