@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:34:52 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/27 16:38:42 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/27 18:58:05 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	ft_sti(t_cw *corewar, t_cursor *cursor, t_op op)
 			corewar->map[place_cur(cursor->position + ((args[1] + args[2]) % IDX_MOD) + 1)] = cursor->reg[args[0] - 1] << 8 >> 24;
 			corewar->map[place_cur(cursor->position + ((args[1] + args[2]) % IDX_MOD) + 2)] = cursor->reg[args[0] - 1] << 16 >> 24;
 			corewar->map[place_cur(cursor->position + ((args[1] + args[2]) % IDX_MOD) + 3)] = cursor->reg[args[0] - 1] << 24 >> 24;
+			// ft_printf("arg1 = %i arg2 = %i arg3 = %i\n", 
+			// 			cursor->reg[args[0] - 1], args[1], args[2]);
 			if (corewar->flags == 2)
 			{
 				i[0] = place_cur(cursor->position + (args[1] + args[2]) % IDX_MOD) / 64;

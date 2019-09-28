@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:34:29 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/27 16:08:40 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/28 13:13:42 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	ft_lldi(t_cw *corewar, t_cursor *cursor, t_op op)
 	if (type.t_tp.t3 == REG_CODE && type.t_tp.t1 &&\
 								type.t_tp.t2 && type.t_tp.t2 != IND_CODE)
 	{
-		cursor->reg[args[2] - 1] = (args[0] + args[1]);
+		cursor->reg[args[2] - 1] = check_grep_args(corewar->map, cursor->position +\
+									(args[0] + args[1]), DIR_CODE, 0);
 		cursor->carry = !cursor->reg[args[2] - 1] ? 1 : 0;
 	}
 	ft_memdel((void **)&args);

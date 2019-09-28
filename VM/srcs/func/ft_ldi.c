@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:36:11 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/27 14:38:29 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/28 13:13:29 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	ft_ldi(t_cw *corewar, t_cursor *cursor, t_op op)
 	{
 		if (args[2] > 0 && args[2] <= 16)
 		{
-			cursor->reg[args[2] - 1] = cursor->position +\
-											(args[0] + args[1]) % IDX_MOD;
+			cursor->reg[args[2] - 1] = check_grep_args(corewar->map, cursor->position +\
+									(args[0] + args[1]) % IDX_MOD, DIR_CODE, 0);
 			cursor->carry = !cursor->reg[args[2] - 1] ? 1 : 0;
 		}
 	}

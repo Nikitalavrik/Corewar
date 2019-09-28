@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 10:55:15 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/19 14:15:36 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/27 18:14:48 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	vis_init(t_cw *corewar)
     refresh();
     noecho();
     corewar->vis = ft_memalloc(sizeof(t_vis));
-    corewar->vis->speed = 1000;
+    corewar->vis->speed = 11000;
     corewar->vis->cols = COLS;
     corewar->vis->lines = LINES;
     corewar->vis->win = newwin(HEIGHT, WIDTH + 4, 1, 2);
