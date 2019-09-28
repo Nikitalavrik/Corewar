@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 11:44:03 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/27 16:45:04 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/28 13:39:09 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		del_cursor(t_cursor **cursor, t_cursor **prev, t_cursor **main_cursor, t_cw
 	int			i[2];
 	t_cursor    *begin;
 	
-	if (corewar->flags == 2)
+	if (corewar->flags & 2)
 	{
 		count = 0;
 		begin = *main_cursor;
@@ -71,7 +71,7 @@ int		del_cursor(t_cursor **cursor, t_cursor **prev, t_cursor **main_cursor, t_cw
 	if (*prev)
 		(*prev)->next = (*cursor)->next;
 	if (*cursor == *main_cursor)
-		*main_cursor = *prev;
+		*main_cursor = *prev ? *prev : (*main_cursor)->next;
 	if (*cursor)
 		ft_memdel((void **)cursor);
 	return (id);

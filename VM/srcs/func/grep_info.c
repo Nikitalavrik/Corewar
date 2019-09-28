@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   func.c                                             :+:      :+:    :+:   */
+/*   grep_info.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:37:40 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/19 13:15:53 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/28 15:45:20 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ int	grep_args(unsigned char *map, int position, int size)
 	if (!sign)
 		while (i < size)
 		{
-			val = (val << 8) + map[position + i];
+			val = (val << 8) + map[place_cur(position + i)];
 			i++;
 		}
 	else
 		while (i < size)
 		{
-			val = (val << 8) + (map[position + i] ^ 0xff);
+			val = (val << 8) + (map[place_cur(position + i)] ^ 0xff);
 			i++;
 		}
 	if (sign)
