@@ -16,15 +16,15 @@
 
 void			vis_init(t_cw *corewar)
 {
-	system("printf '\033[8;100;1000t' && printf '\e[3;0;0t' && sleep 1");
+	system("printf '\033[8;76;362t' && printf '\e[3;0;0t' && sleep 1");
 	initscr();
 	curs_set(0);
 	refresh();
 	noecho();
 	corewar->vis = ft_memalloc(sizeof(t_vis));
 	corewar->vis->speed = 11000;
-	corewar->vis->cols = COLS;
-	corewar->vis->lines = LINES;
+	corewar->vis->cols = 362;
+	corewar->vis->lines = 76;
 	corewar->vis->win = newwin(HEIGHT, WIDTH + 4, 1, 2);
 	corewar->vis->info = newwin(HEIGHT / 2, 64, 1, WIDTH + 5);
 	corewar->vis->help = newwin(HEIGHT / 2 + 1, 64, HEIGHT / 2, WIDTH + 5);

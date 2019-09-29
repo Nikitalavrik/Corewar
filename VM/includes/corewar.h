@@ -154,6 +154,7 @@ void    		draw_box_and_words(t_cw *corewar);
 void			draw_box_and_words2(t_cw *corewar);
 void			draw_box(t_cw *corewar);
 void    		draw_player_name(char *prog_name, t_cw *corewar);
+void			after_game(t_cw *corewar, t_player player, char c);
 
 /**
  ** implement func

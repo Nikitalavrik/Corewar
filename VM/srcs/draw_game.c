@@ -120,3 +120,27 @@ void			draw_player_name(char *prog_name, t_cw *corewar)
 	}
 	wrefresh(corewar->vis->info);
 }
+
+void			after_game(t_cw *corewar, t_player player, char c)
+{
+	set_player_collor(player.id - 1, corewar, corewar->vis->info);
+	mvwprintw(corewar->vis->info, 29, 5, "Winner player %i: %s",\
+		player.id, player.head->prog_name);
+	wrefresh(corewar->vis->info);
+	nodelay(stdscr, FALSE);
+	c = '\0';
+	while (c != 27)
+	{
+		mvwprintw(corewar->vis->help, 6, 5, "Press esc to exit.");
+		wrefresh(corewar->vis->help);
+		c = getch();
+		if (c == 27)
+		{
+			delwin(corewar->vis->win);
+			delwin(corewar->vis->help);
+			delwin(corewar->vis->info);
+			endwin();
+		}
+	}
+	free(corewar->vis);
+}

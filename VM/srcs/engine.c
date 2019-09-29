@@ -12,9 +12,8 @@
 
 
 #include "corewar.h"
-
-# define HEIGHT					(MEM_SIZE / 64 + 4)
-# define WIDTH					(64 * 3 + 5)
+#define HEIGHT					(MEM_SIZE / 64 + 4)
+#define WIDTH					(64 * 3 + 5)
 
 int		check_cycle_to_die(t_cw *corewar)
 {
@@ -89,13 +88,40 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 		start->cycles_num++;
 		if (corewar->flags == 2)
 		{
+			draw_cursor(pos, start, corewar, cursor);
 			if (COLS != corewar->vis->cols || LINES != corewar->vis->lines)
 			{
-				system("sleep 1 && printf '\033[8;100;1000t' && printf '\e[3;0;0t' && sleep 2");
+				delwin(corewar->vis->win);
+				delwin(corewar->vis->help);
+				delwin(corewar->vis->info);
+				endwin();
+				system("sleep 1");
+				system("reset");
+				system("clear");
+				system("printf '\033[8;76;362t'"); 
+				system("printf '\e[3;0;0t'");
+				system("sleep 2");
+				initscr();
+				curs_set(0);
+				refresh();
+				noecho();
+				corewar->vis->win = newwin(HEIGHT, WIDTH + 4, 1, 2);
+				corewar->vis->info = newwin(HEIGHT / 2, 64, 1, WIDTH + 5);
+				corewar->vis->help = newwin(HEIGHT / 2 + 1, 64, HEIGHT / 2, WIDTH + 5);
+				ft_init_colors();
 				draw_map(corewar);
 				draw_box_and_words(corewar);
+				while (i < corewar->player_nbr)
+				{
+					corewar->vis->player = i + 1;
+					draw_player_name(corewar->players[i].head->prog_name, corewar);
+				 	i++;
+				}
+				corewar->vis->player = 0;
+				wrefresh(corewar->vis->win);
+				wrefresh(corewar->vis->help);
+				wrefresh(corewar->vis->info);
 			}
-			draw_cursor(pos, start, corewar, cursor);
 			count++;
 		}
 		start = start->next;
@@ -103,9 +129,11 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 	if (corewar->flags == 2)
 	{
 		 mvwprintw(corewar->vis->info, 14, 21, "%i", count);
+		 i = 0;
 		 while (i < corewar->player_nbr)
 		 {
-		 	mvwprintw(corewar->vis->info, 15 + corewar->vis->player * 3 + (i + 1) * 3, 16, "%i", corewar->players[i].last_live);
+		 	mvwprintw(corewar->vis->info, 15 + corewar->vis->player * 3\
+		 		+ (i + 1) * 3, 16, "%i", corewar->players[i].last_live);
 		 	i++;
 		 }
 		 wrefresh(corewar->vis->info);
@@ -123,7 +151,7 @@ void	engine(t_cw *corewar)
 	tmp_die = 0;
 	corewar->cycle_to_die = CYCLE_TO_DIE;
 	c = '\0';
-	if (corewar->flags == 2)
+	if (corewar->flags & 2)
 	{
 		while (c != 32)
 		    c = getch();
@@ -165,26 +193,6 @@ void	engine(t_cw *corewar)
 	player = check_winner(corewar->players, corewar->player_nbr);
 	if (!(corewar->flags & 2))
 		ft_printf("Winner %s\n", player.head->prog_name);
-	if (corewar->flags == 2)
-	{
-		set_player_collor(player.id - 1, corewar, corewar->vis->info);
-		mvwprintw(corewar->vis->info, 29, 5, "Winner player %i: %s", player.id, player.head->prog_name);
-		wrefresh(corewar->vis->info);
-		nodelay(stdscr, FALSE);
-		c = '\0';
-		while (c != 27)
-		{
-			mvwprintw(corewar->vis->help, 6, 5, "Press esc to exit.");
-			wrefresh(corewar->vis->help);
-			c = getch();
-			if (c == 27)
-			{
-				delwin(corewar->vis->win);
-				delwin(corewar->vis->help);
-				delwin(corewar->vis->info);
-	   	 		endwin();
-			}
-		}
-		free(corewar->vis);
-	}
+	if (corewar->flags & 2)
+		after_game(corewar, player, c);
 }
