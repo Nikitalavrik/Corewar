@@ -65,13 +65,13 @@ void    cursor_color_to_player(int pos, t_cw *corewar)
 
 void    set_color_by_cursor(t_cw *corewar, t_cursor *cursor)
 {
-    if (cursor->reg[0] == -1)
+    if (cursor->player_nbr == 1)
         wattron(corewar->vis->win, COLOR_PAIR(2));
-    if (cursor->reg[0] == -2)
+    if (cursor->player_nbr == 2)
         wattron(corewar->vis->win, COLOR_PAIR(4));
-    if (cursor->reg[0] == -3)
+    if (cursor->player_nbr == 3)
         wattron(corewar->vis->win, COLOR_PAIR(1));
-    if (cursor->reg[0] == -4)
+    if (cursor->player_nbr == 4)
         wattron(corewar->vis->win, COLOR_PAIR(3));
 }
 

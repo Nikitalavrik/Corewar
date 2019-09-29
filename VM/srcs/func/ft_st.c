@@ -51,10 +51,10 @@ void	ft_st(t_cw *corewar, t_cursor *cursor, t_op op)
 				i[0] = place_cur(cursor->position + (args[1] % IDX_MOD) + 3) / 64;
 				i[1] = place_cur(cursor->position + (args[1] % IDX_MOD) + 3) % 64;
 				mvwprintw(corewar->vis->win, i[0] + 2, 3 * i[1] + 5, "%.2x", corewar->map[i[0] * 64 + i[1]]);
-				corewar->vis->map[place_cur(cursor->position + (args[1] % IDX_MOD))] = -cursor->reg[0];
-				corewar->vis->map[place_cur(cursor->position + (args[1] % IDX_MOD) + 1)] = -cursor->reg[0];
-				corewar->vis->map[place_cur(cursor->position + (args[1] % IDX_MOD) + 2)] = -cursor->reg[0];
-				corewar->vis->map[place_cur(cursor->position + (args[1] % IDX_MOD) + 3)] = -cursor->reg[0];	
+				corewar->vis->map[place_cur(cursor->position + (args[1] % IDX_MOD))] = cursor->player_nbr;;
+				corewar->vis->map[place_cur(cursor->position + (args[1] % IDX_MOD) + 1)] = cursor->player_nbr;;
+				corewar->vis->map[place_cur(cursor->position + (args[1] % IDX_MOD) + 2)] = cursor->player_nbr;;
+				corewar->vis->map[place_cur(cursor->position + (args[1] % IDX_MOD) + 3)] = cursor->player_nbr;;	
 				wrefresh(corewar->vis->win);
 			}
 		}		
