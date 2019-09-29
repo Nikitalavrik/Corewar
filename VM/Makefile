@@ -14,35 +14,37 @@
 
 NAME = corewar
 
-SRC =	main.c				\
-		sys_out.c			\
-		parse_argv.c		\
-		errors.c			\
-		parse_file.c 		\
-		cursor.c			\
-		engine.c			\
-		op.c				\
-		check_func.c		\
-		vis_main.c			\
-		func/ft_live.c		\
-		func/ft_ld.c		\
-		func/ft_st.c		\
-		func/ft_add.c		\
-		func/ft_sub.c		\
-		func/ft_or.c		\
-		func/ft_xor.c		\
-		func/ft_and.c		\
-		func/ft_zjmp.c		\
-		func/ft_ldi.c		\
-		func/ft_sti.c		\
-		func/ft_fork.c		\
-		func/ft_lld.c		\
-		func/ft_lldi.c		\
-		func/ft_lfork.c		\
-		func/ft_aff.c		\
-		func/grep_info.c	\
-		func/implement.c	\
-		set_color.c 		\
+SRC =	main.c					\
+		sys_out.c				\
+		parse_argv.c			\
+		errors.c				\
+		parse_file.c 			\
+		cursor.c				\
+		engine.c				\
+		op.c					\
+		check_func.c			\
+		vis_main.c				\
+		func/ft_live.c			\
+		func/ft_ld.c			\
+		func/ft_st.c			\
+		func/ft_add.c			\
+		func/ft_sub.c			\
+		func/ft_or.c			\
+		func/ft_xor.c			\
+		func/ft_and.c			\
+		func/ft_zjmp.c			\
+		func/ft_ldi.c			\
+		func/ft_sti.c			\
+		func/ft_fork.c			\
+		func/ft_lld.c			\
+		func/ft_lldi.c			\
+		func/ft_lfork.c			\
+		func/ft_aff.c			\
+		func/grep_info.c		\
+		func/implement.c		\
+		set_color.c 			\
+		draw_box_and_words.c	\
+		draw_game.c				\
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
