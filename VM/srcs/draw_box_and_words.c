@@ -56,7 +56,6 @@ void			draw_box_and_words2(t_cw *corewar)
 	mvwprintw(corewar->vis->info, 14, 5, "Processes: ");
 	mvwprintw(corewar->vis->help, 8, 5, "Press '+' to increase speed");
 	mvwprintw(corewar->vis->help, 10, 5, "Press '-' to decrease speed");
-	mvwprintw(corewar->vis->help, 12, 5, "COLS = %i, LINES = %i", COLS, LINES);
 	wrefresh(corewar->vis->info);
 	wrefresh(corewar->vis->help);
 }

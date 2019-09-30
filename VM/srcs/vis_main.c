@@ -31,6 +31,7 @@ void			vis_init(t_cw *corewar)
 	ft_bzero(corewar->vis->map, MEM_SIZE);
 	corewar->vis->player = 0;
 	ft_init_colors();
+	system("afplay music/sound.mp3&");
 }
 
 void			ft_init_colors(void)

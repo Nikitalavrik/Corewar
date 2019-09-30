@@ -131,6 +131,9 @@ void			after_game(t_cw *corewar, t_player player, char c)
 	c = '\0';
 	while (c != 27)
 	{
+		system("afplay music/sound.mp3&");
+		system("killall afplay");
+		system("afplay music/winner.mp3&");
 		mvwprintw(corewar->vis->help, 6, 5, "Press esc to exit.");
 		wrefresh(corewar->vis->help);
 		c = getch();
@@ -142,5 +145,6 @@ void			after_game(t_cw *corewar, t_player player, char c)
 			endwin();
 		}
 	}
+	system("killall afplay");
 	free(corewar->vis);
 }
