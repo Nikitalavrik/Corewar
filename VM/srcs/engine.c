@@ -185,7 +185,7 @@ void	engine(t_cw *corewar)
 			else if (c == '-' && corewar->vis->speed < 10000)
 				corewar->vis->speed += 100;
 			mvwprintw(corewar->vis->info, 4, 21, "%i", i);
-			mvwprintw(corewar->vis->info, 6, 21, "%i", corewar->cycle_to_die);
+			mvwprintw(corewar->vis->info, 6, 21, "%i  ", corewar->cycle_to_die);
 			wrefresh(corewar->vis->info);
 		}
 		i++;
