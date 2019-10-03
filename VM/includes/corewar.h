@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/09/27 13:41:26 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/03 13:32:00 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct		s_corewar
 	int				check_cycle;
 	int				cycle_to_die;
 	int				flags;
+	int				live_process;
 	t_cursor		*cursor;
 	t_player		*players;
 	t_vis			*vis;

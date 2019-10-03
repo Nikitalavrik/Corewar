@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/28 13:30:32 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/03 13:33:59 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,18 @@ int		check_cycle_to_die(t_cw *corewar)
 	t_cursor	*start;
 	t_cursor	*prev;
 	t_cursor	*next;
-	int			live_process;
 
 	start = corewar->cursor;
 	prev = NULL;
-	live_process = 0;
 	while (start)
 	{
 		next = start->next;
 		if (start->cycles_num > corewar->cycle_to_die)
 			del_cursor(&start, &prev, &corewar->cursor, corewar);
-		else
-			live_process++;
 		prev = start ? start : prev;
 		start = next;
 	}
-	if (live_process >= NBR_LIVE || corewar->check_cycle > MAX_CHECKS)
+	if (corewar->live_process >= NBR_LIVE || corewar->check_cycle > MAX_CHECKS)
 	{
 		corewar->cycle_to_die -= CYCLE_DELTA;
 		corewar->check_cycle = corewar->check_cycle > MAX_CHECKS ? 0 :\
@@ -43,6 +39,7 @@ int		check_cycle_to_die(t_cw *corewar)
 	}
 	else
 		corewar->check_cycle++;
+	corewar->live_process = 0;
 	return (corewar->cursor == NULL ? 1 : 0);
 }
 
@@ -65,6 +62,8 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 		cursor->is_wait = 0;
 		do_op(corewar, cursor);
 	}
+	else if (cursor->is_wait)
+		cursor->remaining_cycles--;
 	return (0);
 }
 
@@ -81,7 +80,6 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 	start = cursor;
 	while (start)
 	{
-		start->remaining_cycles -= start->is_wait ? 1 : 0; 
 		pos = start->position;
 		start->position += do_op(corewar, start);
 		start->position %= MEM_SIZE;

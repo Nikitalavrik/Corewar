@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:48:57 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/28 13:25:23 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/03 12:42:40 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	out_cursor(t_cursor *cursor)
 	start = cursor;
 	while (start != NULL)
 	{
-		ft_printf("id = %i carry = %i position = %i\n", start->id, start->carry, start->position);
+		ft_printf("id = %i cycle_num %i position = %i remaining %i\n", 
+		start->id, start->cycles_num, start->position, start->remaining_cycles);
 		start = start->next;
 	}	
 }
@@ -56,7 +57,7 @@ void	out_print_bytes(unsigned char *line, int count)
 void	out_func_info(t_cw *corewar, t_cursor *cursor, t_op op)
 {
 	ft_printf("i = %i process %s nbr_players %i cursor id %i cursor lifecycle %i\n",\
-	g_i - op.cycle_before_exec, op.func_name, corewar->player_nbr, cursor->id, cursor->cycles_num);
+	g_i, op.func_name, corewar->player_nbr, cursor->id, cursor->cycles_num);
 }
 
 void	dump(t_cursor *cursor)
