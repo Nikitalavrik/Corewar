@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 14:04:43 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/28 15:44:35 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/09/28 16:53:44 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ void	ft_and_xor_or(t_cw *corewar, t_cursor *cursor, t_op op, int f(int, int))
 		args[0] = cursor->reg[args[0] - 1];
 	else if (type.t_tp.t1 == IND_CODE)
 		args[0] = (int)check_grep_args(corewar->map, place_cur(cursor->position\
-								+ args[0] % IDX_MOD), IND_CODE, op.t_dirsize);
+								+ args[0] % IDX_MOD), DIR_CODE, 0);
 	if (type.t_tp.t2 == REG_CODE && args[1] > 0 && args[1] <= 16)
 		args[1] = cursor->reg[args[1] - 1];
 	else if (type.t_tp.t2 == IND_CODE)
 		args[1] = (int)check_grep_args(corewar->map, place_cur(cursor->position\
-								+ args[1] % IDX_MOD), IND_CODE, op.t_dirsize);
+								+ args[1] % IDX_MOD), DIR_CODE, 0);
 	if (type.t_tp.t3 == REG_CODE)
 	{
-		cursor->reg[args[2] - 1] = f(args[0], args[0]);
+		cursor->reg[args[2] - 1] = f(args[0], args[1]);
 		cursor->carry = !cursor->reg[args[2] - 1] ? 1 : 0;
 	}
 	ft_memdel((void **)&args);
