@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/03 13:33:59 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/03 14:17:14 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ void	engine(t_cw *corewar)
 	}
 	player = check_winner(corewar->players, corewar->player_nbr);
 	if (!(corewar->flags & 2))
-		ft_printf("Winner %s\n", player.head->prog_name);
+		ft_printf("Winner: Player %i \"%s\"\n", player.id, player.head->prog_name);
 	if (corewar->flags & 2)
 		after_game(corewar, player, c);
 }
