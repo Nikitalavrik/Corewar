@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:07:47 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/03 15:51:08 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/04 19:08:50 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	check_uniq_name(t_player *players)
 		i--;
 	while (i >= 0)
 	{
+		
 		if (!players[i].name)
 			print_error("Bad player number");
 		if (ft_strcmp(ft_strrchr(players[i].name, '.'), ".cor"))

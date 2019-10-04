@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/03 15:52:52 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/04 18:42:18 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int		check_cycle_to_die(t_cw *corewar)
 		prev = start ? start : prev;
 		start = next;
 	}
-	if (corewar->live_process >= NBR_LIVE || corewar->check_cycle >= MAX_CHECKS)
+	if (corewar->live_process >= NBR_LIVE || corewar->check_cycle >= MAX_CHECKS - 1)
 	{
 		corewar->cycle_to_die -= CYCLE_DELTA;
-		corewar->check_cycle = corewar->check_cycle >= MAX_CHECKS ? 0 :\
+		corewar->check_cycle = corewar->check_cycle >= MAX_CHECKS - 1 ? 0 :\
 		corewar->check_cycle;
 	}
 	else
@@ -49,7 +49,18 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 
 	op = corewar->map[cursor->position];
 	if (op > 16 || !op)
+	{
+		// cursor->position += 1;
+		// do_op(corewar, cursor);
+		op = corewar->map[cursor->position + 1];
+		if (op <= 16  && op)
+		{
+			cursor->op = op;
+			cursor->remaining_cycles = g_op_tab[op - 1].cycle_before_exec - 1;
+			cursor->is_wait = 1;
+		}
 		return (1);
+	}
 	if (!cursor->is_wait)
 	{
 		cursor->op = op;
@@ -84,6 +95,8 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 		start->position += do_op(corewar, start);
 		start->position %= MEM_SIZE;
 		start->cycles_num++;
+		// if (g_i == 172)
+		// 	ft_printf("pos = %i\n", start->position);
 		if (corewar->flags == 2)
 		{
 			draw_cursor(pos, start, corewar, cursor);
@@ -148,6 +161,7 @@ void	engine(t_cw *corewar)
 	i = 0;
 	tmp_die = 0;
 	corewar->cycle_to_die = CYCLE_TO_DIE;
+	// out_cursor(corewar->cursor);
 	c = '\0';
 	if (corewar->flags & 2)
 	{
@@ -159,12 +173,39 @@ void	engine(t_cw *corewar)
 	while (1)
 	{
 		g_i = i;
+
 		iterate_all_cursors(corewar, corewar->cursor);
+		if (i == corewar->dump && corewar->flags & 16)
+		{
+			dump(corewar->map);
+			exit(0);
+		}
 		if (tmp_die >= corewar->cycle_to_die)
 		{
 			if ((tmp_die = check_cycle_to_die(corewar)))
+			{
+				if (corewar->flags & 2)
+				{	
+					c = getch();
+					if (c == 32)
+					{
+						c = '\0';
+						while (c != 32)
+							c = getch();
+						c = '\0';
+					}
+					else if (c == '+' && corewar->vis->speed > 100)
+						corewar->vis->speed -= 100;
+					else if (c == '-' && corewar->vis->speed < 10000)
+						corewar->vis->speed += 100;
+					mvwprintw(corewar->vis->info, 4, 21, "%i", i);
+					mvwprintw(corewar->vis->info, 6, 21, "%i  ", corewar->cycle_to_die);
+					wrefresh(corewar->vis->info);
+				}
 				break ;
-			tmp_die = 0;
+			}
+				
+			tmp_die = 1;
 		}
 		else
 			tmp_die++;
@@ -188,6 +229,8 @@ void	engine(t_cw *corewar)
 		}
 		i++;
 	}
+	if (corewar->flags & 8)
+		ft_printf("i = %i\n", i);
 	player = check_winner(corewar->players, corewar->player_nbr);
 	if (!(corewar->flags & 2))
 		ft_printf("Winner: Player %i \"%s\"\n", player.id, player.head->prog_name);

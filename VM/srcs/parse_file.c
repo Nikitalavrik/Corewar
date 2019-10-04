@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/27 16:46:10 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/04 18:33:42 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,14 @@ int		count_players(t_player *players)
 	return (i);
 }
 
-t_cw	*parse_file(t_player *players, int flags)
+t_cw	*parse_file(t_cw	*corewar, t_player *players)
 {
-	t_cw	*corewar;
 	int		i;
 	int		place;
 	int		diff;
 
 	i = 0;
 	place = 0;
-	corewar = ft_memalloc(sizeof(t_cw));
-	corewar->flags = flags;
 	corewar->player_nbr = count_players(players);
 	corewar->players = players;
 	diff = MEM_SIZE / corewar->player_nbr;

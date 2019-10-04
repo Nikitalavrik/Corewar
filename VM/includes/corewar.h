@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/10/03 13:32:00 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/04 18:41:27 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct		s_corewar
 	int				cycle_to_die;
 	int				flags;
 	int				live_process;
+	int				dump;
 	t_cursor		*cursor;
 	t_player		*players;
 	t_vis			*vis;
@@ -100,13 +101,13 @@ void			out_players(t_player *players);
 void			out_cursor(t_cursor *cursor);
 void			out_print_bytes(unsigned char *line, int count);
 void			out_func_info(t_cw *corewar, t_cursor *cursor, t_op op);
-void			dump(t_cursor *cursor);
+void			dump(unsigned char *map);
 
 /**
  ** parse function
  */
-t_player		*parse_argv(int argc, char ** argv, int *flags);
-t_cw			*parse_file(t_player *players, int flags);
+t_player		*parse_argv(t_cw *corewar, int argc, char ** argv);
+t_cw			*parse_file(t_cw	*corewar, t_player *players);
 int				check_uniq_id(t_player *players, int id);
 void			check_uniq_name(t_player *players);
 
@@ -117,6 +118,7 @@ void			engine(t_cw *corewar);
 int				check_operation(t_cw *corewar, t_cursor *cursor, int op);
 unsigned int 	place_cur(int cur);
 t_player 		check_winner(t_player *players, int n);
+int				do_op(t_cw *corewar, t_cursor *cursor);
 
 /**
  ** grep value from map

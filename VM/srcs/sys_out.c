@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:48:57 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/03 12:42:40 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/04 17:57:37 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,4 @@ void	out_func_info(t_cw *corewar, t_cursor *cursor, t_op op)
 {
 	ft_printf("i = %i process %s nbr_players %i cursor id %i cursor lifecycle %i\n",\
 	g_i, op.func_name, corewar->player_nbr, cursor->id, cursor->cycles_num);
-}
-
-void	dump(t_cursor *cursor)
-{
-	int i;
-
-	i = 0;
-	cursor->reg[i]++;
-	cursor->reg[i]--;
-	while (i < 16)
-	{
-		ft_printf("%i ", cursor->reg[i]);
-		i++;
-	}
-	ft_printf("\n\n");
 }

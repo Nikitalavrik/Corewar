@@ -1,12 +1,18 @@
 .name		"BisssgBob"
 .comment	"chick chick"
 
-		ld   %0,r3
-avantdebut:	zjmp %:code  # 		#7
+roll:
+sti r2, r3, r2
+xor r2, r2, r3
+live %-1
 
-		
-code:	
-		ldi %:lol, r2, r6
-		sti r6, %50, %50
-
-lol: live %1
+live %-2
+add r2, r2, r3
+live %-3
+add r2, r2, r3
+live %-4
+xor r2, r2, r3
+lldi 50, %10, r10
+ld %0, r2
+fork %:roll
+zjmp %:roll

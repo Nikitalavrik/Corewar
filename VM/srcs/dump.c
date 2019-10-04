@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   dump.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/02 16:17:00 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/04 18:42:04 by nlavrine         ###   ########.fr       */
+/*   Created: 2019/10/04 17:52:54 by nlavrine          #+#    #+#             */
+/*   Updated: 2019/10/04 18:07:40 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int		main(int argc, char **argv)
+void	dump(unsigned char *map)
 {
-	t_cw		*corewar;
-	t_player	*players;
+	int row;
+	int	column;
 
-	g_id = 1;
-	if (argc < 2)
-		print_error("Please put champions!");
-	corewar = ft_memalloc(sizeof(t_cw));
-	players = parse_argv(corewar, argc, argv);
-	parse_file(corewar, players);
-	cursor(corewar);
-	engine(corewar);
-	return (0);
+	row = 0;
+	while (row < 64)
+	{
+		column = 0;
+		// ft_printf("0x");
+		// if (row)
+		// ft_printf("%#.4x: ", row * 64);
+		row ? ft_printf("%#.4x : ", row * 64) : ft_printf("0x0000 : ");
+		while (column < 64)
+		{
+			ft_printf("%.2x ", map[row * 64 + column]);
+			column++;
+		}
+		ft_printf("\n");
+		row++;
+	}
 }

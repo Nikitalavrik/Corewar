@@ -6,19 +6,21 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:05:43 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/23 13:59:12 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/04 19:08:10 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int 		choose_flag(char *param)
+int 		choose_flag(t_cw *corewar, char **argv, int *pos, int argc)
 {
-	int i;
-	int	flag;
+	int 	i;
+	int		flag;
+	char	*param;
 
 	i = 1;
 	flag = 0;
+	param = argv[*pos];
 	while (param[i])
 	{
 		if (param[i] == 'a')
@@ -29,6 +31,14 @@ int 		choose_flag(char *param)
 			flag |= 4;
 		else if (param[i] == 'o')
 			flag |= 8;
+		else if (param[i] == 'd')
+		{
+			flag |= 16;
+			if (*pos + 1 == argc)
+				print_error("Enter number of cycles");
+			corewar->dump = ft_atoi(argv[*pos + 1]);
+			(*pos) += 2;
+		}
 		else
 			print_error("Unexpected flag");
 		i++;
@@ -59,7 +69,7 @@ t_player	*fill_n_flag(int argc, char **argv, t_player *players)
 	return (players);
 }
 
-t_player	*fill_other_players(int argc, char **argv, t_player *players, int *flags)
+t_player	*fill_other_players(t_cw *corewar, int argc, char **argv, t_player *players)
 {
 	int i;
 	int	player_id;
@@ -69,11 +79,13 @@ t_player	*fill_other_players(int argc, char **argv, t_player *players, int *flag
 	while (argv[i] && i < argc)
 	{
 		if (argv[i] && argv[i][0] == '-' && argv[i][1] != 'n')
-			*flags |= choose_flag(argv[i]);
+			corewar->flags |= choose_flag(corewar, argv, &i, argc);
+		if (i >= argc)
+			break ;
 		while (i < argc && !ft_strcmp(argv[i], "-n"))
 			i += 3;
 		if (argv[i] && argv[i][0] == '-' && argv[i][1] != 'n')
-			*flags |= choose_flag(argv[i]);
+			corewar->flags |= choose_flag(corewar, argv, &i, argc);
 		if (i >= argc)
 			break ;
 		if (argv[i] && argv[i][0] != '-')
@@ -90,13 +102,13 @@ t_player	*fill_other_players(int argc, char **argv, t_player *players, int *flag
 	return (players);
 }
 
-t_player	*parse_argv(int argc, char ** argv, int *flags)
+t_player	*parse_argv(t_cw *corewar, int argc, char ** argv)
 {
 	t_player	*players;
 
 	players = ft_memalloc(sizeof(t_player) * MAX_PLAYERS);
 	players = fill_n_flag(argc, argv, players);
-	players = fill_other_players(argc, argv, players, flags);
+	players = fill_other_players(corewar, argc, argv, players);
 	check_uniq_name(players);
 	return (players);
 }
