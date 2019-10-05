@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:35:15 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/05 13:09:25 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/05 16:00:31 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,6 @@ void	ft_fork(t_cw *corewar, t_cursor *cursor, t_op op)
 		corewar->cursor->remaining_cycles = g_op_tab[next_op - 1].cycle_before_exec - 1;
 		corewar->cursor->is_wait = 1;
 	}
+	else
+		corewar->cursor->position += 1;
 }
