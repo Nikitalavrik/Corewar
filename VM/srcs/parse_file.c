@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/04 18:33:42 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/05 12:23:31 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_cw	*parse_file(t_cw	*corewar, t_player *players)
 	corewar->players = players;
 	diff = MEM_SIZE / corewar->player_nbr;
 	ft_bzero(corewar->map, MEM_SIZE);
+	ft_printf("Introducing contestants...\n");
 	if (corewar->flags == 2)
 	{
 		vis_init(corewar);
@@ -96,7 +97,7 @@ t_cw	*parse_file(t_cw	*corewar, t_player *players)
 		if (corewar->flags == 2)
 			reset_player_collor(i, corewar);
 		else
-			ft_printf("* Player %i, weight %2i bytes, %10s, %s\n", i + 1,\
+			ft_printf("* Player %i, weighing %2i bytes, \"%10s\" (\"%s\") !\n", i + 1,\
 		players[i].head->prog_size, players[i].head->prog_name,\
 		players[i].head->comment);
 		place += diff;

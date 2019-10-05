@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:34:18 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/04 17:48:33 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/05 14:09:45 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void	ft_zjmp(t_cw *corewar, t_cursor *cursor, t_op op)
 		cursor->position = place_cur(cursor->position + arg1 % IDX_MOD);
 	else
 		cursor->position = place_cur(cursor->position + 1 + T_DIR);
+	// ft_printf("pos = %i\n", cursor->position);
 }

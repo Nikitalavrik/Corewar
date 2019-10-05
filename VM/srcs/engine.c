@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/04 18:42:18 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/05 14:41:28 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,19 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 {
 	unsigned char op;
 
-	op = corewar->map[cursor->position];
-	if (op > 16 || !op)
+	if (!cursor->is_wait)
+		op = corewar->map[cursor->position];
+	if (!cursor->is_wait && (op > 16 || !op))
 	{
 		// cursor->position += 1;
 		// do_op(corewar, cursor);
-		op = corewar->map[cursor->position + 1];
-		if (op <= 16  && op)
-		{
-			cursor->op = op;
-			cursor->remaining_cycles = g_op_tab[op - 1].cycle_before_exec - 1;
-			cursor->is_wait = 1;
-		}
+		// op = corewar->map[cursor->position + 1];
+		// if (op <= 16  && op)
+		// {
+		// 	cursor->op = op;
+		// 	cursor->remaining_cycles = g_op_tab[op - 1].cycle_before_exec - 1;
+		// 	cursor->is_wait = 1;
+		// }
 		return (1);
 	}
 	if (!cursor->is_wait)
@@ -71,7 +72,7 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 	{
 		check_operation(corewar, cursor, cursor->op);
 		cursor->is_wait = 0;
-		do_op(corewar, cursor);
+		return (do_op(corewar, cursor));
 	}
 	else if (cursor->is_wait)
 		cursor->remaining_cycles--;
@@ -177,6 +178,7 @@ void	engine(t_cw *corewar)
 		iterate_all_cursors(corewar, corewar->cursor);
 		if (i == corewar->dump && corewar->flags & 16)
 		{
+			
 			dump(corewar->map);
 			exit(0);
 		}
