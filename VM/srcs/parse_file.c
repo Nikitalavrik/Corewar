@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/05 12:23:31 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/05 15:37:32 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ header_t	*read_file(char *filename, unsigned char *area, int i, t_cw *corewar)
 	if (null_byte)
 		print_error("Bad file");
 	read(fd, &area[i], head->prog_size);
-	if (corewar->flags == 2)
+	if (corewar->flags & 2)
 	{
 		draw_player(area, i, head->prog_size, corewar);
 		draw_player_name(head->prog_name, corewar);
@@ -84,17 +84,17 @@ t_cw	*parse_file(t_cw	*corewar, t_player *players)
 	diff = MEM_SIZE / corewar->player_nbr;
 	ft_bzero(corewar->map, MEM_SIZE);
 	ft_printf("Introducing contestants...\n");
-	if (corewar->flags == 2)
+	if (corewar->flags & 2)
 	{
 		vis_init(corewar);
 		draw_map(corewar);
 	}
 	while (i < corewar->player_nbr)
 	{
-		if (corewar->flags == 2)
+		if (corewar->flags & 2)
 			set_player_collor(i, corewar, corewar->vis->win);
 		players[i].head = read_file(players[i].name, corewar->map, place, corewar);
-		if (corewar->flags == 2)
+		if (corewar->flags & 2)
 			reset_player_collor(i, corewar);
 		else
 			ft_printf("* Player %i, weighing %2i bytes, \"%10s\" (\"%s\") !\n", i + 1,\

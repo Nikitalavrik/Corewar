@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/05 14:41:28 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/05 15:37:57 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 		start->cycles_num++;
 		// if (g_i == 172)
 		// 	ft_printf("pos = %i\n", start->position);
-		if (corewar->flags == 2)
+		if (corewar->flags & 2)
 		{
 			draw_cursor(pos, start, corewar, cursor);
 			if (COLS != corewar->vis->cols || LINES != corewar->vis->lines)
@@ -138,7 +138,7 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 		}
 		start = start->next;
 	}
-	if (corewar->flags == 2)
+	if (corewar->flags & 2)
 	{
 		 mvwprintw(corewar->vis->info, 14, 21, "%i", count);
 		 i = 0;
@@ -178,8 +178,8 @@ void	engine(t_cw *corewar)
 		iterate_all_cursors(corewar, corewar->cursor);
 		if (i == corewar->dump && corewar->flags & 16)
 		{
-			
-			dump(corewar->map);
+			if (!(corewar->flags & 2))
+				dump(corewar->map);
 			exit(0);
 		}
 		if (tmp_die >= corewar->cycle_to_die)
