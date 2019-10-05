@@ -179,8 +179,35 @@ void	engine(t_cw *corewar)
 		if (i == corewar->dump && corewar->flags & 16)
 		{
 			if (!(corewar->flags & 2))
+			{
 				dump(corewar->map);
-			exit(0);
+				exit(0);
+			}
+			else
+			{
+				mvwprintw(corewar->vis->info, 4, 21, "%i", i);
+				mvwprintw(corewar->vis->info, 6, 21, "%i  ", corewar->cycle_to_die);
+				wrefresh(corewar->vis->info);
+				nodelay(stdscr, FALSE);
+				c = '\0';
+				while (c != 27)
+				{
+					system("afplay music/sound.mp3&");
+					system("killall afplay");
+					mvwprintw(corewar->vis->help, 6, 5, "Press esc to exit.");
+					wrefresh(corewar->vis->help);
+					c = getch();
+					if (c == 27)
+					{
+						delwin(corewar->vis->win);
+						delwin(corewar->vis->help);
+						delwin(corewar->vis->info);
+						endwin();
+					}
+				}
+				free(corewar->vis);
+				exit(0);
+			}
 		}
 		if (tmp_die >= corewar->cycle_to_die)
 		{

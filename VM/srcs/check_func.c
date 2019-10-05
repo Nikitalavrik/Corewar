@@ -58,6 +58,7 @@ t_player check_winner(t_player *players, int n)
 
 	min_live = -1;
 	i = n;
+	player_id = 0; 
 	while (i)
 	{
 		if (players[i - 1].last_live > min_live)

@@ -48,7 +48,7 @@ SRC =	main.c					\
 		dump.c					\
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 SRC_DIR = srcs
 H_DIR = includes
 OBJ_DIR = obj
