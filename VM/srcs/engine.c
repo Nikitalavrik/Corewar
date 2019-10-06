@@ -140,7 +140,7 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 	}
 	if (corewar->flags & 2)
 	{
-		 mvwprintw(corewar->vis->info, 14, 21, "%i", count);
+		 mvwprintw(corewar->vis->info, 14, 21, "%i  ", count);
 		 i = 0;
 		 while (i < corewar->player_nbr)
 		 {
@@ -188,25 +188,8 @@ void	engine(t_cw *corewar)
 				mvwprintw(corewar->vis->info, 4, 21, "%i", i);
 				mvwprintw(corewar->vis->info, 6, 21, "%i  ", corewar->cycle_to_die);
 				wrefresh(corewar->vis->info);
-				nodelay(stdscr, FALSE);
-				c = '\0';
-				while (c != 27)
-				{
-					system("afplay music/sound.mp3&");
-					system("killall afplay");
-					mvwprintw(corewar->vis->help, 6, 5, "Press esc to exit.");
-					wrefresh(corewar->vis->help);
+				while (c != 32)
 					c = getch();
-					if (c == 27)
-					{
-						delwin(corewar->vis->win);
-						delwin(corewar->vis->help);
-						delwin(corewar->vis->info);
-						endwin();
-					}
-				}
-				free(corewar->vis);
-				exit(0);
 			}
 		}
 		if (tmp_die >= corewar->cycle_to_die)
