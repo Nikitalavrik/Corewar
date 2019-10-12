@@ -6,25 +6,28 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 14:04:43 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/11 15:29:24 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/12 15:52:39 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static int	check_incorrect_reg(t_type type, int *args, t_cursor *cursor, t_op op)
+static int	check_incorrect_reg(t_type type, int *args,
+													t_cursor *cursor, t_op op)
 {
 	if ((type.t_tp.t1 == REG_CODE && (args[0] <= 0 || args[0] > 16))\
 	|| (type.t_tp.t2 == REG_CODE && (args[1] <= 0 || args[1] > 16)))
 	{
 		ft_memdel((void **)&args);
-		cursor->position = place_cur(cursor->position + 2 + calc_pos(type, 3, op));
+		cursor->position = place_cur(cursor->position + 2 +\
+														calc_pos(type, 3, op));
 		return (1);
 	}
 	return (0);
 }
 
-void	ft_and_xor_or(t_cw *corewar, t_cursor *cursor, t_op op, int f(int, int))
+void		ft_and_xor_or(t_cw *corewar, t_cursor *cursor,
+													t_op op, int f(int, int))
 {
 	int		*args;
 	t_type	type;
@@ -53,7 +56,8 @@ void	ft_and_xor_or(t_cw *corewar, t_cursor *cursor, t_op op, int f(int, int))
 	cursor->position = place_cur(cursor->position + 2 + calc_pos(type, 3, op));
 }
 
-void	ft_add_sub(t_cw *corewar, t_cursor *cursor, t_op op, int f(int, int))
+void		ft_add_sub(t_cw *corewar, t_cursor *cursor,
+													t_op op, int f(int, int))
 {
 	int		*args;
 	t_type	type;
@@ -76,7 +80,7 @@ void	ft_add_sub(t_cw *corewar, t_cursor *cursor, t_op op, int f(int, int))
 	cursor->position = place_cur(cursor->position + 2 + calc_pos(type, 3, op));
 }
 
-int		calc_pos(t_type type, int n, t_op op)
+int			calc_pos(t_type type, int n, t_op op)
 {
 	int num;
 
@@ -90,7 +94,7 @@ int		calc_pos(t_type type, int n, t_op op)
 	return (num);
 }
 
-int		*init_args(t_cw *corewar, t_cursor *cursor, t_op op, t_type type)
+int			*init_args(t_cw *corewar, t_cursor *cursor, t_op op, t_type type)
 {
 	int *args;
 

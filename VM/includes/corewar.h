@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/10/04 18:41:27 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/12 15:50:42 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,23 @@ typedef	struct		s_op
 	char			codage;				// код типов аргументов
 	char			t_dirsize;			// если 1 то Тдир = 2, если 0, то 4
 }					t_op;
+
+// typedef union		u_flag
+// {
+// 	unsigned char	flag;
+// 	struct			s_f
+// 	{
+// 		unsigned char	a : 1;
+// 		unsigned char	d : 1;
+// 		unsigned char	n : 1;
+// 		unsigned char	a : 1;
+// 		unsigned char	a : 1;
+// 		unsigned char	a : 1;
+// 		unsigned char	a : 1;
+// 		unsigned char	a : 1;
+// 	}				t_f;
+	
+// }
 
 typedef union		u_type
 {

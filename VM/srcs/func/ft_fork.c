@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:35:15 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/12 12:31:53 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/12 15:46:53 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,5 @@ void	ft_fork(t_cw *corewar, t_cursor *cursor, t_op op)
 		corewar->cursor->is_wait = 1;
 	}
 	else
-	{
-		// ft_printf("fork skip cursor id %i i = %i pos = %i\n", corewar->cursor->id, g_i, cursor->position);
 		corewar->cursor->position += 1;
-	}
-	// ft_printf("pos = %i id = %i\n", corewar->cursor->position, corewar->cursor->id);
 }
