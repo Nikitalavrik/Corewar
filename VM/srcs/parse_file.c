@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/11 13:36:07 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/12 17:55:39 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ void			check_space_name(char *prog_name)
 	ft_printf("prog_name", prog_name);
 }
 
-header_t	*read_file(char *filename, unsigned char *area, int i, t_cw *corewar)
+header_t		*read_file(char *filename, unsigned char *area,
+														int i, t_cw *corewar)
 {
-	int fd;
-	unsigned int null_byte;
+	int				fd;
+	unsigned int	null_byte;
 	header_t		*head;
-
 
 	null_byte = 0;
 	fd = open(filename, O_RDONLY);
@@ -56,8 +56,6 @@ header_t	*read_file(char *filename, unsigned char *area, int i, t_cw *corewar)
 	if (head->magic != COREWAR_EXEC_MAGIC)
 		print_error("Bad magic head");
 	read(fd, &head->prog_name, PROG_NAME_LENGTH);
-	// if (!head->prog_name)
-	// 	print_error("Noname champion");
 	read(fd, &null_byte, 4);
 	if (null_byte)
 		print_error("Bad file");
@@ -78,8 +76,7 @@ header_t	*read_file(char *filename, unsigned char *area, int i, t_cw *corewar)
 	return (head);
 }
 
-
-int		count_players(t_player *players)
+int				count_players(t_player *players)
 {
 	int i;
 
@@ -89,7 +86,7 @@ int		count_players(t_player *players)
 	return (i);
 }
 
-t_cw	*parse_file(t_cw	*corewar, t_player *players)
+t_cw			*parse_file(t_cw *corewar, t_player *players)
 {
 	int		i;
 	int		place;
@@ -111,12 +108,13 @@ t_cw	*parse_file(t_cw	*corewar, t_player *players)
 	{
 		if (corewar->flags & 2)
 			set_player_collor(i, corewar, corewar->vis->win);
-		players[i].head = read_file(players[i].name, corewar->map, place, corewar);
+		players[i].head = read_file(players[i].name,
+										corewar->map, place, corewar);
 		if (corewar->flags & 2)
 			reset_player_collor(i, corewar);
 		else
-			ft_printf("* Player %i, weighing %2i bytes, \"%s\" (\"%s\") !\n", i + 1,\
-		players[i].head->prog_size, players[i].head->prog_name,\
+			ft_printf("* Player %i, weighing %2i bytes, \"%s\" (\"%s\") !\n",
+			i + 1, players[i].head->prog_size, players[i].head->prog_name,\
 		players[i].head->comment);
 		place += diff;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 11:44:03 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/10/03 12:45:11 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/12 17:48:54 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,31 +44,37 @@ void	cursor(t_cw *cw)
 	g_id = cw->player_nbr;
 }
 
-int		del_cursor(t_cursor **cursor, t_cursor **prev, t_cursor **main_cursor, t_cw *corewar)
+void	del_vizual(t_cursor **cursor, t_cursor **main_cursor, t_cw *corewar)
 {
-	int			id;
 	int			count;
 	int			i[2];
-	t_cursor    *begin;
-	
-	if (corewar->flags & 2)
+	t_cursor	*begin;
+
+	count = 0;
+	begin = *main_cursor;
+	while (begin)
 	{
-		count = 0;
-		begin = *main_cursor;
-		while (begin)
-		{
-			if (begin->position == (*cursor)->position)
-				count++;
-			begin = begin->next;
-		}
-		if (count == 1)
-		{
-		    cursor_color_to_player((*cursor)->position, corewar);
-		    i[0] = (*cursor)->position / 64;
-		    i[1] = (*cursor)->position % 64;
-		    mvwprintw(corewar->vis->win, i[0] + 2, 3 * i[1] + 5, "%.2x", corewar->map[i[0] * 64 + i[1]]);
-		}
+		if (begin->position == (*cursor)->position)
+			count++;
+		begin = begin->next;
 	}
+	if (count == 1)
+	{
+		cursor_color_to_player((*cursor)->position, corewar);
+		i[0] = (*cursor)->position / 64;
+		i[1] = (*cursor)->position % 64;
+		mvwprintw(corewar->vis->win, i[0] + 2, 3 * i[1] + 5, "%.2x",
+											corewar->map[i[0] * 64 + i[1]]);
+	}
+}
+
+int		del_cursor(t_cursor **cursor, t_cursor **prev,
+										t_cursor **main_cursor, t_cw *corewar)
+{
+	int			id;
+
+	if (corewar->flags & 2)
+		del_vizual(cursor, main_cursor, corewar);
 	id = (*cursor) ? (*cursor)->player_nbr : 0;
 	if (*prev)
 		(*prev)->next = (*cursor)->next;

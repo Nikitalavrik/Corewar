@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/12 15:07:10 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/12 17:15:30 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,22 +165,6 @@ void	engine(t_cw *corewar)
 		g_i = i;
 
 		iterate_all_cursors(corewar, corewar->cursor);
-		if (i == corewar->dump && corewar->flags & 16)
-		{
-			if (!(corewar->flags & 2))
-			{
-				dump(corewar->map);
-				exit(0);
-			}
-			else
-			{
-				mvwprintw(corewar->vis->info, 4, 21, "%i", i);
-				mvwprintw(corewar->vis->info, 6, 21, "%i  ", corewar->cycle_to_die);
-				wrefresh(corewar->vis->info);
-				while (c != 32)
-					c = getch();
-			}
-		}
 		if (tmp_die >= corewar->cycle_to_die)
 		{
 			if ((tmp_die = check_cycle_to_die(corewar)))
@@ -210,6 +194,22 @@ void	engine(t_cw *corewar)
 		}
 		else
 			tmp_die++;
+		if (i == corewar->dump && corewar->flags & 16)
+		{
+			if (!(corewar->flags & 2))
+			{
+				dump(corewar->map);
+				exit(0);
+			}
+			else
+			{
+				mvwprintw(corewar->vis->info, 4, 21, "%i", i);
+				mvwprintw(corewar->vis->info, 6, 21, "%i  ", corewar->cycle_to_die);
+				wrefresh(corewar->vis->info);
+				while (c != 32)
+					c = getch();
+			}
+		}
 		if (corewar->flags & 2)
 		{	
 			c = getch();

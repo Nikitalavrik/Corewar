@@ -6,7 +6,7 @@
 #    By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/25 17:55:29 by nlavrine          #+#    #+#              #
-#    Updated: 2019/10/04 17:57:54 by nlavrine         ###   ########.fr        #
+#    Updated: 2019/10/12 17:40:30 by nlavrine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC =	main.c					\
 		draw_box_and_words.c	\
 		draw_game.c				\
 		dump.c					\
+		flags.c					\
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror -fsanitize=address
