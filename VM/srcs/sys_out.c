@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:48:57 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/05 16:32:44 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/11 14:46:57 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	out_print_bytes(unsigned char *line, int count)
 
 void	out_func_info(t_cw *corewar, t_cursor *cursor, t_op op)
 {
-	ft_printf("i = %i process %s nbr_players %i max_players %i cursor id %i cursor lifecycle %i\n",\
-	g_i, op.func_name, cursor->player_nbr, corewar->player_nbr, cursor->id, cursor->cycles_num);
+	ft_printf("i = %i process %s cursor id %i cursor position %i max_players = %i\n",\
+	g_i, op.func_name, cursor->id, cursor->position, corewar->player_nbr);
+	// ft_printf("i = %i process %s nbr_players %i max_players %i cursor id %i cursor lifecycle %i\n",\
+	// g_i, op.func_name, cursor->player_nbr, corewar->player_nbr, cursor->id, cursor->cycles_num);
 }

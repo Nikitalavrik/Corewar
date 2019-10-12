@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:35:15 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/05 16:00:31 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/12 12:31:53 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,30 @@
 
 void	ft_fork(t_cw *corewar, t_cursor *cursor, t_op op)
 {
-	int			arg1;
+	int				arg1;
 	unsigned int	next_op;
 
 	corewar->flags & 8 ? out_func_info(corewar, cursor, op) : 0;
-	arg1 = (short int)grep_args(corewar->map, place_cur(cursor->position + 1), T_DIR);
+	arg1 = (short int)grep_args(corewar->map,\
+									place_cur(cursor->position + 1), T_DIR);
 	add_cursor(corewar, cursor->player_nbr);
 	copy_cursor(cursor, corewar->cursor);
 	corewar->cursor->id = ++g_id;
-	corewar->cursor->position = place_cur(cursor->position + (arg1 % IDX_MOD));
+	corewar->cursor->position = place_cur(cursor->position\
+														+ (arg1 % IDX_MOD));
 	cursor->position = place_cur(cursor->position + 1 + T_DIR);
 	next_op = corewar->map[corewar->cursor->position];
 	if (next_op && next_op <= 16)
 	{
+		arg1 = g_op_tab[next_op - 1].cycle_before_exec - 1;
 		corewar->cursor->op = next_op;
-		corewar->cursor->remaining_cycles = g_op_tab[next_op - 1].cycle_before_exec - 1;
+		corewar->cursor->remaining_cycles = arg1;
 		corewar->cursor->is_wait = 1;
 	}
 	else
+	{
+		// ft_printf("fork skip cursor id %i i = %i pos = %i\n", corewar->cursor->id, g_i, cursor->position);
 		corewar->cursor->position += 1;
+	}
+	// ft_printf("pos = %i id = %i\n", corewar->cursor->position, corewar->cursor->id);
 }

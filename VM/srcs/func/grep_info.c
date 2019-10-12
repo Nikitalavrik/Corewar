@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:37:40 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/28 15:45:20 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/11 13:50:11 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ func	*g_func[17] =
 	&ft_aff
 };
 
-int	grep_args(unsigned char *map, int position, int size)
+int				grep_args(unsigned char *map, int position, int size)
 {
 	int				i;
 	int				val;
@@ -59,7 +59,7 @@ int	grep_args(unsigned char *map, int position, int size)
 	return (val);
 }
 
-int	check_grep_args(unsigned char *map, int position,\
+int				check_grep_args(unsigned char *map, int position,\
 											int type, char t_dirsize)
 {
 	int	arg;
@@ -74,7 +74,7 @@ int	check_grep_args(unsigned char *map, int position,\
 	return (arg);
 }
 
-unsigned	int get_val_size(int type, char t_dirsize)
+unsigned int	get_val_size(int type, char t_dirsize)
 {
 	if (type == REG_CODE)
 		return (T_REG);
@@ -86,7 +86,7 @@ unsigned	int get_val_size(int type, char t_dirsize)
 		return (0);
 }
 
-unsigned int place_cur(int cur)
+unsigned int	place_cur(int cur)
 {
 	if (cur < 0)
 		return (MEM_SIZE + cur % MEM_SIZE);

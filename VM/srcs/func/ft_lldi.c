@@ -6,13 +6,25 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:34:29 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/09/28 16:39:10 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/11 15:29:39 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	ft_lldi(t_cw *corewar, t_cursor *cursor, t_op op)
+static int	check_incorrect_reg(t_type type, int *args, t_cursor *cursor, t_op op)
+{
+	if ((type.t_tp.t1 == REG_CODE && (args[0] <= 0 || args[0] > 16))\
+	|| (type.t_tp.t2 == REG_CODE && (args[1] <= 0 || args[1] > 16)))
+	{
+		ft_memdel((void **)&args);
+		cursor->position = place_cur(cursor->position + 2 + calc_pos(type, 3, op));
+		return (1);
+	}
+	return (0);
+}
+
+void		ft_lldi(t_cw *corewar, t_cursor *cursor, t_op op)
 {
 	int		*args;
 	t_type	type;
@@ -20,6 +32,8 @@ void	ft_lldi(t_cw *corewar, t_cursor *cursor, t_op op)
 	corewar->flags & 8 ? out_func_info(corewar, cursor, op) : 0;
 	type.types = corewar->map[place_cur(cursor->position + 1)];
 	args = init_args(corewar, cursor, op, type);
+	if (check_incorrect_reg(type, args, cursor, op))
+		return ;
 	if (type.t_tp.t1 == REG_CODE && args[0] > 0 && args[0] <= 16)
 		args[0] = cursor->reg[args[0] - 1];
 	else if (type.t_tp.t1 == IND_CODE)

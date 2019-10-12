@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/05 15:37:32 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/11 13:36:07 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,24 @@ unsigned int	reverse_num(unsigned int num)
 	reversed += num << 8 >> 24 << 8;
 	reversed += num << 16 >> 24 << 16;
 	return (reversed);
+}
+
+void			check_space_name(char *prog_name)
+{
+	int i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (prog_name[i] == ' ' || prog_name[i])
+		i++;
+	while (prog_name[i])
+	{
+		prog_name[j] = prog_name[i];
+		i++;
+		j++;
+	}
+	ft_printf("prog_name", prog_name);
 }
 
 header_t	*read_file(char *filename, unsigned char *area, int i, t_cw *corewar)
@@ -97,7 +115,7 @@ t_cw	*parse_file(t_cw	*corewar, t_player *players)
 		if (corewar->flags & 2)
 			reset_player_collor(i, corewar);
 		else
-			ft_printf("* Player %i, weighing %2i bytes, \"%10s\" (\"%s\") !\n", i + 1,\
+			ft_printf("* Player %i, weighing %2i bytes, \"%s\" (\"%s\") !\n", i + 1,\
 		players[i].head->prog_size, players[i].head->prog_name,\
 		players[i].head->comment);
 		place += diff;

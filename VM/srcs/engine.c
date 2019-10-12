@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/05 15:37:57 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/11 17:54:55 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,7 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 	if (!cursor->is_wait)
 		op = corewar->map[cursor->position];
 	if (!cursor->is_wait && (op > 16 || !op))
-	{
-		// cursor->position += 1;
-		// do_op(corewar, cursor);
-		// op = corewar->map[cursor->position + 1];
-		// if (op <= 16  && op)
-		// {
-		// 	cursor->op = op;
-		// 	cursor->remaining_cycles = g_op_tab[op - 1].cycle_before_exec - 1;
-		// 	cursor->is_wait = 1;
-		// }
 		return (1);
-	}
 	if (!cursor->is_wait)
 	{
 		cursor->op = op;
@@ -96,8 +85,6 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 		start->position += do_op(corewar, start);
 		start->position %= MEM_SIZE;
 		start->cycles_num++;
-		// if (g_i == 172)
-		// 	ft_printf("pos = %i\n", start->position);
 		if (corewar->flags & 2)
 		{
 			draw_cursor(pos, start, corewar, cursor);
