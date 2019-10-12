@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:31:08 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/12 16:23:48 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/12 17:00:40 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	vizual_save(t_cw *corewar, t_cursor *cursor, int wh)
 		mvwprintw(corewar->vis->win, i[0] + 2, 3 * i[1] + 5, "%.2x",
 											corewar->map[i[0] * 64 + i[1]]);
 		corewar->vis->map[place_cur(cursor->position + wh + j)] = player;
+		j++;
 	}
 }
 
