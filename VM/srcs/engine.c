@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/11 17:54:55 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/12 15:07:10 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,16 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 	if (!cursor->is_wait)
 	{
 		cursor->op = op;
-		cursor->remaining_cycles = g_op_tab[op - 1].cycle_before_exec;
+		cursor->remaining_cycles += g_op_tab[op - 1].cycle_before_exec;
 		cursor->is_wait = 1;
+		// ft_printf("id %i op = %i\n", cursor->id, op);
 	}
 	if (cursor->remaining_cycles <= 0 && cursor->is_wait)
 	{
 		check_operation(corewar, cursor, cursor->op);
 		cursor->is_wait = 0;
-		return (do_op(corewar, cursor));
+		cursor->remaining_cycles = -1;
+		return (0);
 	}
 	else if (cursor->is_wait)
 		cursor->remaining_cycles--;
