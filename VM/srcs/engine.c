@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/13 14:09:11 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/13 14:25:58 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void	engine(t_cw *corewar)
 	int			tmp_die;
 	t_player	player;
 
-	i = 1;
+	i = 0;
 	tmp_die = 0;
 	corewar->cycle_to_die = CYCLE_TO_DIE;
 	// out_cursor(corewar->cursor);
@@ -161,6 +161,8 @@ void	engine(t_cw *corewar)
 	}
 	while (1)
 	{
+		i++;
+		tmp_die++;
 		g_i = i;
 		iterate_all_cursors(corewar, corewar->cursor);
 		if (tmp_die >= corewar->cycle_to_die)
@@ -188,10 +190,8 @@ void	engine(t_cw *corewar)
 				break ;
 			}
 				
-			tmp_die = 1;
+			tmp_die = 0;
 		}
-		else
-			tmp_die++;
 		if (i == corewar->dump && corewar->flags & 16)
 		{
 			if (!(corewar->flags & 2))
@@ -226,7 +226,6 @@ void	engine(t_cw *corewar)
 			mvwprintw(corewar->vis->info, 6, 21, "%i  ", corewar->cycle_to_die);
 			wrefresh(corewar->vis->info);
 		}
-		i++;
 	}
 	if (corewar->flags & 8)
 		ft_printf("i = %i\n", i);

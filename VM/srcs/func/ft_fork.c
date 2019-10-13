@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:35:15 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/12 16:45:02 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/13 12:38:46 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	ft_fork(t_cw *corewar, t_cursor *cursor, t_op op)
 														+ (arg1 % IDX_MOD));
 	cursor->position = place_cur(cursor->position + 1 + T_DIR);
 	next_op = corewar->map[corewar->cursor->position];
-	if (next_op && next_op <= 16)
-	{
-		arg1 = g_op_tab[next_op - 1].cycle_before_exec - 1;
-		corewar->cursor->op = next_op;
-		corewar->cursor->remaining_cycles += arg1;
-		corewar->cursor->is_wait = 1;
-	}
-	else
-		corewar->cursor->position += 1;
+	// if (next_op && next_op <= 16)
+	// {
+	// 	arg1 = g_op_tab[next_op - 1].cycle_before_exec - 1;
+	// 	corewar->cursor->op = next_op;
+	// 	corewar->cursor->remaining_cycles += arg1;
+	// 	corewar->cursor->is_wait = 1;
+	// }
+	// else
+	// 	corewar->cursor->position += 1;
 }
