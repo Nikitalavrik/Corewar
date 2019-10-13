@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/12 17:15:30 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/13 14:09:11 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int		check_cycle_to_die(t_cw *corewar)
 		prev = start ? start : prev;
 		start = next;
 	}
-	if (corewar->live_process >= NBR_LIVE || corewar->check_cycle >= MAX_CHECKS - 1)
+	if (corewar->live_process >= NBR_LIVE || corewar->check_cycle >= MAX_CHECKS)
 	{
 		corewar->cycle_to_die -= CYCLE_DELTA;
-		corewar->check_cycle = corewar->check_cycle >= MAX_CHECKS - 1 ? 0 :\
+		corewar->check_cycle = corewar->check_cycle >= MAX_CHECKS ? 0 :\
 		corewar->check_cycle;
 	}
 	else
@@ -47,26 +47,25 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 {
 	unsigned char op;
 
-	if (!cursor->is_wait)
-		op = corewar->map[cursor->position];
-	if (!cursor->is_wait && (op > 16 || !op))
-		return (1);
-	if (!cursor->is_wait)
+	if (cursor->remaining_cycles == 0)
 	{
+		op = corewar->map[cursor->position];	
+			if (op > 16 || !op)
+				return (1);
 		cursor->op = op;
 		cursor->remaining_cycles += g_op_tab[op - 1].cycle_before_exec;
-		cursor->is_wait = 1;
-		// ft_printf("id %i op = %i\n", cursor->id, op);
 	}
-	if (cursor->remaining_cycles <= 0 && cursor->is_wait)
-	{
-		check_operation(corewar, cursor, cursor->op);
-		cursor->is_wait = 0;
-		cursor->remaining_cycles = -1;
-		return (0);
-	}
-	else if (cursor->is_wait)
+	if (cursor->remaining_cycles > 0)
 		cursor->remaining_cycles--;
+	if (cursor->remaining_cycles <= 0)
+	{
+		if (cursor->op)
+		{
+			check_operation(corewar, cursor, cursor->op);
+			cursor->op = 0;
+			return (0);
+		}
+	}
 	return (0);
 }
 
@@ -148,7 +147,7 @@ void	engine(t_cw *corewar)
 	int			tmp_die;
 	t_player	player;
 
-	i = 0;
+	i = 1;
 	tmp_die = 0;
 	corewar->cycle_to_die = CYCLE_TO_DIE;
 	// out_cursor(corewar->cursor);
@@ -163,7 +162,6 @@ void	engine(t_cw *corewar)
 	while (1)
 	{
 		g_i = i;
-
 		iterate_all_cursors(corewar, corewar->cursor);
 		if (tmp_die >= corewar->cycle_to_die)
 		{

@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/10/12 15:50:42 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/12 17:40:44 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ t_player		*parse_argv(t_cw *corewar, int argc, char ** argv);
 t_cw			*parse_file(t_cw	*corewar, t_player *players);
 int				check_uniq_id(t_player *players, int id);
 void			check_uniq_name(t_player *players);
+int				choose_flag(t_cw *corewar, char **argv, int *pos, int argc);
 
 /**
  ** main cycle function
