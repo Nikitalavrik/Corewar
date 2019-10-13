@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/13 14:25:58 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/13 15:35:25 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,13 @@ int		check_cycle_to_die(t_cw *corewar)
 		prev = start ? start : prev;
 		start = next;
 	}
+	if (corewar->live_process < NBR_LIVE)
+		corewar->check_cycle++;
 	if (corewar->live_process >= NBR_LIVE || corewar->check_cycle >= MAX_CHECKS)
 	{
 		corewar->cycle_to_die -= CYCLE_DELTA;
-		corewar->check_cycle = corewar->check_cycle >= MAX_CHECKS ? 0 :\
-		corewar->check_cycle;
+		corewar->check_cycle = 0;
 	}
-	else
-		corewar->check_cycle++;
 	corewar->live_process = 0;
 	return (corewar->cursor == NULL ? 1 : 0);
 }
@@ -189,7 +188,6 @@ void	engine(t_cw *corewar)
 				}
 				break ;
 			}
-				
 			tmp_die = 0;
 		}
 		if (i == corewar->dump && corewar->flags & 16)
