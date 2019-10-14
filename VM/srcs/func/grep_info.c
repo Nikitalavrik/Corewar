@@ -6,14 +6,14 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:37:40 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/11 13:50:11 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/14 13:05:00 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "func.h"
 
-func	*g_func[17] =
+t_func	*g_func[17] =
 {
 	&ft_live,
 	&ft_ld,

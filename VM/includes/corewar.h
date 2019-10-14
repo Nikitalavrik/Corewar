@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/10/12 17:40:44 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/14 13:13:26 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ typedef struct		s_cursor
 {
 	struct s_cursor	*next;
 	int				id;
-	int				carry;				// флаг, который могут менять некоторые операции, значения 1 или 0. Изначально 0
+	int				carry;
 	int				op;
 	int				is_wait;
-	int				cycles_num;			// переменная для цикла, в котором последний раз была замечена операция live
-	int				remaining_cycles; 	// количество циклов, оставшиеся до исполнения операции, на которой стоит каретка
-	int				position;   		// текущая позиция каретки либо х у
-	int				byte_count; 		//количество байт, которые нужно будет «перешагнуть», чтобы оказаться на следующей операции
-	int				reg[REG_NUMBER];    //регистры, количество которых задано в константе REG_NUMBER
-	int				player_nbr;			//номер игрока породившего каретку
+	int				cycles_num;
+	int				remaining_cycles;
+	int				position;
+	int				byte_count;
+	int				reg[REG_NUMBER];
+	int				player_nbr;
 }					t_cursor;
 
 typedef	struct		s_player
@@ -52,7 +52,7 @@ typedef	struct		s_player
 	int				id;
 	char			*name;
 	long			last_live;
-	header_t		*head;
+	t_header		*head;
 }					t_player;
 
 typedef struct		s_corewar
@@ -71,32 +71,15 @@ typedef struct		s_corewar
 
 typedef	struct		s_op
 {
-	char			*func_name; 		// имя функции
-	int				num_of_args;		// количество аргументов
-	int				type_of_args[3]; 	// типы аргументов
-	char			id;					// номер функции <= 16
-	int				cycle_before_exec;	// количество циклов перед исполнением
-	char			*description;		// описание функции
-	char			codage;				// код типов аргументов
-	char			t_dirsize;			// если 1 то Тдир = 2, если 0, то 4
+	char			*func_name;
+	int				num_of_args;
+	int				type_of_args[3];
+	char			id;
+	int				cycle_before_exec;
+	char			*description;
+	char			codage;
+	char			t_dirsize;
 }					t_op;
-
-// typedef union		u_flag
-// {
-// 	unsigned char	flag;
-// 	struct			s_f
-// 	{
-// 		unsigned char	a : 1;
-// 		unsigned char	d : 1;
-// 		unsigned char	n : 1;
-// 		unsigned char	a : 1;
-// 		unsigned char	a : 1;
-// 		unsigned char	a : 1;
-// 		unsigned char	a : 1;
-// 		unsigned char	a : 1;
-// 	}				t_f;
-	
-// }
 
 typedef union		u_type
 {

@@ -6,10 +6,9 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/13 15:35:25 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/14 12:56:19 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "corewar.h"
 #define HEIGHT					(MEM_SIZE / 64 + 4)
@@ -48,9 +47,9 @@ int		do_op(t_cw *corewar, t_cursor *cursor)
 
 	if (cursor->remaining_cycles == 0)
 	{
-		op = corewar->map[cursor->position];	
-			if (op > 16 || !op)
-				return (1);
+		op = corewar->map[cursor->position];
+		if (op > 16 || !op)
+			return (1);
 		cursor->op = op;
 		cursor->remaining_cycles += g_op_tab[op - 1].cycle_before_exec;
 	}
@@ -97,7 +96,7 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 				system("sleep 1");
 				system("reset");
 				system("clear");
-				system("printf '\033[8;76;362t'"); 
+				system("printf '\033[8;76;362t'");
 				system("printf '\e[3;0;0t'");
 				system("sleep 2");
 				initscr();
@@ -114,7 +113,7 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 				{
 					corewar->vis->player = i + 1;
 					draw_player_name(corewar->players[i].head->prog_name, corewar);
-				 	i++;
+					i++;
 				}
 				corewar->vis->player = 0;
 				wrefresh(corewar->vis->win);
@@ -127,15 +126,15 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 	}
 	if (corewar->flags & 2)
 	{
-		 mvwprintw(corewar->vis->info, 14, 21, "%i  ", count);
-		 i = 0;
-		 while (i < corewar->player_nbr)
-		 {
-		 	mvwprintw(corewar->vis->info, 15 + corewar->vis->player * 3\
-		 		+ (i + 1) * 3, 16, "%i", corewar->players[i].last_live);
-		 	i++;
-		 }
-		 wrefresh(corewar->vis->info);
+		mvwprintw(corewar->vis->info, 14, 21, "%i  ", count);
+		i = 0;
+		while (i < corewar->player_nbr)
+		{
+			mvwprintw(corewar->vis->info, 15 + corewar->vis->player * 3\
+				+ (i + 1) * 3, 16, "%i", corewar->players[i].last_live);
+			i++;
+		}
+		wrefresh(corewar->vis->info);
 	}
 }
 
@@ -149,12 +148,11 @@ void	engine(t_cw *corewar)
 	i = 0;
 	tmp_die = 0;
 	corewar->cycle_to_die = CYCLE_TO_DIE;
-	// out_cursor(corewar->cursor);
 	c = '\0';
 	if (corewar->flags & 2)
 	{
 		while (c != 32)
-		    c = getch();
+			c = getch();
 		c = '\0';
 		nodelay(stdscr, TRUE);
 	}
@@ -169,7 +167,7 @@ void	engine(t_cw *corewar)
 			if ((tmp_die = check_cycle_to_die(corewar)))
 			{
 				if (corewar->flags & 2)
-				{	
+				{
 					c = getch();
 					if (c == 32)
 					{
@@ -207,14 +205,14 @@ void	engine(t_cw *corewar)
 			}
 		}
 		if (corewar->flags & 2)
-		{	
+		{
 			c = getch();
 			if (c == 32)
 			{
 				c = '\0';
 				while (c != 32)
 		    		c = getch();
-		    	c = '\0';
+				c = '\0';
 			}
 			else if (c == '+' && corewar->vis->speed > 100)
 				corewar->vis->speed -= 100;

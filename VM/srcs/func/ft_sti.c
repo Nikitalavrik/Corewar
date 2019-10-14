@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:34:52 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/12 17:00:29 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/14 12:59:43 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void		ft_sti(t_cw *corewar, t_cursor *cursor, t_op op)
 	{
 		if (args[0] > 0 && args[0] <= 16)
 			save_arg(corewar, cursor, (args[1] + args[2]) % IDX_MOD,
-												cursor->reg[args[0] - 1]);
+									cursor->reg[args[0] - 1]);
 	}
 	cursor->position = place_cur(cursor->position + 2 + calc_pos(type, 3, op));
 	ft_memdel((void **)&args);

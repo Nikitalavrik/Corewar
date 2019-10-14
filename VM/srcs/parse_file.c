@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/12 17:55:39 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/14 13:13:47 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ void			check_space_name(char *prog_name)
 	ft_printf("prog_name", prog_name);
 }
 
-header_t		*read_file(char *filename, unsigned char *area,
+t_header		*read_file(char *filename, unsigned char *area,
 														int i, t_cw *corewar)
 {
 	int				fd;
 	unsigned int	null_byte;
-	header_t		*head;
+	t_header		*head;
 
 	null_byte = 0;
 	fd = open(filename, O_RDONLY);
-	head = ft_memalloc(sizeof(header_t));
+	head = ft_memalloc(sizeof(t_header));
 	read(fd, &head->magic, 4);
 	head->magic = reverse_num(head->magic);
 	if (head->magic != COREWAR_EXEC_MAGIC)
