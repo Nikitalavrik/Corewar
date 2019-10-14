@@ -59,3 +59,46 @@ void			draw_box_and_words2(t_cw *corewar)
 	wrefresh(corewar->vis->info);
 	wrefresh(corewar->vis->help);
 }
+
+void			add_speed_pause(t_cw *corewar, char c, int i)
+{
+	c = '\0';
+	if (corewar->flags & 2)
+	{
+		c = getch();
+		if (c == 32)
+		{
+			c = '\0';
+			while (c != 32)
+				c = getch();
+			c = '\0';
+		}
+		else if (c == '+' && corewar->vis->speed > 100)
+			corewar->vis->speed -= 100;
+		else if (c == '-' && corewar->vis->speed < 10000)
+			corewar->vis->speed += 100;
+		mvwprintw(corewar->vis->info, 4, 21, "%i", i);
+		mvwprintw(corewar->vis->info, 6, 21, "%i  ", corewar->cycle_to_die);
+		wrefresh(corewar->vis->info);
+	}
+}
+
+void			check_dump_flag(t_cw *corewar, char c, int i)
+{
+	if (i == corewar->dump && corewar->flags & 16)
+	{
+		if (!(corewar->flags & 2))
+		{
+			dump(corewar->map);
+			exit(0);
+		}
+		else
+		{
+			mvwprintw(corewar->vis->info, 4, 21, "%i", i);
+			mvwprintw(corewar->vis->info, 6, 21, "%i  ", corewar->cycle_to_die);
+			wrefresh(corewar->vis->info);
+			while (c != 32)
+				c = getch();
+		}
+	}
+}

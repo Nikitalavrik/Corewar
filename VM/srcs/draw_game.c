@@ -124,7 +124,6 @@ void			draw_player_name(char *prog_name, t_cw *corewar)
 void			after_game(t_cw *corewar, t_player player, char c)
 {
 	mvwprintw(corewar->vis->info, 14, 21, "0  ");
-	wrefresh(corewar->vis->info);
 	set_player_collor(player.id - 1, corewar, corewar->vis->info);
 	mvwprintw(corewar->vis->info, 29, 5, "Winner player %i: %s",\
 		player.id, player.head->prog_name);
