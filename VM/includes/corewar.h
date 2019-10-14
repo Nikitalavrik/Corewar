@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/10/14 13:37:44 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/14 14:00:48 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ void				ft_and_xor_or(t_cw *corewar, t_cursor *cursor,\
 void				ft_add_sub(t_cw *corewar, t_cursor *cursor,\
 										t_op op, int f(int, int));
 int					calc_pos(t_type	type, int n, t_op op);
+void				free_corewar(t_cw *corewar);
 
 extern			t_op	g_op_tab[17];
 int				g_id;

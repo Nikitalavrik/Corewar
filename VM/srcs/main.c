@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 16:17:00 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/14 12:59:18 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/14 14:05:33 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int		main(int argc, char **argv)
 	parse_file(corewar, players);
 	cursor(corewar);
 	engine(corewar);
+	free_corewar(corewar);
 	return (0);
 }
