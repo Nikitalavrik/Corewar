@@ -124,6 +124,7 @@ int					check_operation(t_cw *corewar, t_cursor *cursor, int op);
 unsigned int		place_cur(int cur);
 t_player			check_winner(t_player *players, int n);
 int					do_op(t_cw *corewar, t_cursor *cursor);
+void				check_dump_flag(t_cw *corewar, char c, int i);
 
 /*
 ** grep value from map
@@ -166,6 +167,10 @@ void				draw_box_and_words2(t_cw *corewar);
 void				draw_box(t_cw *corewar);
 void				draw_player_name(char *prog_name, t_cw *corewar);
 void				after_game(t_cw *corewar, t_player player, char c);
+void				draw_cursor_count(t_cw *corewar, int count, int i);
+void				add_speed_pause(t_cw *corewar, char c, int i);
+void				ft_check_size_win(t_cw *corewar, int *i);
+void				reinit_win(t_cw *corewar, int *i);
 
 /*
 ** implement func
