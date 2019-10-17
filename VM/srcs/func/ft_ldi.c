@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:36:11 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/14 12:49:25 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/17 15:14:02 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static int	check_incorrect_reg(t_type type, int *args,
 													t_cursor *cursor, t_op op)
 {
 	if ((type.t_tp.t1 == REG_CODE && (args[0] <= 0 || args[0] > 16))\
-	|| (type.t_tp.t2 == REG_CODE && (args[1] <= 0 || args[1] > 16)))
+	|| (type.t_tp.t2 == REG_CODE && (args[1] <= 0 || args[1] > 16))
+	|| !type.t_tp.t1 || !type.t_tp.t2 || !type.t_tp.t3)
 	{
 		ft_memdel((void **)&args);
 		cursor->position = place_cur(cursor->position + 2 +\
@@ -58,7 +59,7 @@ void		ft_ldi(t_cw *corewar, t_cursor *cursor, t_op op)
 			cursor->reg[args[2] - 1] = check_grep_args(corewar->map,
 			place_cur(cursor->position + (args[0] + args[1]) % IDX_MOD),
 															DIR_CODE, 0);
-			cursor->carry = !cursor->reg[args[2] - 1] ? 1 : 0;
+			// cursor->carry = !cursor->reg[args[2] - 1] ? 1 : 0;
 		}
 	}
 	ft_memdel((void **)&args);
