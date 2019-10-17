@@ -6,7 +6,7 @@
 #    By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/25 17:55:29 by nlavrine          #+#    #+#              #
-#    Updated: 2019/10/12 17:40:30 by nlavrine         ###   ########.fr        #
+#    Updated: 2019/10/14 14:01:11 by nlavrine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,9 +47,10 @@ SRC =	main.c					\
 		draw_game.c				\
 		dump.c					\
 		flags.c					\
+		free_all.c
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 SRC_DIR = srcs
 H_DIR = includes
 OBJ_DIR = obj
