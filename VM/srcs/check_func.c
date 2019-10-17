@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:07:47 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/12 17:42:05 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/17 16:57:54 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int			check_uniq_id(t_player *players, int id)
 
 void		check_uniq_name(t_player *players)
 {
-	int	i;
+	int		i;
+	char	*extent;
 
 	i = MAX_PLAYERS - 1;
 	while (i > 0 && !players[i].id)
@@ -43,7 +44,8 @@ void		check_uniq_name(t_player *players)
 	{
 		if (!players[i].name)
 			print_error("Bad player number");
-		if (ft_strcmp(ft_strrchr(players[i].name, '.'), ".cor"))
+		extent = ft_strrchr(players[i].name, '.');
+		if (!extent || ft_strcmp(extent, ".cor"))
 			print_error("Bad filename");
 		i--;
 	}
@@ -68,4 +70,31 @@ t_player	check_winner(t_player *players, int n)
 		i--;
 	}
 	return (players[player_id]);
+}
+
+int			check_cycle_to_die(t_cw *corewar)
+{
+	t_cursor	*start;
+	t_cursor	*prev;
+	t_cursor	*next;
+
+	start = corewar->cursor;
+	prev = NULL;
+	while (start)
+	{
+		next = start->next;
+		if (start->cycles_num >= corewar->cycle_to_die)
+			del_cursor(&start, &prev, &corewar->cursor, corewar);
+		prev = start ? start : prev;
+		start = next;
+	}
+	if (corewar->live_process < NBR_LIVE)
+		corewar->check_cycle++;
+	if (corewar->live_process >= NBR_LIVE || corewar->check_cycle >= MAX_CHECKS)
+	{
+		corewar->cycle_to_die -= CYCLE_DELTA;
+		corewar->check_cycle = 0;
+	}
+	corewar->live_process = 0;
+	return (corewar->cursor == NULL ? 1 : 0);
 }

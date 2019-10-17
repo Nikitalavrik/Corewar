@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:36:11 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/17 15:14:02 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/17 17:01:08 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void		ft_ldi(t_cw *corewar, t_cursor *cursor, t_op op)
 			cursor->reg[args[2] - 1] = check_grep_args(corewar->map,
 			place_cur(cursor->position + (args[0] + args[1]) % IDX_MOD),
 															DIR_CODE, 0);
-			// cursor->carry = !cursor->reg[args[2] - 1] ? 1 : 0;
 		}
 	}
 	ft_memdel((void **)&args);

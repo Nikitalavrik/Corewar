@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:05:43 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/12 17:40:12 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/17 15:53:03 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_player	*fill_other_players(t_cw *corewar, int argc, char **argv,
 			corewar->flags |= choose_flag(corewar, argv, &i, argc);
 		while (i < argc && !ft_strcmp(argv[i], "-n"))
 			i += 3;
-		if (argv[i] && argv[i][0] == '-' && argv[i][1] != 'n')
+		if (argv[i] && argv[i][0] == '-' && argv[i][1] && argv[i][1] != 'n')
 			corewar->flags |= choose_flag(corewar, argv, &i, argc);
 		if (i >= argc)
 			break ;

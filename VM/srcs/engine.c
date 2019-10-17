@@ -6,38 +6,11 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/14 13:41:10 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/17 15:40:14 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-int		check_cycle_to_die(t_cw *corewar)
-{
-	t_cursor	*start;
-	t_cursor	*prev;
-	t_cursor	*next;
-
-	start = corewar->cursor;
-	prev = NULL;
-	while (start)
-	{
-		next = start->next;
-		if (start->cycles_num > corewar->cycle_to_die)
-			del_cursor(&start, &prev, &corewar->cursor, corewar);
-		prev = start ? start : prev;
-		start = next;
-	}
-	if (corewar->live_process < NBR_LIVE)
-		corewar->check_cycle++;
-	if (corewar->live_process >= NBR_LIVE || corewar->check_cycle >= MAX_CHECKS)
-	{
-		corewar->cycle_to_die -= CYCLE_DELTA;
-		corewar->check_cycle = 0;
-	}
-	corewar->live_process = 0;
-	return (corewar->cursor == NULL ? 1 : 0);
-}
 
 int		do_op(t_cw *corewar, t_cursor *cursor)
 {
@@ -93,17 +66,23 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 	draw_cursor_count(corewar, count, i);
 }
 
-void	engine(t_cw *corewar)
+void	end(t_cw *corewar, char c)
 {
-	int			i;
-	char		c;
-	int			tmp_die;
 	t_player	player;
 
-	i = 0;
-	tmp_die = 0;
-	corewar->cycle_to_die = CYCLE_TO_DIE;
-	c = '\0';
+	player = check_winner(corewar->players, corewar->player_nbr);
+	if (!(corewar->flags & 2))
+		ft_printf("Winner: Player %i \"%s\"\n", player.id,\
+			player.head->prog_name);
+	if (corewar->flags & 2)
+		after_game(corewar, player, c);
+}
+
+void	start_game(t_cw *corewar, char c, int *i, int *tmp_die)
+{
+	*i = 0;
+	*tmp_die = 0;
+	check_dump_flag(corewar, c, *i);
 	if (corewar->flags & 2)
 	{
 		while (c != 32)
@@ -111,6 +90,16 @@ void	engine(t_cw *corewar)
 		c = '\0';
 		nodelay(stdscr, TRUE);
 	}
+}
+
+void	engine(t_cw *corewar)
+{
+	int			i;
+	char		c;
+	int			tmp_die;
+
+	c = '\0';
+	start_game(corewar, c, &i, &tmp_die);
 	while (1)
 	{
 		i++;
@@ -129,12 +118,5 @@ void	engine(t_cw *corewar)
 		check_dump_flag(corewar, c, i);
 		add_speed_pause(corewar, c, i);
 	}
-	if (corewar->flags & 8)
-		ft_printf("i = %i\n", i);
-	player = check_winner(corewar->players, corewar->player_nbr);
-	if (!(corewar->flags & 2))
-		ft_printf("Winner: Player %i \"%s\"\n", player.id,\
-			player.head->prog_name);
-	if (corewar->flags & 2)
-		after_game(corewar, player, c);
+	end(corewar, c);
 }

@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/10/14 14:00:48 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/17 15:37:43 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int					choose_flag(t_cw *corewar, char **argv, int *pos, int argc);
 ** main cycle function
 */
 
+int					check_cycle_to_die(t_cw *corewar);
 void				engine(t_cw *corewar);
 int					check_operation(t_cw *corewar, t_cursor *cursor, int op);
 unsigned int		place_cur(int cur);

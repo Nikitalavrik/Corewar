@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/14 13:13:47 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/17 16:01:32 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ t_header		*read_file(char *filename, unsigned char *area,
 
 	null_byte = 0;
 	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		print_error("Bad file");
 	head = ft_memalloc(sizeof(t_header));
 	read(fd, &head->magic, 4);
 	head->magic = reverse_num(head->magic);
