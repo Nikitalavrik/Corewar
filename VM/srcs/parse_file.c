@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/17 17:43:36 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/17 18:24:24 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,11 @@ unsigned int	reverse_num(unsigned int num)
 	return (reversed);
 }
 
-void			check_space_name(char *prog_name)
+void			read_program(t_header *head, int fd, unsigned char *area, int i)
 {
-	int i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (prog_name[i] == ' ' || prog_name[i])
-		i++;
-	while (prog_name[i])
-	{
-		prog_name[j] = prog_name[i];
-		i++;
-		j++;
-	}
-	ft_printf("prog_name", prog_name);
-}
-
-t_header		*read_file(char *filename, unsigned char *area,
-														int i, t_cw *corewar)
-{
-	int				fd;
-	unsigned int	null_byte;
-	t_header		*head;
+	int		null_byte;
 
 	null_byte = 0;
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		print_error("Bad file");
-	head = ft_memalloc(sizeof(t_header));
 	read(fd, &head->magic, 4);
 	head->magic = reverse_num(head->magic);
 	if (head->magic != COREWAR_EXEC_MAGIC)
@@ -70,22 +45,23 @@ t_header		*read_file(char *filename, unsigned char *area,
 	if (null_byte)
 		print_error("After COMMENT_LENGTH no null byte");
 	read(fd, &area[i], head->prog_size);
+}
+
+t_header		*read_file(char *filename, unsigned char *area,
+														int i, t_cw *corewar)
+{
+	int				fd;
+	t_header		*head;
+
+	head = NULL;
+	fd = init_file(filename, &head);
+	read_program(head, fd, area, i);
 	if (corewar->flags & 2)
 	{
 		draw_player(area, i, head->prog_size, corewar);
 		draw_player_name(head->prog_name, corewar);
 	}
 	return (head);
-}
-
-int				count_players(t_player *players)
-{
-	int i;
-
-	i = 0;
-	while (i < MAX_PLAYERS && players[i].id)
-		i++;
-	return (i);
 }
 
 t_cw			*parse_file(t_cw *corewar, t_player *players)
@@ -96,16 +72,9 @@ t_cw			*parse_file(t_cw *corewar, t_player *players)
 
 	i = 0;
 	place = 0;
-	corewar->player_nbr = count_players(players);
-	corewar->players = players;
+	init_corewar(corewar, players);
 	diff = MEM_SIZE / corewar->player_nbr;
-	ft_bzero(corewar->map, MEM_SIZE);
 	ft_printf("Introducing contestants...\n");
-	if (corewar->flags & 2)
-	{
-		vis_init(corewar);
-		draw_map(corewar);
-	}
 	while (i < corewar->player_nbr)
 	{
 		if (corewar->flags & 2)
@@ -117,7 +86,7 @@ t_cw			*parse_file(t_cw *corewar, t_player *players)
 		else
 			ft_printf("* Player %i, weighing %2i bytes, \"%s\" (\"%s\") !\n",
 			i + 1, players[i].head->prog_size, players[i].head->prog_name,\
-		players[i].head->comment);
+												players[i].head->comment);
 		place += diff;
 		i++;
 	}

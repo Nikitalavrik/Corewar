@@ -6,7 +6,7 @@
 #    By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/25 17:55:29 by nlavrine          #+#    #+#              #
-#    Updated: 2019/10/17 15:56:47 by nlavrine         ###   ########.fr        #
+#    Updated: 2019/10/17 18:20:27 by nlavrine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ SRC =	main.c					\
 		draw_game.c				\
 		dump.c					\
 		flags.c					\
-		free_all.c
+		free_all.c				\
+		setup_val.c
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror

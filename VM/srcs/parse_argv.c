@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:05:43 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/17 17:44:53 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/17 18:26:46 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,19 @@ t_player	*fill_n_flag(int argc, char **argv, t_player *players)
 	i = 0;
 	while (argv[i] && i < argc)
 	{
-		if (!ft_strcmp(argv[i], "-n") && argv[i + 1])
+		if (!ft_strcmp(argv[i], "-n"))
 		{
-			player_id = ft_atoi(argv[++i]);
-			if (player_id > MAX_PLAYERS || player_id <= 0\
-			|| check_uniq_id(players, player_id))
-				print_error("Bad player number");
-			player_id--;
-			players = save_player(&player_id, players, argv[++i]);
+			if (argv[i + 1])
+			{
+				player_id = ft_atoi(argv[++i]);
+				if (player_id > MAX_PLAYERS || player_id <= 0\
+				|| check_uniq_id(players, player_id))
+					print_error("Bad player number");
+				player_id--;
+				players = save_player(&player_id, players, argv[++i]);
+			}
+			else
+				print_error("Enter number of player");
 		}
 		i++;
 	}
@@ -57,7 +62,7 @@ t_player	*fill_other_players(t_cw *corewar, int argc, char **argv,
 			choose_flag(corewar, argv, &i, argc);
 		while (i < argc && !ft_strcmp(argv[i], "-n"))
 			i += 3;
-		if (argv[i] && argv[i][0] == '-' && argv[i][1] && argv[i][1] != 'n')
+		if (argv[i] && argv[i][0] == '-' && ft_strcmp(argv[i], "-n"))
 			choose_flag(corewar, argv, &i, argc);
 		if (i >= argc)
 			break ;
