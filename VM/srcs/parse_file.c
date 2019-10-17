@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/17 16:01:32 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/17 17:43:36 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,15 @@ t_header		*read_file(char *filename, unsigned char *area,
 	read(fd, &head->prog_name, PROG_NAME_LENGTH);
 	read(fd, &null_byte, 4);
 	if (null_byte)
-		print_error("Bad file");
+		print_error("After PROG_NAME_LENGTH no null byte");
 	read(fd, &head->prog_size, 4);
 	head->prog_size = reverse_num(head->prog_size);
 	if (head->prog_size > CHAMP_MAX_SIZE)
-		print_error("Big size");
+		print_error("Big champion size");
 	read(fd, &head->comment, COMMENT_LENGTH);
 	read(fd, &null_byte, 4);
 	if (null_byte)
-		print_error("Bad file");
+		print_error("After COMMENT_LENGTH no null byte");
 	read(fd, &area[i], head->prog_size);
 	if (corewar->flags & 2)
 	{
