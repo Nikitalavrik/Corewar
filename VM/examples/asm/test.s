@@ -7,22 +7,14 @@ ld %190054918, r4
 ld %168514563, r5
 ld %101124948, r12
 ld %67504139,  r13
-<<<<<<< HEAD
 ld %200, r6
-=======
-ld %150, r6
->>>>>>> master
 ld %-1, r7
 ld %-2, r8
 ld %-3, r9
 ld %-4, r14
 ld %-5, r15
-<<<<<<< HEAD
 ld %128, r11
 ld %4, r16
-=======
-ld %76, r11
->>>>>>> master
 fork %:wow
 start:
 	live %-1
@@ -35,21 +27,13 @@ start:
 
 toto:
 	add r6, r11, r6
-<<<<<<< HEAD
 	add r16, r7, r16
 	zjmp %:zmp
-=======
->>>>>>> master
 	ld %0, r10
 	zjmp %:start
 
 wow:
-<<<<<<< HEAD
 	ld %224, r6
-=======
-	ld %174, r6
-	ld %76, r11
->>>>>>> master
 	ld %1409615369, r2
 	ld %190057478,  r3
 	ld %235623437, 	r4
@@ -59,10 +43,7 @@ wow:
 	ld %0, r10
 	zjmp %:start
 
-<<<<<<< HEAD
 zmp: live %-1
 	 live %-2
 	 live %-3
 	 live %-4
-=======
->>>>>>> master

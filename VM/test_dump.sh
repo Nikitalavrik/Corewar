@@ -6,8 +6,8 @@ read to
 
 for  i in $(seq $from $to)
 do
-	./corewar examples/toto.cor examples/maxidef.cor examples/jumper.cor -d $i > test_toto
-	../../resources/corewar examples/toto.cor examples/maxidef.cor examples/jumper.cor -d $i > test_original
+	./corewar examples/test.cor examples/ex.cor examples/mortel.cor examples/slider2.cor -d $i > test_toto
+	../../resources/corewar examples/test.cor examples/ex.cor examples/mortel.cor examples/slider2.cor -d $i > test_original
 	dif=$(diff test_toto test_original)
 	echo $i >> test_diff
 	diff test_toto test_original >> test_diff

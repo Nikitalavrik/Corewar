@@ -6,11 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 17:54:53 by nlavrine          #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2019/10/13 12:20:06 by nlavrine         ###   ########.fr       */
-=======
-/*   Updated: 2019/09/05 17:59:01 by nlavrine         ###   ########.fr       */
->>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +16,4 @@ void	print_error(char *error)
 {
 	ft_printf("%s\n", error);
 	exit(0);
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> master

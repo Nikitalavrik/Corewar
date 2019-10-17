@@ -6,11 +6,7 @@
 #    By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/25 17:55:29 by nlavrine          #+#    #+#              #
-<<<<<<< HEAD
 #    Updated: 2019/10/17 18:20:27 by nlavrine         ###   ########.fr        #
-=======
-#    Updated: 2019/09/13 15:48:38 by nlavrine         ###   ########.fr        #
->>>>>>> master
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +14,6 @@
 
 NAME = corewar
 
-<<<<<<< HEAD
 SRC =	main.c					\
 		sys_out.c				\
 		parse_argv.c			\
@@ -54,36 +49,6 @@ SRC =	main.c					\
 		flags.c					\
 		free_all.c				\
 		setup_val.c
-=======
-SRC =	main.c				\
-		sys_out.c			\
-		parse_argv.c		\
-		errors.c			\
-		parse_file.c 		\
-		cursor.c			\
-		engine.c			\
-		op.c				\
-		check_func.c		\
-		vis_main.c			\
-		func/ft_live.c		\
-		func/ft_ld.c		\
-		func/ft_st.c		\
-		func/ft_add.c		\
-		func/ft_sub.c		\
-		func/ft_or.c		\
-		func/ft_xor.c		\
-		func/ft_and.c		\
-		func/ft_zjmp.c		\
-		func/ft_ldi.c		\
-		func/ft_sti.c		\
-		func/ft_fork.c		\
-		func/ft_lld.c		\
-		func/ft_lldi.c		\
-		func/ft_lfork.c		\
-		func/ft_aff.c		\
-		func/func.c			\
-		set_color.c 		\
->>>>>>> master
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
@@ -100,11 +65,7 @@ OBJS = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 all: $(NAME) 
 
 $(NAME): $(LIB) $(PRINTF) $(OBJS)
-<<<<<<< HEAD
 		@$(CC) $(FLAGS) $(OBJS) $(PRINTF) $(LIB) -o $(NAME) -g -lncurses -fsanitize=address
-=======
-		@$(CC) $(FLAGS) $(OBJS) $(PRINTF) $(LIB) -o $(NAME) -g -lncurses
->>>>>>> master
 	
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 		@mkdir -p $(OBJ_DIR)
