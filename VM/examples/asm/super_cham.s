@@ -14,6 +14,7 @@ ld %5, r2
 fork %:pakosti
 start:
 	live %-1
+<<<<<<< HEAD
 	sti r6, r7
 	sti r9, r10
 	sti r11, r12
@@ -36,6 +37,30 @@ start:
 	sti r9, r10, r8
 	sti r11, r12, r8
 	sti r4, r15, r8
+=======
+	st r6, r7
+	st r9, r10
+	st r11, r12
+	st r4, r15
+	st r6, r7
+	st r9, r10
+	st r11, r12
+	st r4, r15
+	st r6, r7
+	live %-2
+	st r9, r10, r8
+	st r11, r12, r8
+	st r4, r15, r8
+	st r6, r7, r8
+	st r9, r10, r8
+	st r11, r12, r8
+	live %-3
+	st r4, r15, r8
+	st r6, r7, r8
+	st r9, r10, r8
+	st r11, r12, r8
+	st r4, r15, r8
+>>>>>>> master
 	add r8, r8, r8
 	add r2, r10, r2
 	zjmp %:goforward

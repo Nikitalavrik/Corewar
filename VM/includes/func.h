@@ -6,7 +6,11 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:30:11 by nlavrine          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/10/14 13:04:28 by nlavrine         ###   ########.fr       */
+=======
+/*   Updated: 2019/09/09 13:36:51 by nlavrine         ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +36,16 @@ void			ft_lldi(t_cw *corewar, t_cursor *cursor, t_op op);
 void			ft_lfork(t_cw *corewar, t_cursor *cursor, t_op op);
 void			ft_aff(t_cw *corewar, t_cursor *cursor, t_op op);
 
+<<<<<<< HEAD
 typedef	void	t_func(t_cw *corewar, t_cursor *cursor, t_op op);
 
 extern	t_func	*g_func[17];
 
 #endif
+=======
+typedef	void	func(t_cw *, t_cursor *, t_op);
+
+extern	func	*g_func[17];
+
+#endif
+>>>>>>> master

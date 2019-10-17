@@ -6,7 +6,11 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 11:44:03 by tbratsla          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/10/14 13:39:02 by nlavrine         ###   ########.fr       */
+=======
+/*   Updated: 2019/09/19 12:43:35 by nlavrine         ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +29,12 @@ void	add_cursor(t_cw *cw, int i)
 	cw->cursor->player_nbr = i;
 	cw->cursor->carry = 0;
 	cw->cursor->reg[0] = -i;
+<<<<<<< HEAD
 	cw->cursor->position = (MEM_SIZE / cw->player_nbr * (i - 1));
 	cw->cursor->cycles_num = 0;
+=======
+	cw->cursor->position = MEM_SIZE / cw->player_nbr * (i - 1);
+>>>>>>> master
 }
 
 void	cursor(t_cw *cw)
@@ -41,6 +49,7 @@ void	cursor(t_cw *cw)
 		i++;
 	}
 	g_id = cw->player_nbr;
+<<<<<<< HEAD
 }
 
 void	del_vizual(t_cursor **cursor, t_cursor **main_cursor, t_cw *corewar)
@@ -81,6 +90,28 @@ int		del_cursor(t_cursor **cursor, t_cursor **prev,
 		*main_cursor = *prev ? *prev : (*main_cursor)->next;
 	if (*cursor)
 		ft_memdel((void **)cursor);
+=======
+	// out_cursor(cw->cursor);
+}
+
+int	del_cursor(t_cursor **cursor, t_cursor **prev, t_cursor **main_cursor)
+{
+	int id;
+
+	
+	id = (*cursor) ? (*cursor)->player_nbr : 0;
+	if (*prev)
+	{
+		(*prev)->next = (*cursor)->next;
+	}
+	if (*cursor == *main_cursor)
+		*main_cursor = *prev;
+	if (*cursor)
+	{
+		ft_memdel((void **)cursor);
+	}
+
+>>>>>>> master
 	return (id);
 }
 
