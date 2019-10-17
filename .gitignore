@@ -4,3 +4,7 @@ resources
 *.o
 obj
 corewar
+test_odiginal
+test_tot
+differ
+test_diff
