@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/17 15:40:14 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/18 15:11:29 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ void	iterate_all_cursors(t_cw *corewar, t_cursor *cursor)
 	start = cursor;
 	while (start)
 	{
+		start->cycles_num++;
 		pos = start->position;
 		start->position += do_op(corewar, start);
 		start->position %= MEM_SIZE;
-		start->cycles_num++;
 		if (corewar->flags & 2)
 		{
 			draw_cursor(pos, start, corewar, cursor);
