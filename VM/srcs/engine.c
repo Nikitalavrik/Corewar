@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 17:16:51 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/18 15:11:29 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/18 16:09:37 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	end(t_cw *corewar, char c)
 
 	player = check_winner(corewar->players, corewar->player_nbr);
 	if (!(corewar->flags & 2))
-		ft_printf("Winner: Player %i \"%s\"\n", player.id,\
+		ft_printf("Player %i (%s) won\n", player.id,\
 			player.head->prog_name);
 	if (corewar->flags & 2)
 		after_game(corewar, player, c);

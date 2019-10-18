@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 17:54:53 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/13 12:20:06 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/18 16:26:34 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 void	print_error(char *error)
 {
-	ft_printf("%s\n", error);
+	int i;
+
+	i = 0;
+	while (error[i])
+	{
+		write(2, &error[i], 1);
+		i++;
+	}
 	exit(0);
 }

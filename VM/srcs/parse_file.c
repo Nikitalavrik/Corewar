@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:06:22 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/17 18:24:24 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/18 16:24:08 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,19 @@ void			read_program(t_header *head, int fd, unsigned char *area, int i)
 	read(fd, &head->magic, 4);
 	head->magic = reverse_num(head->magic);
 	if (head->magic != COREWAR_EXEC_MAGIC)
-		print_error("Bad magic head");
+		print_error("Bad magic head\n");
 	read(fd, &head->prog_name, PROG_NAME_LENGTH);
 	read(fd, &null_byte, 4);
 	if (null_byte)
-		print_error("After PROG_NAME_LENGTH no null byte");
+		print_error("After PROG_NAME_LENGTH no null byte\n");
 	read(fd, &head->prog_size, 4);
 	head->prog_size = reverse_num(head->prog_size);
 	if (head->prog_size > CHAMP_MAX_SIZE)
-		print_error("Big champion size");
+		print_error("Big champion size\n");
 	read(fd, &head->comment, COMMENT_LENGTH);
 	read(fd, &null_byte, 4);
 	if (null_byte)
-		print_error("After COMMENT_LENGTH no null byte");
+		print_error("After COMMENT_LENGTH no null byte\n");
 	read(fd, &area[i], head->prog_size);
 }
 
@@ -74,7 +74,6 @@ t_cw			*parse_file(t_cw *corewar, t_player *players)
 	place = 0;
 	init_corewar(corewar, players);
 	diff = MEM_SIZE / corewar->player_nbr;
-	ft_printf("Introducing contestants...\n");
 	while (i < corewar->player_nbr)
 	{
 		if (corewar->flags & 2)

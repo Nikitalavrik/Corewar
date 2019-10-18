@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 10:55:15 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/10/17 14:55:05 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/18 16:26:14 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			vis_init(t_cw *corewar)
 	ft_bzero(corewar->vis->map, MEM_SIZE);
 	corewar->vis->player = 0;
 	ft_init_colors();
-	// system("afplay music/sound.mp3&");
+	system("afplay music/sound.mp3&");
 }
 
 void			ft_init_colors(void)
