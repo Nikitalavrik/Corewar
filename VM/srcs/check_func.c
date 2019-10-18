@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:07:47 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/18 15:11:55 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/18 16:49:47 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void		check_uniq_name(t_player *players)
 	while (i >= 0)
 	{
 		if (!players[i].name)
-			print_error("Bad player number");
+			print_error("", "Bad player number\n");
 		extent = ft_strrchr(players[i].name, '.');
 		if (!extent || ft_strcmp(extent, ".cor"))
-			print_error("Bad filename");
+			print_error(players[i].name, ": Bad filename\n");
 		i--;
 	}
 }

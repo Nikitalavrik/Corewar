@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/10/17 18:30:52 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/18 16:47:42 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ typedef union			u_type
 ** print function
 */
 
-void					print_error(char *error);
+void					print_error(char *name, char *error);
 void					out_players(t_player *players);
 void					out_cursor(t_cursor *cursor);
 void					out_print_bytes(unsigned char *line, int count);

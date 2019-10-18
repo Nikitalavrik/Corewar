@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:31:08 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/17 13:36:04 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/18 20:20:11 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		ft_st(t_cw *corewar, t_cursor *cursor, t_op op)
 	corewar->flags & 8 ? out_func_info(corewar, cursor, op) : 0;
 	type.types = corewar->map[place_cur(cursor->position + 1)];
 	args = init_args(corewar, cursor, op, type);
-	if (type.t_tp.t1 == REG_CODE && !type.t_tp.t3 &&\
+	if (type.t_tp.t1 == REG_CODE &&\
 			(type.t_tp.t2 == REG_CODE || type.t_tp.t2 == IND_CODE))
 	{
 		if (type.t_tp.t2 == REG_CODE && args[0] <= 16 &&\

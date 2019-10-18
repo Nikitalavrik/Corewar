@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 14:04:43 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/14 12:49:08 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/18 20:21:10 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		ft_and_xor_or(t_cw *corewar, t_cursor *cursor,
 	else if (type.t_tp.t2 == IND_CODE)
 		args[1] = (int)check_grep_args(corewar->map, place_cur(cursor->position\
 								+ args[1] % IDX_MOD), DIR_CODE, 0);
-	if (type.t_tp.t3 == REG_CODE)
+	if (type.t_tp.t3 == REG_CODE && args[2] > 0 && args[2] <= 16)
 	{
 		cursor->reg[args[2] - 1] = f(args[0], args[1]);
 		cursor->carry = !cursor->reg[args[2] - 1] ? 1 : 0;

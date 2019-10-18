@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:31:39 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/17 16:26:28 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/18 20:20:27 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_ld(t_cw *corewar, t_cursor *cursor, t_op op)
 	type.types = corewar->map[place_cur(cursor->position + 1)];
 	args = init_args(corewar, cursor, op, type);
 	if ((type.t_tp.t1 == DIR_CODE || type.t_tp.t1 == IND_CODE)\
-						&& type.t_tp.t2 == REG_CODE && !type.t_tp.t3)
+						&& type.t_tp.t2 == REG_CODE)
 	{
 		if (args[1] > 0 && args[1] <= 16)
 		{

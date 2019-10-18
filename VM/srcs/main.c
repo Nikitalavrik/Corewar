@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 16:17:00 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/18 16:12:31 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/18 16:37:03 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_usage(void)
 {
-	ft_printf("./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ...");
+	ft_printf("./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ...\n");
 	exit(0);
 }
 

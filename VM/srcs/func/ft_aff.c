@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:36:49 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/11 15:13:40 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/18 17:25:44 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	ft_aff(t_cw *corewar, t_cursor *cursor, t_op op)
 		arg1 = cursor->reg[arg1 - 1] % 256;
 	if (corewar->flags & 1)
 		ft_printf("Aff: %c\n", arg1);
-	cursor->position = place_cur(cursor->position + (2 + T_REG));
+	cursor->position = place_cur(cursor->position + 2 + calc_pos(type, 1, op));
 }

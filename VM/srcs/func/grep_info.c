@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:37:40 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/14 13:05:00 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/18 19:39:23 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,7 @@ int				grep_args(unsigned char *map, int position, int size)
 			val = (val << 8) + (map[place_cur(position + i)] ^ 0xff);
 			i++;
 		}
-	if (sign)
-		val = ~val;
-	return (val);
+	return (sign ? ~val : val);
 }
 
 int				check_grep_args(unsigned char *map, int position,\

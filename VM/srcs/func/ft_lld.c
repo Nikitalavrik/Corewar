@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:35:40 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/17 17:01:14 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/18 18:54:55 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_lld(t_cw *corewar, t_cursor *cursor, t_op op)
 			cursor->reg[args[1] - 1] = type.t_tp.t1 == IND_CODE ?\
 			check_grep_args(corewar->map, place_cur(cursor->position +\
 									args[0]), DIR_CODE, 0) : args[0];
+			cursor->carry = !cursor->reg[args[1] - 1] ? 1 : 0;
 		}
 	}
 	ft_memdel((void **)&args);

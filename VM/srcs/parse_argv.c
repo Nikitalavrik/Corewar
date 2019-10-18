@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:05:43 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/18 16:24:45 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/18 16:50:31 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ t_player	*fill_n_flag(int argc, char **argv, t_player *players)
 				player_id = ft_atoi(argv[++i]);
 				if (player_id > MAX_PLAYERS || player_id <= 0\
 				|| check_uniq_id(players, player_id))
-					print_error("Bad player number\n");
+					print_error(ft_itoa(player_id), ": Bad player number\n");
 				player_id--;
 				players = save_player(&player_id, players, argv[++i]);
 			}
 			else
-				print_error("Enter number of player\n");
+				print_error("", "Enter number of player\n");
 		}
 		i++;
 	}
