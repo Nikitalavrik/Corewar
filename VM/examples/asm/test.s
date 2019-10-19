@@ -43,7 +43,5 @@ wow:
 	ld %0, r10
 	zjmp %:start
 
-zmp: live %-1
-	 live %-2
-	 live %-3
-	 live %-4
+zmp: live %10
+
