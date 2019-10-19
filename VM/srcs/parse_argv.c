@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:05:43 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/18 16:50:31 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/19 17:32:18 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_player	*fill_n_flag(int argc, char **argv, t_player *players)
 				|| check_uniq_id(players, player_id))
 					print_error(ft_itoa(player_id), ": Bad player number\n");
 				player_id--;
+				player_id >= MAX_PLAYERS ? print_error("", "Too many bots\n") : 0;
 				players = save_player(&player_id, players, argv[++i]);
 			}
 			else
@@ -70,6 +71,7 @@ t_player	*fill_other_players(t_cw *corewar, int argc, char **argv,
 		{
 			while (players[player_id].id)
 				player_id++;
+			player_id >= MAX_PLAYERS ? print_error("", "Too many bots\n") : 0;
 			players = save_player(&player_id, players, argv[i]);
 		}
 		i++;
