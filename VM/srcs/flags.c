@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 17:39:34 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/18 16:50:21 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/19 12:59:09 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ int			check_num(char *line)
 	return (1);
 }
 
+void		check_conflict(int flags)
+{
+	if (flags & 2 && (flags & 8 || flags & 32 || flags & 1))
+		print_error("", "Conflict of flag\n");
+}
+
 void		choose_flag(t_cw *corewar, char **argv, int *pos, int argc)
 {
 	int		i;
@@ -65,6 +71,7 @@ void		choose_flag(t_cw *corewar, char **argv, int *pos, int argc)
 		while (param[i])
 		{
 			corewar->flags |= put_flag(param[i]);
+			check_conflict(corewar->flags);
 			i++;
 		}
 		i == 1 ? print_error("", "Unexpected flag\n") : 0;

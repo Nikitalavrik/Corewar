@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:31:58 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/18 16:17:02 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/19 12:34:36 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	ft_live(t_cw *corewar, t_cursor *cursor, t_op op)
 		corewar->players[-arg1 - 1].last_live = g_i;
 		if (corewar->flags & 32)
 			ft_printf("A process shows that player %i (%s) is alive\n",
-			cursor->player_nbr, corewar->players[cursor->player_nbr - 1].name);
+			cursor->player_nbr,
+			corewar->players[cursor->player_nbr - 1].head->prog_name);
 	}
 	cursor->cycles_num = 0;
 	corewar->live_process++;

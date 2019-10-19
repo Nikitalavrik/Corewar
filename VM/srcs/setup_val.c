@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 18:18:23 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/18 16:51:59 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/19 12:45:02 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void			init_corewar(t_cw *corewar, t_player *players)
 	corewar->player_nbr = count_players(players);
 	corewar->players = players;
 	ft_bzero(corewar->map, MEM_SIZE);
+	ft_printf("Introducing contestants...\n");
 	if (corewar->flags & 2)
 	{
 		vis_init(corewar);
 		draw_map(corewar);
 	}
-	ft_printf("Introducing contestants...\n");
 }
 
 int				init_file(char *filename, t_header **head)
