@@ -35,13 +35,21 @@ void			init_corewar(t_cw *corewar, t_player *players)
 	}
 }
 
-int				init_file(char *filename, t_header **head)
+int				init_file(char *filename, t_header **head, t_cw *corewar)
 {
 	int		fd;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
+		if (corewar->flags & 2)
+		{
+			delwin(corewar->vis->win);
+			delwin(corewar->vis->help);
+			delwin(corewar->vis->info);
+			endwin();
+			system("killall afplay");
+		}
 		perror(filename);
 		exit(1);
 	}

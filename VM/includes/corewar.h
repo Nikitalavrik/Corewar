@@ -116,7 +116,8 @@ void					check_uniq_name(t_player *players);
 void					choose_flag(t_cw *corewar, char **argv,
 													int *pos, int argc);
 void					init_corewar(t_cw *corewar, t_player *players);
-int						init_file(char *filename, t_header **head);
+int						init_file(char *filename, t_header **head,\
+						t_cw *corewar);
 
 /*
 ** main cycle function

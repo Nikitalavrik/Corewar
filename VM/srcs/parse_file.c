@@ -12,6 +12,26 @@
 
 #include "corewar.h"
 
+void			parse_error(t_cw *corewar, int error, char *filename)
+{
+	if (corewar->flags & 2)
+	{
+		delwin(corewar->vis->win);
+		delwin(corewar->vis->help);
+		delwin(corewar->vis->info);
+		endwin();
+		system("killall afplay");
+	}
+	if (error == 1)
+		print_error(filename, ": After COMMENT_LENGTH no null byte\n");
+	if (error == 2)
+		print_error(filename, ": Big champion size\n");
+	if (error == 3)
+		print_error(filename, ": After PROG_NAME_LENGTH no null byte\n");
+	if (error == 4)
+		print_error(filename, ": Bad magic head\n");
+}
+
 unsigned int	reverse_num(unsigned int num)
 {
 	unsigned int	reversed;
@@ -23,7 +43,7 @@ unsigned int	reverse_num(unsigned int num)
 	return (reversed);
 }
 
-void			read_program(t_header *head, int fd, unsigned char *area, int i)
+int				read_program(t_header *head, int fd, unsigned char *area, int i)
 {
 	int		null_byte;
 
@@ -31,20 +51,22 @@ void			read_program(t_header *head, int fd, unsigned char *area, int i)
 	read(fd, &head->magic, 4);
 	head->magic = reverse_num(head->magic);
 	if (head->magic != COREWAR_EXEC_MAGIC)
-		print_error("", ": Bad magic head\n");
+		return (4);
 	read(fd, &head->prog_name, PROG_NAME_LENGTH);
 	read(fd, &null_byte, 4);
 	if (null_byte)
-		print_error(head->prog_name, ": After PROG_NAME_LENGTH no null byte\n");
+		return (3);
 	read(fd, &head->prog_size, 4);
 	head->prog_size = reverse_num(head->prog_size);
 	if (head->prog_size > CHAMP_MAX_SIZE)
-		print_error(head->prog_name, ": Big champion size\n");
+		return (2);
 	read(fd, &head->comment, COMMENT_LENGTH);
 	read(fd, &null_byte, 4);
 	if (null_byte)
-		print_error(head->prog_name, ": After COMMENT_LENGTH no null byte\n");
+		return (1);
 	read(fd, &area[i], head->prog_size);
+	close(fd);
+	return (0);
 }
 
 t_header		*read_file(char *filename, unsigned char *area,
@@ -52,10 +74,13 @@ t_header		*read_file(char *filename, unsigned char *area,
 {
 	int				fd;
 	t_header		*head;
+	int				error;
 
 	head = NULL;
-	fd = init_file(filename, &head);
-	read_program(head, fd, area, i);
+	fd = init_file(filename, &head, corewar);
+	error = read_program(head, fd, area, i);
+	if (error)
+		parse_error(corewar, error, filename);
 	if (corewar->flags & 2)
 	{
 		draw_player(area, i, head->prog_size, corewar);
