@@ -1,0 +1,12 @@
+.DS_Store
+resources
+.vscode
+*.o
+obj
+corewar
+test_odiginal
+test_tot
+differ
+test_diff
+champs
+vm_champs
