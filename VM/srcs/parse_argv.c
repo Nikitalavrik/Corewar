@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 18:05:43 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/19 17:32:18 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/19 17:36:15 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_player	*save_player(int *player_id, t_player *players, char *name)
 t_player	*fill_n_flag(int argc, char **argv, t_player *players)
 {
 	int	i;
-	int	player_id;
+	int	id;
 
 	i = 0;
 	while (argv[i] && i < argc)
@@ -33,13 +33,13 @@ t_player	*fill_n_flag(int argc, char **argv, t_player *players)
 		{
 			if (argv[i + 1])
 			{
-				player_id = ft_atoi(argv[++i]);
-				if (player_id > MAX_PLAYERS || player_id <= 0\
-				|| check_uniq_id(players, player_id))
-					print_error(ft_itoa(player_id), ": Bad player number\n");
-				player_id--;
-				player_id >= MAX_PLAYERS ? print_error("", "Too many bots\n") : 0;
-				players = save_player(&player_id, players, argv[++i]);
+				id = ft_atoi(argv[++i]);
+				if (id > MAX_PLAYERS || id <= 0\
+				|| check_uniq_id(players, id))
+					print_error(ft_itoa(id), ": Bad player number\n");
+				id--;
+				id >= MAX_PLAYERS ? print_error("", "Too many bots\n") : 0;
+				players = save_player(&id, players, argv[++i]);
 			}
 			else
 				print_error("", "Enter number of player\n");

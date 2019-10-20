@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:47:47 by tbratsla          #+#    #+#             */
-/*   Updated: 2019/10/18 16:47:42 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/20 10:07:47 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct			s_cursor
 typedef	struct			s_player
 {
 	int					id;
+	int					cursor_live;
 	char				*name;
 	long				last_live;
 	t_header			*head;

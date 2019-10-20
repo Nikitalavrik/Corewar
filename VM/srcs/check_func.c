@@ -6,7 +6,7 @@
 /*   By: nlavrine <nlavrine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:07:47 by nlavrine          #+#    #+#             */
-/*   Updated: 2019/10/18 16:49:47 by nlavrine         ###   ########.fr       */
+/*   Updated: 2019/10/20 10:21:15 by nlavrine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,20 @@ t_player	check_winner(t_player *players, int n)
 	int		i;
 	int		player_id;
 	long	min_live;
+	int		cur_id;
 
 	min_live = -1;
 	i = n;
-	player_id = 0;
+	player_id = n - 1;
+	cur_id = 0;
 	while (i)
 	{
-		if (players[i - 1].last_live > min_live)
+		if (players[i - 1].last_live > min_live ||\
+		(players[i - 1].last_live == min_live &&\
+		players[i - 1].cursor_live < cur_id))
 		{
 			min_live = players[i - 1].last_live;
+			cur_id = players[i - 1].cursor_live;
 			player_id = i - 1;
 		}
 		i--;
